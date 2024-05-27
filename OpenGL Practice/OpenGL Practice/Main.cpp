@@ -1,69 +1,40 @@
 /*
-APA references:
+APA references (I'm trying to learn more about OpenGL using this tutorial below):
 
 	Welcome to OpenGL. (n.d.) Learn OpenGL. 
 		https://learnopengl.com/
 */
 
-#include <glad/glad.h>
-#include <glfw3.h>
-#include <iostream>
-
-void FrameBufferSizeCallback(GLFWwindow* window, int width, int height);
-void ProcessInput(GLFWwindow* window);
+// Include my very own window, vertex shader loader classes
+#include "Window.h"
+#include "VertexShaderLoader.h"
+#include "FragmentShaderLoader.h"
+#include "ShaderProgram.h"
 
 int main()
 {
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	// I don't need to make this window object a pointer because I don't have a constructor for it
+	Window window;
 
-	GLFWwindow* openGLwindow = glfwCreateWindow(1280, 960, "OpenGL Practice", NULL, NULL);
+	VertexShaderLoader* vertexShaderLoader;
+	vertexShaderLoader = new VertexShaderLoader();
 
-	if (openGLwindow == NULL)
-	{
-		std::cout << "GLFW Window cannot be created!" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
+	FragmentShaderLoader* fragmentShaderLoader;
+	fragmentShaderLoader = new FragmentShaderLoader();
 
-	glfwMakeContextCurrent(openGLwindow);
+	ShaderProgram* shaderProgram;
+	shaderProgram = new ShaderProgram();
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "GLAD cannot be initialized!" << std::endl;
-		return -1;
-	}
+	// Just initialize the OpenGL window by filling in the right parameters below
+	window.InitializeOpenGLwindow(1280, 960, "OpenGL Practice", NULL, NULL);
 
-	glViewport(0, 0, 1280, 960);
+	vertexShaderLoader->InitializeVertexShaderLoader();
+	fragmentShaderLoader->InitializeFragmentShaderLoader();
+	shaderProgram->InitializeShaderProgram();
+	shaderProgram->~ShaderProgram();
 
-	glfwSetFramebufferSizeCallback(openGLwindow, FrameBufferSizeCallback);
+	window.WindowStillRunning();
 
-	while (!glfwWindowShouldClose(openGLwindow))
-	{
-		ProcessInput(openGLwindow);
-
-		glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glfwSwapBuffers(openGLwindow);
-		glfwPollEvents();
-	}
-
-	glfwTerminate();
+	// Return 0 is needed because the main function is of type int
 	return 0;
-}
-
-void FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
-
-void ProcessInput(GLFWwindow* window)
-{
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, true);
-	}
 }
