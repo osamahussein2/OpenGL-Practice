@@ -12,9 +12,10 @@ public:
 	void InitializeVertexObjects();
 
 	unsigned int vertexShader;
-	unsigned int VAO, VBO;
 
 private:
 	const char* vertexShaderSource;
+	unsigned int VAO, VBO;
+	unsigned int EBO;
 };
 
