@@ -9,10 +9,12 @@ class FragmentShaderLoader
 public:
 	FragmentShaderLoader();
 	void InitializeFragmentShaderLoader();
+	void InitializeFragmentShaderLoader2();
+	void InitializeFragmentShaderLoader3();
 
-	unsigned int fragmentShader;
+	unsigned int fragmentShader[3];
 
 private:
-	const char* fragmentShaderSource;
+	const char* fragmentShaderSource[3];
 };
 

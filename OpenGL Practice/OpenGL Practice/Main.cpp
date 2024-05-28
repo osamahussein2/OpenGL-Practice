@@ -29,8 +29,14 @@ int main()
 	window.InitializeOpenGLwindow(1280, 960, "OpenGL Practice", NULL, NULL);
 
 	vertexShaderLoader->InitializeVertexShaderLoader();
+	vertexShaderLoader->InitializeVertexShaderLoader2();
+	vertexShaderLoader->InitializeVertexShaderLoader3();
 	fragmentShaderLoader->InitializeFragmentShaderLoader();
+	fragmentShaderLoader->InitializeFragmentShaderLoader2();
+	fragmentShaderLoader->InitializeFragmentShaderLoader3();
 	shaderProgram->InitializeShaderProgram();
+	shaderProgram->InitializeShaderProgram2();
+	shaderProgram->InitializeShaderProgram3();
 	shaderProgram->~ShaderProgram();
 
 	window.WindowStillRunning();

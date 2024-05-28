@@ -7,40 +7,111 @@ VertexShaderLoader::VertexShaderLoader()
 	// I was going to initialize the vertices array but for some reason, I had a lot of trouble initializing it
 
 	// Initialize our vertex shader's source code
-	vertexShaderSource = "#version 330 core // Version of GLSL with OpenGL's version\n"
+	vertexShaderSource[0] = "#version 330 core // Version of GLSL with OpenGL's version\n"
 		"layout (location = 0) in vec3 position;\n"
-		"void main() \n"
+		"void main()\n"
 		"{\n"
 		"	// gl_Position is a 4D vector inside of OpenGL\n"
 		"	gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
 		"}\0";
 
-	vertexShader = NULL;
+	vertexShaderSource[1] = "#version 330 core // Version of GLSL with OpenGL's version\n"
+		"layout (location = 1) in vec3 position;\n"
+
+		"void main()\n"
+		"{\n"
+		"	// gl_Position is a 4D vector inside of OpenGL\n"
+		"	gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+		"}\0";
+
+	vertexShaderSource[2] = "#version 330 core // Version of GLSL with OpenGL's version\n"
+		"layout (location = 2) in vec3 position;\n"
+
+		"void main()\n"
+		"{\n"
+		"	// gl_Position is a 4D vector inside of OpenGL\n"
+		"	gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+		"}\0";
+
+	size_t sizeOfVertexShadersArray = sizeof(vertexShader);
+
+	for (int vertexShaders = 0; vertexShaders > sizeOfVertexShadersArray; vertexShaders++)
+	{
+		vertexShader[vertexShaders] = NULL;
+	}
 
 	VAO = NULL;
 	VBO = NULL;
+
+	EBO = NULL;
 }
 
 void VertexShaderLoader::InitializeVertexShaderLoader()
 {
 	// Create a shader object ID to use it when we create the shader
-	vertexShader = glCreateShader(GL_VERTEX_SHADER); // Create a vertex shader using OpenGL's version of it
+	vertexShader[0] = glCreateShader(GL_VERTEX_SHADER); // Create a vertex shader using OpenGL's version of it
 
 	// Attach the shader source code (the GLSL one) to the shader object and compile it
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
+	glShaderSource(vertexShader[0], 1, &vertexShaderSource[0], NULL);
+	glCompileShader(vertexShader[0]);
 
 	int successfullyCompiled; // An integer that checks if the vertex shader compilation was successful
 	char compilationInformationLog[512]; // Gives information about its compilation in a log file (maybe?)
 
 	// Returns a successful compilation of the vertex shader if it can compile successfully
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &successfullyCompiled);
+	glGetShaderiv(vertexShader[0], GL_COMPILE_STATUS, &successfullyCompiled);
 
 	// If the compilation failed, then return a log compilation error and explain the error
 	if (!successfullyCompiled)
 	{
-		glGetShaderInfoLog(vertexShader, 512, NULL, compilationInformationLog);
-		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << compilationInformationLog << std::endl;
+		glGetShaderInfoLog(vertexShader[0], 512, NULL, compilationInformationLog);
+		std::cout << "ERROR::SHADER1::VERTEX::COMPILATION_FAILED\n" << compilationInformationLog << std::endl;
+	}
+}
+
+void VertexShaderLoader::InitializeVertexShaderLoader2()
+{
+	// Create a shader object ID to use it when we create the shader
+	vertexShader[1] = glCreateShader(GL_VERTEX_SHADER); // Create a vertex shader using OpenGL's version of it
+
+	// Attach the shader source code (the GLSL one) to the shader object and compile it
+	glShaderSource(vertexShader[1], 1, &vertexShaderSource[1], NULL);
+	glCompileShader(vertexShader[1]);
+
+	int successfullyCompiled; // An integer that checks if the vertex shader compilation was successful
+	char compilationInformationLog[512]; // Gives information about its compilation in a log file (maybe?)
+
+	// Returns a successful compilation of the vertex shader if it can compile successfully
+	glGetShaderiv(vertexShader[1], GL_COMPILE_STATUS, &successfullyCompiled);
+
+	// If the compilation failed, then return a log compilation error and explain the error
+	if (!successfullyCompiled)
+	{
+		glGetShaderInfoLog(vertexShader[1], 512, NULL, compilationInformationLog);
+		std::cout << "ERROR::SHADER2::VERTEX::COMPILATION_FAILED\n" << compilationInformationLog << std::endl;
+	}
+}
+
+void VertexShaderLoader::InitializeVertexShaderLoader3()
+{
+	// Create a shader object ID to use it when we create the shader
+	vertexShader[2] = glCreateShader(GL_VERTEX_SHADER); // Create a vertex shader using OpenGL's version of it
+
+	// Attach the shader source code (the GLSL one) to the shader object and compile it
+	glShaderSource(vertexShader[2], 1, &vertexShaderSource[2], NULL);
+	glCompileShader(vertexShader[2]);
+
+	int successfullyCompiled; // An integer that checks if the vertex shader compilation was successful
+	char compilationInformationLog[512]; // Gives information about its compilation in a log file (maybe?)
+
+	// Returns a successful compilation of the vertex shader if it can compile successfully
+	glGetShaderiv(vertexShader[2], GL_COMPILE_STATUS, &successfullyCompiled);
+
+	// If the compilation failed, then return a log compilation error and explain the error
+	if (!successfullyCompiled)
+	{
+		glGetShaderInfoLog(vertexShader[2], 512, NULL, compilationInformationLog);
+		std::cout << "ERROR::SHADER3::VERTEX::COMPILATION_FAILED\n" << compilationInformationLog << std::endl;
 	}
 }
 
@@ -117,4 +188,102 @@ void VertexShaderLoader::InitializeVertexObjects()
 	// The second argument is the actual polygon mode: So GL_LINE renders the triangles in a line (wireframe mode)
 	// Or we can render the whole triangle like previously by calling in GL_FILL instead of GL_LINE (default mode)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+void VertexShaderLoader::LoadThreeTriangles()
+{
+	// Initialize the first triangle's vertices to be at the middle of the OpenGL window
+	float TriangleOneVertices[] = { -0.5f, -0.5f, 0.0f,
+	0.0f, 0.5f, 0.0f,
+	0.5f, -0.5f, 0.0f };
+
+	// Initialize the second triangle's vertices to be the right of the OpenGL window
+	float TriangleTwoVertices[] = { 1.0f, 0.5f, 0.0f,
+	0.0f, 0.5f, 0.0f,
+	0.5f, -0.5f, 0.0f };
+
+	// Initialize the third triangle's vertices to be the left of the OpenGL window
+	float TriangleThreeVertices[] = { -1.0f, 0.5f, 0.0f,
+	0.0f, 0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f };
+
+	// Render triangle 1
+	unsigned int VBOtriangleOne, VAOtriangleOne;
+
+	// Generate the buffer ID here
+	glGenBuffers(1, &VBOtriangleOne); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
+
+	// Generate a vertex attribute object ID
+	glGenVertexArrays(1, &VAOtriangleOne);
+
+	// This binds the buffers more than once at the same time as long as they're different buffer types
+	glBindBuffer(GL_ARRAY_BUFFER, VBOtriangleOne);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(VAOtriangleOne);
+
+	// Copies the previously defined vertex data into the buffer's memory
+	glBufferData(GL_ARRAY_BUFFER, sizeof(TriangleOneVertices), TriangleOneVertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	ShaderProgram shaderProg;
+
+	shaderProg.InitializeShaderProgram();
+	glBindVertexArray(VAOtriangleOne);
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	// Render triangle 2
+	unsigned int VBOtriangleTwo, VAOtriangleTwo;
+
+	// Generate the buffer ID here
+	glGenBuffers(1, &VBOtriangleTwo);
+
+	// Generate a vertex attribute object ID
+	glGenVertexArrays(1, &VAOtriangleTwo);
+
+	// This binds the buffers more than once at the same time as long as they're different buffer types
+	glBindBuffer(GL_ARRAY_BUFFER, VBOtriangleTwo);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(VAOtriangleTwo);
+
+	// Copies the previously defined vertex data into the buffer's memory
+	glBufferData(GL_ARRAY_BUFFER, sizeof(TriangleTwoVertices), TriangleTwoVertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+
+	shaderProg.InitializeShaderProgram2();
+
+	glBindVertexArray(VAOtriangleTwo);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	// Render triangle 3
+	unsigned int VBOtriangleThree, VAOtriangleThree;
+
+	// Generate the buffer ID here
+	glGenBuffers(1, &VBOtriangleThree);
+
+	// Generate a vertex attribute object ID
+	glGenVertexArrays(1, &VAOtriangleThree);
+
+	// This binds the buffers more than once at the same time as long as they're different buffer types
+	glBindBuffer(GL_ARRAY_BUFFER, VBOtriangleThree);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(VAOtriangleThree);
+
+	// Copies the previously defined vertex data into the buffer's memory
+	glBufferData(GL_ARRAY_BUFFER, sizeof(TriangleThreeVertices), TriangleThreeVertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(2); // My vertex's location for the third triangle is 2
+
+	shaderProg.InitializeShaderProgram3();
+
+	glBindVertexArray(VAOtriangleThree);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
