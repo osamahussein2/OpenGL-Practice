@@ -9,16 +9,17 @@ VertexShaderLoader::VertexShaderLoader()
 	// Initialize our vertex shader's source code
 	vertexShaderSource[0] = "#version 330 core // Version of GLSL with OpenGL's version\n"
 		"layout (location = 0) in vec3 position; // vertex attribute position is equal to 0\n"
+		"layout (location = 1) in vec3 color; // color attribute position is equal to 1\n"
 		"\n"
-		"out vec4 vertexColor;  // The sending vertex shader\n"
+		"out vec3 vertexColor; // The sending vertex shader to use inside the fragment shader\n"
 		"\n"
 		"void main()\n"
 		"{\n"
 		"	// gl_Position is a 4D vector inside of OpenGL\n"
-		"	gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+		"	gl_Position = vec4(position, 1.0);\n"
 		"	\n"
-		"	// This vertex color will be dark-red\n"
-		"	vertexColor = vec4(0.5, 0.0, 0.0, 1.0);\n"
+		"	// Input the color from the vertex data\n"
+		"	vertexColor = color;\n"
 		"}\0";
 
 	vertexShaderSource[1] = "#version 330 core // Version of GLSL with OpenGL's version\n"
@@ -130,10 +131,10 @@ void VertexShaderLoader::InitializeVertexObjects()
 	/* If one of the values goes below - 1.0 or above 1.0, the object will not be rendered on the window, meaning
 	the object will go offscreen */
 
-	// Initialize the first triangle's vertices to be at the middle of the OpenGL window
-	float vertices[] = { -0.5f, -0.5f, 0.0f,
-	0.0f, 0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f };
+	// Initialize the first triangle's vertices and its colors to be at the middle of the OpenGL window
+	float vertices[] = { -0.5f, -0.5f, 0.0f,	0.0f, 1.0f, 0.0f,
+	0.0f, 0.5f, 0.0f,	0.0f, 0.0f, 1.0f,
+	0.5f, -0.5f, 0.0f,	1.0f, 0.0f, 0.0f };
 
 	// Render triangle 1
 
@@ -152,8 +153,16 @@ void VertexShaderLoader::InitializeVertexObjects()
 	// Copies the previously defined vertex data into the buffer's memory
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	// Set the position attribute's location to 0 like our vertex shader GLSL file
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0); // Position attribute location occurs at 1
+
+	// Set the color attribute's location to 1 like our vertex shader GLSL file
+	// 3 * sizeof(float) in the last argument below is the offset of the color which is 3 * of our position offset
+	// The color offset is 12 bytes, and the position offset is at 0 and goes up to 3 bytes each time
+	// Since we have 3 position values, the first color offset will occur at 12 bytes, hence why we multiply it by 3
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1); // Color attribute location occurs at 1
 
 	ShaderProgram shaderProg;
 

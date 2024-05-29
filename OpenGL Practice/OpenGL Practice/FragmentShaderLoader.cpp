@@ -5,11 +5,11 @@ FragmentShaderLoader::FragmentShaderLoader()
 	fragmentShaderSource[0] = "#version 330 core\n"
 		"out vec4 fragColor;\n"
 		"\n"
-		"uniform vec4 vertexColor; // We can set this variable in OpenGL code\n"
+		"in vec3 vertexColor; // Receives the vertex color we set inside the vertex shader and we can use it here\n"
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	fragColor = vertexColor;\n"
+		"	fragColor = vec4(vertexColor, 1.0f);\n"
 		"}\0";
 
 	fragmentShaderSource[1] = "#version 330 core\n"

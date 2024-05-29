@@ -1,9 +1,9 @@
 #version 330 core
 out vec4 fragColor;
 
-uniform vec4 vertexColor; // We can set this variable in OpenGL code
+in vec3 vertexColor; // Receives the vertex color we set inside the vertex shader and we can use it here
 
 void main()
 {
-	fragColor = vertexColor;
+	fragColor = vec4(vertexColor, 1.0f);
 }
