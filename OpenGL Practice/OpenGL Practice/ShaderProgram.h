@@ -20,5 +20,8 @@ private:
 	FragmentShaderLoader fragmentShaderLoader;
 
 	unsigned int shaderProgram[3];
+	float timer;
+	float colorValue;
+	int vertexColorLocation;
 };
 

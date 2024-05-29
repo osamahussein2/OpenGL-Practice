@@ -8,6 +8,10 @@ ShaderProgram::ShaderProgram()
 	{
 		shaderProgram[shaderPrograms] = NULL;
 	}
+
+	timer = 0.0f;
+	colorValue = 0.0f;
+	vertexColorLocation = 0;
 }
 
 ShaderProgram::~ShaderProgram()
@@ -50,8 +54,18 @@ void ShaderProgram::InitializeShaderProgram()
 		std::cout << "ERROR::SHADER1::PROGRAM::LINKING_FAILED\n" << compilationInformationLog << std::endl;
 	}
 
+	timer = glfwGetTime(); // Gets the time in seconds using the GLFW library
+	colorValue = (sin(timer) / 2.0f) + 0.5f;
+
+	// Query the location of the uniform color in the fragment shader
+	// Pass in the shader program and the uniform color's name inside the glGetUniformLocation defined parameters
+	vertexColorLocation = glGetUniformLocation(shaderProgram[0], "vertexColor");
+
 	// Activate the shader program using glUseProgram function to use it
-	glUseProgram(shaderProgram[0]);
+	glUseProgram(shaderProgram[0]); // This helps set the uniform on the currently running shader program (updating it)
+
+	// Set the uniform value
+	glUniform4f(vertexColorLocation, 0.0f, colorValue, 0.0f, 1.0f);
 }
 
 void ShaderProgram::InitializeShaderProgram2()

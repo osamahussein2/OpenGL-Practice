@@ -46,8 +46,8 @@ void Window::WindowStillRunning()
 		// If I get rid of this, my window will be black because then we didn't clear any color buffer bit first before rendering
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//vertexShaderLoader.InitializeVertexObjects();
-		vertexShaderLoader.LoadThreeTriangles();
+		vertexShaderLoader.InitializeVertexObjects();
+		//vertexShaderLoader.LoadThreeTriangles();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
