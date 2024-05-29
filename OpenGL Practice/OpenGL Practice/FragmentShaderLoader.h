@@ -1,20 +1,25 @@
-#pragma once
+#ifndef FRAGMENTSHADERLOADER_H
+#define FRAGMENTSHADERLOADER_H
 
 #include <glad/glad.h>
 #include <glfw3.h>
+#include <fstream>
+#include <sstream>
 #include <iostream>
 
 class FragmentShaderLoader
 {
 public:
-	FragmentShaderLoader();
+	FragmentShaderLoader(const char* fragmentShaderPath_);
 	void InitializeFragmentShaderLoader();
-	void InitializeFragmentShaderLoader2();
-	void InitializeFragmentShaderLoader3();
 
-	unsigned int fragmentShader[3];
+	unsigned int fragmentShader;
 
 private:
-	const char* fragmentShaderSource[3];
+	std::string fragmentShaderCode;
+	std::ifstream fragmentShaderFile;
+	std::stringstream fragmentShaderStream;
+	const char* fShaderCode;
 };
 
+#endif

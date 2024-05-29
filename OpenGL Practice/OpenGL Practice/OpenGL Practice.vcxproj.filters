@@ -51,9 +51,5 @@
   <ItemGroup>
     <None Include="VertexShader.glsl" />
     <None Include="FragmentShader.glsl" />
-    <None Include="VertexShader2.glsl" />
-    <None Include="FragmentShader2.glsl" />
-    <None Include="VertexShader3.glsl" />
-    <None Include="FragmentShader3.glsl" />
   </ItemGroup>
 </Project>

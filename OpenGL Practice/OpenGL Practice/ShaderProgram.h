@@ -12,16 +12,14 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 	void InitializeShaderProgram();
-	void InitializeShaderProgram2();
-	void InitializeShaderProgram3();
 
 private:
-	VertexShaderLoader vertexShaderLoader;
-	FragmentShaderLoader fragmentShaderLoader;
+	VertexShaderLoader* vertexShaderLoader;
+	FragmentShaderLoader* fragmentShaderLoader;
 
-	unsigned int shaderProgram[3];
+	unsigned int shaderProgram;
 	float timer;
-	float colorValue;
-	int vertexColorLocation;
+	float moveRight;
+	int movingPositionLocation;
 };
 

@@ -1,14 +1,17 @@
-#pragma once
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <glad/glad.h>
 #include <glfw3.h>
 #include <iostream>
 #include "VertexShaderLoader.h"
-#include "ShaderProgram.h"
 
 class Window
 {
 public:
+	// Initialize the window's variables to be NULL first before we do anything with it
+	Window();
+
 	// Initialize OpenGL window here
 	void InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 
@@ -26,7 +29,7 @@ public:
 	GLFWwindow* openGLwindow;
 
 private:
-	VertexShaderLoader vertexShaderLoader;
-	ShaderProgram shaderProg;
+	VertexShaderLoader* vertexShaderLoader;
 };
 
+#endif

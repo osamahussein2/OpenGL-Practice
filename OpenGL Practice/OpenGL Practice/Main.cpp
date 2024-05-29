@@ -5,7 +5,7 @@ APA references (I'm trying to learn more about OpenGL using this tutorial below)
 		https://learnopengl.com/
 */
 
-// Include my very own window, vertex shader loader classes
+// Include my very own window, vertex shader loader, fragment shader loader and shader program classes
 #include "Window.h"
 #include "VertexShaderLoader.h"
 #include "FragmentShaderLoader.h"
@@ -13,31 +13,25 @@ APA references (I'm trying to learn more about OpenGL using this tutorial below)
 
 int main()
 {
-	// I don't need to make this window object a pointer because I don't have a constructor for it
+	// I don't need to make this window object a pointer because the constructor doesn't pass in anything
 	Window window;
 
 	VertexShaderLoader* vertexShaderLoader;
-	vertexShaderLoader = new VertexShaderLoader();
+	vertexShaderLoader = new VertexShaderLoader("VertexShader.glsl");
 
 	FragmentShaderLoader* fragmentShaderLoader;
-	fragmentShaderLoader = new FragmentShaderLoader();
+	fragmentShaderLoader = new FragmentShaderLoader("FragmentShader.glsl");
 
-	ShaderProgram* shaderProgram;
-	shaderProgram = new ShaderProgram();
+	// I don't need to make this shader program object a pointer because the constructor doesn't pass in anything
+	ShaderProgram shaderProgram;
 
 	// Just initialize the OpenGL window by filling in the right parameters below
 	window.InitializeOpenGLwindow(1280, 960, "OpenGL Practice", NULL, NULL);
 
 	vertexShaderLoader->InitializeVertexShaderLoader();
-	vertexShaderLoader->InitializeVertexShaderLoader2();
-	vertexShaderLoader->InitializeVertexShaderLoader3();
 	fragmentShaderLoader->InitializeFragmentShaderLoader();
-	fragmentShaderLoader->InitializeFragmentShaderLoader2();
-	fragmentShaderLoader->InitializeFragmentShaderLoader3();
-	shaderProgram->InitializeShaderProgram();
-	shaderProgram->InitializeShaderProgram2();
-	shaderProgram->InitializeShaderProgram3();
-	shaderProgram->~ShaderProgram();
+	shaderProgram.InitializeShaderProgram();
+	shaderProgram.~ShaderProgram();
 
 	window.WindowStillRunning();
 

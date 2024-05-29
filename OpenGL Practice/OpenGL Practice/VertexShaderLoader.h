@@ -1,24 +1,29 @@
-#pragma once
+#ifndef VERTEXSHADERLOADER_H
+#define VERTEXSHADERLOADER_H
 
 #include <glad/glad.h>
 #include <glfw3.h>
+#include <fstream>
+#include <sstream>
 #include <iostream>
 
 class VertexShaderLoader
 {
 public:
-	VertexShaderLoader();
+	VertexShaderLoader(const char* vertexShaderPath_);
 	void InitializeVertexShaderLoader();
-	void InitializeVertexShaderLoader2();
-	void InitializeVertexShaderLoader3();
 	void InitializeVertexObjects();
 	void LoadThreeTriangles();
 
-	unsigned int vertexShader[3];
+	unsigned int vertexShader;
 
 private:
-	const char* vertexShaderSource[3];
 	unsigned int VAO, VBO;
 	unsigned int EBO;
+	std::string vertexShaderCode;
+	std::ifstream vertexShaderFile;
+	std::stringstream vertexShaderStream;
+	const char* vShaderCode;
 };
 
+#endif
