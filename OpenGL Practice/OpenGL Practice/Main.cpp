@@ -30,7 +30,6 @@ int main()
 
 	vertexShaderLoader->InitializeVertexShaderLoader();
 	fragmentShaderLoader->InitializeFragmentShaderLoader();
-	shaderProgram.InitializeShaderProgram();
 	shaderProgram.~ShaderProgram();
 
 	window.WindowStillRunning();

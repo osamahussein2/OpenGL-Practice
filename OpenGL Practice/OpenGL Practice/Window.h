@@ -5,6 +5,7 @@
 #include <glfw3.h>
 #include <iostream>
 #include "VertexShaderLoader.h"
+#include "ShaderProgram.h"
 
 class Window
 {
@@ -28,7 +29,7 @@ public:
 
 private:
 	VertexShaderLoader* vertexShaderLoader;
-
+	ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
 };
 

@@ -10,6 +10,8 @@ ShaderProgram::ShaderProgram()
 	movingPositionLocation = 0;
 
 	shaderProgram = NULL;
+
+	visibilityTextureValue = 0.2f;
 }
 
 ShaderProgram::~ShaderProgram()
@@ -60,4 +62,5 @@ void ShaderProgram::InitializeShaderProgram()
 
 	glUniform1i(glGetUniformLocation(shaderProgram, "theFirstTexture"), 0);
 	glUniform1i(glGetUniformLocation(shaderProgram, "theSecondTexture"), 1);
+	glUniform1f(glGetUniformLocation(shaderProgram, "visibilityTexture"), visibilityTextureValue);
 }

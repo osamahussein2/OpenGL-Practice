@@ -9,6 +9,8 @@ vec2 otherDirection; // Add a vector that makes the smiley face look in the othe
 uniform sampler2D theFirstTexture;
 uniform sampler2D theSecondTexture;
 
+uniform float visibilityTexture;
+
 void main()
 {
 	//fragColor = texture(theFirstTexture, textureCoord) * vec4(vertexColor, 1.0);
@@ -21,5 +23,5 @@ void main()
 	//fragColor = mix(texture(theFirstTexture, textureCoord),  texture(theSecondTexture, textureCoord * 
 	//otherDirection), 0.2);
 
-	fragColor = mix(texture(theFirstTexture, textureCoord),  texture(theSecondTexture, textureCoord), 0.2);
+	fragColor = mix(texture(theFirstTexture, textureCoord),  texture(theSecondTexture, textureCoord), visibilityTexture);
 }

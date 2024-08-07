@@ -13,6 +13,8 @@ public:
 	~ShaderProgram();
 	void InitializeShaderProgram();
 
+	float visibilityTextureValue;
+
 private:
 	VertexShaderLoader* vertexShaderLoader;
 	FragmentShaderLoader* fragmentShaderLoader;
