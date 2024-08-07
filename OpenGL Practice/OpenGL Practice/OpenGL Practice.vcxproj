@@ -138,14 +138,13 @@
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="VertexShaderLoader.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
