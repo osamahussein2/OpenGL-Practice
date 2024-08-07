@@ -17,6 +17,9 @@ void main()
 	// The y value should be 1 so that the face is visible on the container texture
 	otherDirection = vec2(-1.0, 1.0);
 
-	fragColor = mix(texture(theFirstTexture, textureCoord),  texture(theSecondTexture, textureCoord * 
-	otherDirection), 0.2);
+	// This is for making the smiley face look in the other direction
+	//fragColor = mix(texture(theFirstTexture, textureCoord),  texture(theSecondTexture, textureCoord * 
+	//otherDirection), 0.2);
+
+	fragColor = mix(texture(theFirstTexture, textureCoord),  texture(theSecondTexture, textureCoord), 0.2);
 }
