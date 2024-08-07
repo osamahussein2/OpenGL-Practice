@@ -3,7 +3,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "VertexShaderLoader.h"
-#include "ShaderProgram.h"
 
 VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 {
@@ -214,7 +213,7 @@ void VertexShaderLoader::InitializeVertexObjects()
 	GL_LINEAR_MIPMAP_LINEAR linearly interpolates between the 2 closest mipmaps and samples the interpolated level
 	via nearest neighbor interpolation */
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	/* Setting the mipmap filter on a magnifying fliter has no effect on the mipmaps since they are primarily used
@@ -269,13 +268,6 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	// Free the image memory after generating the texture and its corresponding mipmaps
 	stbi_image_free(data);
-
-	ShaderProgram shaderProg;
-
-	shaderProg.InitializeShaderProgram();
-
-	glUniform1i(glGetUniformLocation(shaderProg.shaderProgram, "texture1"), 0);
-	glUniform1i(glGetUniformLocation(shaderProg.shaderProgram, "texture2"), 1);
 
 	// Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
 	// the fragment shader's sampler

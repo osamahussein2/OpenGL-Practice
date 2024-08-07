@@ -13,13 +13,11 @@ public:
 	~ShaderProgram();
 	void InitializeShaderProgram();
 
-	unsigned int shaderProgram;
-
 private:
 	VertexShaderLoader* vertexShaderLoader;
 	FragmentShaderLoader* fragmentShaderLoader;
 
-	//static unsigned int shaderProgram;
+	unsigned int shaderProgram;
 	float timer;
 	float moveRight;
 	int movingPositionLocation;

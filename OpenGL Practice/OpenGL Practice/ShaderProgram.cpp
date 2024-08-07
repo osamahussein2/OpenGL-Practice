@@ -57,4 +57,7 @@ void ShaderProgram::InitializeShaderProgram()
 
 	// Set the uniform value
 	glUniform3f(movingPositionLocation, moveRight, 0.0f, 0.0f);
+
+	glUniform1i(glGetUniformLocation(shaderProgram, "theFirstTexture"), 0);
+	glUniform1i(glGetUniformLocation(shaderProgram, "theSecondTexture"), 1);
 }

@@ -5,7 +5,7 @@ APA references (I'm trying to learn more about OpenGL using this tutorial below)
 		https://learnopengl.com/
 */
 
-// Include my very own window, vertex shader loader, fragment shader loader,shader program, and texture classes
+// Include my very own window, vertex shader loader, fragment shader loader and shader program classes
 #include "Window.h"
 #include "VertexShaderLoader.h"
 #include "FragmentShaderLoader.h"

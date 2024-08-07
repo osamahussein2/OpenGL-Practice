@@ -3,7 +3,6 @@
 Window::Window()
 {
 	vertexShaderLoader = new VertexShaderLoader("VertexShader.glsl");
-	shaderProg = new ShaderProgram();
 
 	openGLwindow = NULL;
 }
@@ -54,7 +53,6 @@ void Window::WindowStillRunning()
 		// If I get rid of this, my window will be black because then we didn't clear any color buffer bit first before rendering
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		shaderProg->InitializeShaderProgram();
 		vertexShaderLoader->InitializeVertexObjects();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error

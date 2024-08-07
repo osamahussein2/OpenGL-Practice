@@ -5,7 +5,6 @@
 #include <glfw3.h>
 #include <iostream>
 #include "VertexShaderLoader.h"
-#include "ShaderProgram.h"
 
 class Window
 {
@@ -27,11 +26,10 @@ public:
 	// Get the keyboard input whenever we want to close the window
 	void ProcessInput(GLFWwindow* window);
 
-	GLFWwindow* openGLwindow;
-
 private:
 	VertexShaderLoader* vertexShaderLoader;
-	ShaderProgram* shaderProg;
+
+	GLFWwindow* openGLwindow;
 };
 
 #endif
