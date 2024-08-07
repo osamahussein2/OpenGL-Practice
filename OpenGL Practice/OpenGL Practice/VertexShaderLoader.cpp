@@ -88,10 +88,10 @@ void VertexShaderLoader::InitializeVertexObjects()
 	float vertices[] = { 
 		// positions      // colors         // texture coordinates
 
-		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 2.0f, 2.0f, // top right
+		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 2.0f, 0.0f, // bottom right
 		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-		-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top right 
+		-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 2.0f // top right 
 	};
 
 	unsigned int indices[] = {
@@ -166,8 +166,8 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	// First parameter passes in the texture target, second parameter passes in the axes that we want to set
 	// And the third parameter passes in what we want the texture wrapping mode to be
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	// If we choose GL_CLAMP_TO_BORDER, we should also specify a border color (r, g, b, a)
 	/*float borderColor[] = {1.0f, 0.0f, 0.0f, 1.0f};
@@ -189,8 +189,8 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	// Texture filtering can be set for magnifying (scaling up) and minifying (scaling downward) operations
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // Nearest filtering for downward scaled textures
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear filtering for upscale textures
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // Nearest filtering for downward scaled textures
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear filtering for upscale textures
 
 	// Mipmaps are collections of texture images where each subsequent (following) texture is twice as small compared
 	// to the previous one
