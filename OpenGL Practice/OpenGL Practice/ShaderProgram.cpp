@@ -106,3 +106,20 @@ void ShaderProgram::InitializeShaderProgram()
 	transformMatrixLocation = glGetUniformLocation(shaderProgram, "translateMat");
 	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, glm::value_ptr(translateMatrix));
 }
+
+// Render the second container texture in the window
+void ShaderProgram::InitializeSecondTexture()
+{
+	translateMatrix = glm::mat4(1.0f);
+
+	// Rotate the matrix on each iteration of the render loop by using glfwGetTime()
+	translateMatrix = glm::scale(translateMatrix,
+		glm::vec3(sin((float)glfwGetTime()), sin((float)glfwGetTime()), sin((float)glfwGetTime())));
+
+	// Translate the matrix at the bottom right of the OpenGL window (or move this at bottom right of the window)
+	translateMatrix = glm::translate(translateMatrix, glm::vec3(-0.5f, 0.5f, 0.0f));
+
+	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, &translateMatrix[0][0]);
+
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}

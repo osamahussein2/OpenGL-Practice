@@ -3,6 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "VertexShaderLoader.h"
+#include "ShaderProgram.h"
 
 VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 {
@@ -299,4 +300,9 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+	ShaderProgram shaderProg;
+
+	// Call the second texture initialization function here to render the second container and scale it overtime
+	shaderProg.InitializeSecondTexture();
 }

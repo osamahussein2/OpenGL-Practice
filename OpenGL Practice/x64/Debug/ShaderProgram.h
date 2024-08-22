@@ -17,6 +17,7 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 	void InitializeShaderProgram();
+	void InitializeSecondTexture();
 
 	float visibilityTextureValue;
 
