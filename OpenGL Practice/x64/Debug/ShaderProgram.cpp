@@ -78,11 +78,19 @@ void ShaderProgram::InitializeShaderProgram()
 	all subsequent matrix operations would be null as well (we don't want that, could lead to unexpected problems) */
 	translateMatrix = glm::mat4(1.0f);
 
-	// Translate the matrix at the bottom right of the OpenGL window (or move this at bottom right of the window)
-	translateMatrix = glm::translate(translateMatrix, glm::vec3(0.5f, -0.5f, 0.0f));
+	/* Since I rotated the matrix first, it will rotate along the z axis per frame and then translate it to the bottom
+	right of the window each time the rotation loop is occuring, meaning that the image will rotate around the screen. 
+	It kind of looks like the container texture is swinging a pendulum. */
+
+	/* Whereas if I rotated the matrix after translating, it will immediately place the texture at the bottom right of
+	the screen and then rotate it without moving the image around the window because of the fact that the translation
+	of the texture has already finished placing it at the bottom right of the window. */
 
 	// Rotate the matrix on each iteration of the render loop by using glfwGetTime()
 	translateMatrix = glm::rotate(translateMatrix, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	// Translate the matrix at the bottom right of the OpenGL window (or move this at bottom right of the window)
+	translateMatrix = glm::translate(translateMatrix, glm::vec3(0.5f, -0.5f, 0.0f));
 
 	//translateMatrix = glm::translate(translateMatrix, glm::vec3(1.0f, 1.0f, 0.0f));
 
