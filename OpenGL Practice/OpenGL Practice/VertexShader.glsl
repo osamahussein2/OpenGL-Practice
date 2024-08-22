@@ -8,13 +8,14 @@ out vec3 vertexPosition;
 out vec2 textureCoord;
 
 uniform vec3 movingPosition;
+uniform mat4 translateMat;
 
 void main()
 {
 	// gl_Position is a 4D vector inside of OpenGL 
 	// gl_Position = vec4(-position + movingPosition, 1.0);
 
-	gl_Position = vec4(position, 1.0);
+	gl_Position = translateMat * vec4(position, 1.0);
 	vertexColor = color;
 	textureCoord = textureCoordinate;
 

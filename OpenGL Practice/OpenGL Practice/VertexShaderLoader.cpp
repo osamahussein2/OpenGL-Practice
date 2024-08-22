@@ -31,6 +31,18 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 
 	vShaderCode = vertexShaderCode.c_str();
 
+	for (int verticesArray = 0; verticesArray < vertices.size(); verticesArray++)
+	{
+		// Initialize all the vertices elements to 0
+		vertices[verticesArray] = 0;
+	}
+
+	for (int indicesArray = 0; indicesArray < indices.size(); indicesArray++)
+	{
+		// Initialize all the indices elements to 0
+		indices[indicesArray] = 0;
+	}
+
 	VAO = NULL;
 	VBO = NULL;
 
@@ -38,8 +50,14 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 
 	vertexShader = NULL;
 
+	data = nullptr;
+
 	texture1 = NULL;
 	texture2 = NULL;
+
+	width = 0; 
+	height = 0;
+	nrChannels = 0;
 
 	//shaderProg = ShaderProgram();
 }
@@ -85,7 +103,7 @@ void VertexShaderLoader::InitializeVertexObjects()
 	the object will go offscreen */
 
 	// Initialize the first triangle's vertices and its colors to be at the middle of the OpenGL window
-	float vertices[] = { 
+	vertices = { 
 		// positions      // colors         // texture coordinates
 
 		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
@@ -94,7 +112,8 @@ void VertexShaderLoader::InitializeVertexObjects()
 		-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top right 
 	};
 
-	unsigned int indices[] = {
+
+	indices = {
 		0, 1, 3, // first triangle
 		1, 2, 3  // second triangle
 	};
@@ -115,13 +134,13 @@ void VertexShaderLoader::InitializeVertexObjects()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	// Copies the previously defined vertex data into the buffer's memory
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
 
 	// This binds the buffers more than once at the same time as long as they're different buffer types
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
 	// Copies the previously defined vertex data into the buffer's memory
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
 
 	// Set the position attribute's location to 0 like our vertex shader GLSL file
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
@@ -220,12 +239,11 @@ void VertexShaderLoader::InitializeVertexObjects()
 	when downscaling the textures as in texture magnification doesn't use mipmaps and passing in a mipmapping
 	filtering option will give an OpenGL INVALID_CODE_ENUM error code */
 
-	int width, height, nrChannels;
-
+	// Flip the image vertically
 	stbi_set_flip_vertically_on_load(true);
 
 	// The 3 int parameters of stbi_load include a width (x), height (y) and number of color channels (nrChannels)
-	unsigned char* data = stbi_load("Textures/container.jpg", &width, &height, &nrChannels, 0);
+	data = stbi_load("Textures/container.jpg", &width, &height, &nrChannels, 0);
 
 	// After the texture ahs been binded, we can generate textures using the previously loaded image data
 	// Textures are generated with glTexImage2D

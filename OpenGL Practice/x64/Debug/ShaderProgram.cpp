@@ -12,6 +12,11 @@ ShaderProgram::ShaderProgram()
 	shaderProgram = NULL;
 
 	visibilityTextureValue = 0.2f;
+
+	transformMatrixLocation = NULL;
+
+	vector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	translateMatrix = glm::mat4(0.0f);
 }
 
 ShaderProgram::~ShaderProgram()
@@ -63,4 +68,33 @@ void ShaderProgram::InitializeShaderProgram()
 	glUniform1i(glGetUniformLocation(shaderProgram, "theFirstTexture"), 0);
 	glUniform1i(glGetUniformLocation(shaderProgram, "theSecondTexture"), 1);
 	glUniform1f(glGetUniformLocation(shaderProgram, "visibilityTexture"), visibilityTextureValue);
+
+	// Initialize the vector by declaring it as a vec4 using the GLM library
+	//vector = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+
+	// Use mat4 for 4D matrix and set it to initialize the identity matrix by initializing the matrix's diagonals to 1
+
+	/* If this is not initialized to its identity matrix, the matrix will be a null matrix(all elements equal to 0) and
+	all subsequent matrix operations would be null as well (we don't want that, could lead to unexpected problems) */
+	translateMatrix = glm::mat4(1.0f);
+
+	// Translate the matrix at the bottom right of the OpenGL window (or move this at bottom right of the window)
+	translateMatrix = glm::translate(translateMatrix, glm::vec3(0.5f, -0.5f, 0.0f));
+
+	// Rotate the matrix on each iteration of the render loop by using glfwGetTime()
+	translateMatrix = glm::rotate(translateMatrix, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	//translateMatrix = glm::translate(translateMatrix, glm::vec3(1.0f, 1.0f, 0.0f));
+
+	// Rotate the container texture 90 degrees around the z-axis (there is 1.0f in z axis below)
+	//translateMatrix = glm::rotate(translateMatrix, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+	// Scale the container texture by half of its normal scale on each axis
+	//translateMatrix = glm::scale(translateMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
+
+	//vector = translateMatrix * vector;
+	//std::cout << "This vector matrix is equal to (" << vector.x << ", " << vector.y << ", " << vector.z << ")" << "\n";
+
+	transformMatrixLocation = glGetUniformLocation(shaderProgram, "translateMat");
+	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, glm::value_ptr(translateMatrix));
 }
