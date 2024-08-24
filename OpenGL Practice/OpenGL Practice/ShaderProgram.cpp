@@ -17,6 +17,14 @@ ShaderProgram::ShaderProgram()
 
 	vector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 	translateMatrix = glm::mat4(0.0f);
+
+	modelMatrix = glm::mat4(0.0f);
+	viewMatrix = glm::mat4(0.0f);
+	projectionMatrix = glm::mat4(0.0f);
+
+	modelMatrixLocation = NULL;
+	viewMatrixLocation = NULL;
+	projectionMatrixLocation = NULL;
 }
 
 ShaderProgram::~ShaderProgram()
@@ -122,4 +130,50 @@ void ShaderProgram::InitializeSecondTexture()
 	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, &translateMatrix[0][0]);
 
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, float far_plane)
+{
+	// To be able to draw in 3D, we will need a model matrix
+
+	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
+	vertices to the global world space */
+
+	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
+	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we 
+	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::rotate(modelMatrix, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+	/* After the model matrix has been created and set up, we need to create a view matrix. We have to move
+	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world 
+	space, we are located at the origin (or in other words, the coordinate (0, 0, 0). */
+
+	/* The view matrix basically moves the entire scene around inversed (or reversed) to where we want the camera to 
+	move. Because we want to move backwards and since OpenGL is a right-handed system we have to move in the positive 
+	z-axis. This gives the impression that we're moving backwards. */
+	viewMatrix = glm::mat4(1.0f);
+	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -3.0f)); // Translate the scene in the reversed direction
+
+	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
+	/* The last thing we need to define is the projection matrix where we're going to use it in our scene */
+
+	/* The glm::perspective function passes in 4 float values: the first one passes in the field of view in the y
+	direction, the second one passes in the aspect ratio value, the third one passes in the near plane value (or the
+	distance from the viewer to the near clipping plane point (always positive, so most likely we need an unsigned int 
+	reference here), and the fourth one passes in the far plane value (or the distance from the viewer to the far
+	clipping plane point (again, always positive so another potential unsigned int is mandatory here) */
+	projectionMatrix = glm::perspective(glm::radians(45.0f), aspect_ratio, near_plane, far_plane);
+
+	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+	/* Make sure to draw arrays at the end of setting the model, view and projection matrices locations to render
+	the cube on the window */
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 }

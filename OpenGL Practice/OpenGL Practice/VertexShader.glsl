@@ -10,12 +10,16 @@ out vec2 textureCoord;
 uniform vec3 movingPosition;
 uniform mat4 translateMat;
 
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
+
 void main()
 {
 	// gl_Position is a 4D vector inside of OpenGL 
 	// gl_Position = vec4(-position + movingPosition, 1.0);
 
-	gl_Position = translateMat * vec4(position, 1.0);
+	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 	vertexColor = color;
 	textureCoord = textureCoordinate;
 

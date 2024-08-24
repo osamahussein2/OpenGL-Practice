@@ -3,7 +3,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "VertexShaderLoader.h"
-#include "ShaderProgram.h"
 
 VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 {
@@ -104,13 +103,51 @@ void VertexShaderLoader::InitializeVertexObjects()
 	the object will go offscreen */
 
 	// Initialize the first triangle's vertices and its colors to be at the middle of the OpenGL window
-	vertices = { 
-		// positions      // colors         // texture coordinates
+	vertices = {
+		// positions      // texture coordinates
 
-		0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-		-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f // top right 
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+		0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+
+
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+
+		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		-0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+		0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+		0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
+		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+
+		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		-0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f
 	};
 
 
@@ -144,19 +181,20 @@ void VertexShaderLoader::InitializeVertexObjects()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
 
 	// Set the position attribute's location to 0 like our vertex shader GLSL file
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0); // Position attribute location occurs at 1
 
 	// Set the color attribute's location to 1 like our vertex shader GLSL file
 	// 3 * sizeof(float) in the last argument below is the offset of the color which is 3 * of our position offset
 	// The color offset is 12 bytes, and the position offset is at 0 and goes up to 3 bytes each time
-	// Since we have 3 position values, the first color offset will occur at 12 bytes, hence why we multiply it by 3
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	// Since we have 5 position values, we need to multiply the sizeof(float) by 5
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1); // Color attribute location occurs at 1
 
 	// Let OpenGL know about the new vertex format using the newly created texture attribute
-	// We have to adjust the stride parameter of the previous 2 vertex attributes to 8 * sizeof(float) as well
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	// // 3 * sizeof(float) in the last argument below is the offset of the texture which is 3 * of our position offset
+	// We have to adjust the stride parameter of the previous 2 vertex attributes to 5 * sizeof(float) as well
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 	// The first parameter takes in an input of how many textures we want to generate and store them in the integer
@@ -186,8 +224,8 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	// First parameter passes in the texture target, second parameter passes in the axes that we want to set
 	// And the third parameter passes in what we want the texture wrapping mode to be
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	// If we choose GL_CLAMP_TO_BORDER, we should also specify a border color (r, g, b, a)
 	/*float borderColor[] = {1.0f, 0.0f, 0.0f, 1.0f};
@@ -299,10 +337,5 @@ void VertexShaderLoader::InitializeVertexObjects()
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
 	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-	ShaderProgram shaderProg;
-
-	// Call the second texture initialization function here to render the second container and scale it overtime
-	shaderProg.InitializeSecondTexture();
+	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 }

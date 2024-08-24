@@ -49,14 +49,30 @@ void Window::WindowStillRunning()
 	{
 		ProcessInput(openGLwindow);
 
+		// OpenGL stores all its depth information in a z-buffer, also known as depth buffering
+
+		/* The depth is stored within each fragment (as the fragment's z value) and whenever the fragment wants to 
+		output its color, OpenGL compares its depth values with the z-buffer. If the current fragment is behind the 
+		other fragment it is discarded, otherwise it's overwritten. This process is called depth testing. */
+		glEnable(GL_DEPTH_TEST);
+
 		// Add our own color to the window
 		glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
 
 		// If I get rid of this, my window will be black because then we didn't clear any color buffer bit first before rendering
-		glClear(GL_COLOR_BUFFER_BIT);
+		// Since we're also using depth buffer, we need to clear the depth buffer before each render iteration
+		// Otherwise, the depth information of the previous frame stays in the buffer (and the cube won't render at all)
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram->InitializeShaderProgram();
 		vertexShaderLoader->InitializeVertexObjects();
+
+		// Call the second texture initialization function here to render the second container and scale it overtime
+		//shaderProgram->InitializeSecondTexture();
+
+		// Call the 3D object initialization function to render 3D objects onto the OpenGL window
+		// The 800.0f/ 600.0f below also equals to 4.0f / 3.0f which is what most graphics aspect ratios are defaulted to
+		shaderProgram->Initialize3Dobjects(800.0f / 600.0f, 0.1f, 100.0f);
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time

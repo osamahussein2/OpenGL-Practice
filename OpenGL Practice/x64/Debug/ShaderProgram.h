@@ -18,6 +18,7 @@ public:
 	~ShaderProgram();
 	void InitializeShaderProgram();
 	void InitializeSecondTexture();
+	void Initialize3Dobjects(float aspect_ratio, float near_plane, float far_plane);
 
 	float visibilityTextureValue;
 
@@ -30,8 +31,16 @@ private:
 	float moveRight;
 	int movingPositionLocation;
 	unsigned int transformMatrixLocation;
+	
+	int modelMatrixLocation;
+	int viewMatrixLocation;
+	int projectionMatrixLocation;
 
 	glm::vec4 vector;
 	glm::mat4 translateMatrix;
+
+	glm::mat4 modelMatrix;
+	glm::mat4 viewMatrix;
+	glm::mat4 projectionMatrix;
 };
 
