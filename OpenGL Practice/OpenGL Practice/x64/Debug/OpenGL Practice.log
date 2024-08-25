@@ -1,1 +1,2 @@
-﻿  OpenGL Practice.vcxproj -> C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Debug\OpenGL Practice.exe
+﻿  ShaderProgram.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\ShaderProgram.cpp(69,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data

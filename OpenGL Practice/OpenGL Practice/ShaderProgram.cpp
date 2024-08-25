@@ -193,10 +193,16 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 
 		// Use the model matrix to place all the cube positions elements somewhere inside the window
 		modelMatrix = glm::translate(modelMatrix, cubePositions[renderCubes]);
-		
-		// Create an angle variable to determine the angle that each cube should rotate at
-		float angle = 20.0f * renderCubes;
-		modelMatrix = glm::rotate(modelMatrix, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+
+		// If the container array index is divisible by 3 (in other words, if the 3rd iteration of the loop is reached)
+		if (renderCubes % 3 == 0)
+		{
+			// Create an angle variable to determine the angle that each cube should rotate at
+			//float angle = 20.0f * renderCubes;
+
+			// Rotate the container over time but only if the container array index is divisible by 3
+			modelMatrix = glm::rotate(modelMatrix, (float)glfwGetTime(), glm::vec3(1.0f, 0.3f, 0.5f));
+		}
 
 		// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
 		modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
