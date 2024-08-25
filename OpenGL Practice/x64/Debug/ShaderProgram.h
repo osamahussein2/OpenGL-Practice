@@ -42,5 +42,7 @@ private:
 	glm::mat4 modelMatrix;
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
+
+	std::array<glm::vec3, 10> cubePositions;
 };
 

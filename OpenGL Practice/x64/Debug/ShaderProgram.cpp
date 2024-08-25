@@ -25,6 +25,12 @@ ShaderProgram::ShaderProgram()
 	modelMatrixLocation = NULL;
 	viewMatrixLocation = NULL;
 	projectionMatrixLocation = NULL;
+
+	for (int cubePositionsArray = 0; cubePositionsArray < cubePositions.size(); cubePositionsArray++)
+	{
+		// Initialize the vec3 array elements to 0 for all axes
+		cubePositions[cubePositionsArray] = glm::vec3(0.0f, 0.0f, 0.0f);
+	}
 }
 
 ShaderProgram::~ShaderProgram()
@@ -134,19 +140,19 @@ void ShaderProgram::InitializeSecondTexture()
 
 void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, float far_plane)
 {
-	// To be able to draw in 3D, we will need a model matrix
-
-	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
-	vertices to the global world space */
-
-	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
-	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we 
-	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
-	modelMatrix = glm::mat4(1.0f);
-	modelMatrix = glm::rotate(modelMatrix, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-
-	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
-	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	// Initialize the translation vector array for each cube that specifies its position in world space
+	cubePositions = {
+		glm::vec3(0.0f, 0.0f, -3.0f),
+		glm::vec3(2.0f, 5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f, 3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f, 2.0f, -2.5f),
+		glm::vec3(1.5f, 0.2f, -1.5f),
+		glm::vec3(-1.3f, 1.0f, -1.5f)
+	};
 
 	/* After the model matrix has been created and set up, we need to create a view matrix. We have to move
 	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world 
@@ -173,7 +179,33 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
-	/* Make sure to draw arrays at the end of setting the model, view and projection matrices locations to render
-	the cube on the window */
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	for (unsigned int renderCubes = 0; renderCubes < cubePositions.size(); renderCubes++)
+	{
+		// To be able to draw in 3D, we will need a model matrix
+
+		/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
+		vertices to the global world space */
+
+		/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
+		coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
+		are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
+		modelMatrix = glm::mat4(1.0f);
+
+		// Use the model matrix to place all the cube positions elements somewhere inside the window
+		modelMatrix = glm::translate(modelMatrix, cubePositions[renderCubes]);
+		
+		// Create an angle variable to determine the angle that each cube should rotate at
+		float angle = 20.0f * renderCubes;
+		modelMatrix = glm::rotate(modelMatrix, (float)glfwGetTime() * glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+
+		// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
+		modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+		// Set the uniform model matrix location to equal to the modelMatrix value pointer
+		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+		/* Make sure to draw arrays at the end of setting the model, view and projection matrices locations to render
+		the cube on the window */
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
 }
