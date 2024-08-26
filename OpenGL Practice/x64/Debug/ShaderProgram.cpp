@@ -194,7 +194,7 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 	distance from the viewer to the near clipping plane point (always positive, so most likely we need an unsigned int 
 	reference here), and the fourth one passes in the far plane value (or the distance from the viewer to the far
 	clipping plane point (again, always positive so another potential unsigned int is mandatory here) */
-	projectionMatrix = glm::perspective(glm::radians(45.0f), aspect_ratio, near_plane, far_plane);
+	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
 
 	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));

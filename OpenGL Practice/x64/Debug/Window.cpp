@@ -1,5 +1,11 @@
 #include "Window.h"
 
+float Window::lastPositionX = 400;
+float Window::lastPositionY = 300;
+
+// Initialize the first time mouse input to true since the mouse cursor will be immediately focused in OpenGL window
+extern bool firstTimeMouseReceivesInput = true;
+
 Window::Window()
 {
 	vertexShaderLoader = new VertexShaderLoader("VertexShader.glsl");
@@ -14,6 +20,9 @@ Window::Window()
 	deltaTime = 0.0f;
 	lastFrame = 0.0f;
 	currentFrame = 0.0f;
+
+	lastPositionX = 0.0f;
+	lastPositionY = 0.0f;
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -60,6 +69,19 @@ void Window::WindowStillRunning()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame; // Get the time of the last frame
 
+		// Tell GLFW to hide the mouse cursor and capture it
+
+		/* Capturing a cursor means that, once the application has focus, the mouse cursor stays within the center of the 
+		window (unless if the application loses focus or quits )*/
+		glfwSetInputMode(openGLwindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+		/* As soon as we register the callback function with GLFW each time the mouse moves while the window has focus on
+		the cursor, this MouseCallback function below will get called. */
+		glfwSetCursorPosCallback(openGLwindow, MouseCallback);
+
+		// Register the mouse scroll callback every time we move the mouse scroll wheel
+		glfwSetScrollCallback(openGLwindow, MouseScrollCallback);
+
 		ProcessInput(openGLwindow);
 
 		// OpenGL stores all its depth information in a z-buffer, also known as depth buffering
@@ -99,6 +121,83 @@ void Window::WindowStillRunning()
 void Window::FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+// To calculate the pitch and yaw values, we must tell GLFW to listen to mouse-movement events
+void Window::MouseCallback(GLFWwindow* window, double positionX, double positionY)
+{
+	// If the mouse receives input for the first time, update the initial mouse positions to the x and y positions
+	if (firstTimeMouseReceivesInput == true)
+	{
+		lastPositionX = positionX;
+		lastPositionY = positionY;
+
+		firstTimeMouseReceivesInput = false; // Make this false afterwards to prevent long movement jumps
+	}
+
+	/* When handling mouse input for a fly style camera, we have to perform 4 steps before the camera's direction vector
+	will be fully calculated to produce the final output. */
+
+	/* 
+		1. Calculate the mouse's offset since the last frame
+		2. Add the offset values to the camera's yaw and pitch values
+		3. Add some constraints to the minimum or maximum yaw and pitch values
+		4. Calculate the direction vector
+	*/
+
+	/* In order to find the mouse's offset from last frame, we have to store the last mouse x and y positions in the 
+	application. */
+	float mouseOffsetX = positionX - lastPositionX;
+	float mouseOffsetY = lastPositionY - positionY; // This has to be reversed since y ranges bottom to top
+
+	lastPositionX = positionX;
+	lastPositionY = positionY;
+
+	/* We need to multiply the mosue offset values by the mouse sensitivity value here or else the mouse movement would
+	be too strong. */
+	const float mouseSensitivity = 0.1f;
+	mouseOffsetX *= mouseSensitivity;
+	mouseOffsetY *= mouseSensitivity;
+
+	// Add the mouse offset x value to yaw and the mouse offset y value to pitch
+	Camera::yaw += mouseOffsetX;
+	Camera::pitch += mouseOffsetY;
+
+	/* We need to restrict the pitch value not to exceed 89 and not to go below -89 to prevent the LookAt view matrix
+	from flipping. */
+	if (Camera::pitch >= 89.0f)
+	{
+		Camera::pitch = 89.0f;
+	}
+
+	else if (Camera::pitch <= -89.0f)
+	{
+		Camera::pitch = -89.0f;
+	}
+
+	Camera::cameraDirection = glm::vec3(cos(glm::radians(Camera::yaw)) * cos(glm::radians(Camera::pitch)),
+		sin(glm::radians(Camera::pitch)),
+		sin(glm::radians(Camera::yaw) * cos(glm::radians(Camera::pitch))));
+
+	Camera::cameraFront = glm::normalize(Camera::cameraDirection);
+}
+
+void Window::MouseScrollCallback(GLFWwindow* window, double offsetX, double offsetY)
+{
+	// Decrease the field of view by the mouse y offset each time
+	Camera::fieldOfView -= offsetY;
+
+	// If the field of view of the camera is zoomed in by 1.0 or less, set the field of view equal to 1.0
+	if (Camera::fieldOfView <= 1.0f)
+	{
+		Camera::fieldOfView = 1.0f;
+	}
+
+	// If the field of view of the camera is zoomed out by 45.0 or more, set the field of view equal to 45.0
+	else if (Camera::fieldOfView >= 45.0f)
+	{
+		Camera::fieldOfView = 45.0f;
+	}
 }
 
 void Window::ProcessInput(GLFWwindow* window)

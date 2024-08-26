@@ -19,16 +19,21 @@ public:
 
 	void WindowStillRunning();
 
+	// Get the keyboard input whenever we want to close the window
+	void ProcessInput(GLFWwindow* window);
+
+private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
 
 	/* If I don't make this static, it'll give an error that it cannot convert this function for the Window class
 	to a parameter type of GLFWframebuffersizefun */
 	static void FrameBufferSizeCallback(GLFWwindow* window, int width, int height);
 
-	// Get the keyboard input whenever we want to close the window
-	void ProcessInput(GLFWwindow* window);
+	// positionX and positionY represent as current mouse positions, along the x and y axes respectively
+	static void MouseCallback(GLFWwindow* window, double positionX, double positionY);
 
-private:
+	static void MouseScrollCallback(GLFWwindow* window, double offsetX, double offsetY);
+
 	VertexShaderLoader* vertexShaderLoader;
 	ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
@@ -37,6 +42,8 @@ private:
 	float cameraMoveSpeed;
 
 	float deltaTime, lastFrame, currentFrame;
+
+	static float lastPositionX, lastPositionY;
 };
 
 #endif

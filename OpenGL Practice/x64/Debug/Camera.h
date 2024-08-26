@@ -21,6 +21,11 @@ public:
 	static glm::vec3 cameraPosition, cameraTarget, cameraDirection;
 	static glm::vec3 cameraUp, cameraRight, cameraFront;
 
+	static float yaw;
+	static float pitch;
+
+	static float fieldOfView;
+
 	const float radius = 10.0f;
 	float cameraX, cameraZ;
 
