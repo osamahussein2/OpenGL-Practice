@@ -7,6 +7,13 @@ Window::Window()
 	openGLwindow = NULL;
 
 	shaderProgram = new ShaderProgram();
+	camera = new Camera();
+
+	cameraMoveSpeed = 0.0f;
+
+	deltaTime = 0.0f;
+	lastFrame = 0.0f;
+	currentFrame = 0.0f;
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -47,6 +54,12 @@ void Window::WindowStillRunning()
 	process any events waiting for us to do something to it */
 	while (!glfwWindowShouldClose(openGLwindow))
 	{
+		currentFrame = glfwGetTime(); // Get the current time
+
+		// deltaTime is the time between current frame and last frame
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame; // Get the time of the last frame
+
 		ProcessInput(openGLwindow);
 
 		// OpenGL stores all its depth information in a z-buffer, also known as depth buffering
@@ -120,5 +133,39 @@ void Window::ProcessInput(GLFWwindow* window)
 		{
 			shaderProgram->visibilityTextureValue = 0.0f;
 		}
+	}
+
+	// Set the camera's moving speed to 2.5 times by the deltaTime when our OpenGL program is still running
+	cameraMoveSpeed = 2.5f * deltaTime;
+
+	// Move the camera around with the WASD keys
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		// Move the camera towards the screen when W is pressed
+		Camera::cameraPosition += cameraMoveSpeed * Camera::cameraFront;
+
+		// I managed to get the up y-axis movement working here but I commented it out for the sake of the tutorial
+		//Camera::cameraPosition += cameraMoveSpeed * glm::normalize(glm::cross(Camera::cameraRight, Camera::cameraFront));
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		// Move the camera away from the screen when S key is pressed
+		Camera::cameraPosition -= cameraMoveSpeed * Camera::cameraFront;
+		
+		// I managed to get the down y-axis movement working here but I commented it out for the sake of the tutorial
+		//Camera::cameraPosition -= cameraMoveSpeed * glm::normalize(glm::cross(Camera::cameraRight, Camera::cameraFront));
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		// Move the camera left when A key is pressed
+		Camera::cameraPosition -= glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		// Move the camera right when D key is pressed
+		Camera::cameraPosition += glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
 	}
 }

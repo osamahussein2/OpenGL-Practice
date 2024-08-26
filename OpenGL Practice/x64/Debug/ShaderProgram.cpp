@@ -1,4 +1,5 @@
 #include "ShaderProgram.h"
+#include "Window.h"
 
 ShaderProgram::ShaderProgram()
 {
@@ -162,7 +163,26 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 	move. Because we want to move backwards and since OpenGL is a right-handed system we have to move in the positive 
 	z-axis. This gives the impression that we're moving backwards. */
 	viewMatrix = glm::mat4(1.0f);
-	viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -3.0f)); // Translate the scene in the reversed direction
+	//viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -3.0f)); // Translate the scene in the reversed direction
+
+	/* The LookAt matrix defines a coordinate space using 3 perpendicular (or non-linear) axes and this is where
+	you can create a matrix with those 3 axes plus a translation vector, that way you can transform any vector to
+	to that coordinate space simply by multiplying it with the LookAt matrix. */
+
+	// LookAt function passes in 3 parameters, one for camera's position, two for target, and three for up vector
+	//viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	// Call the initialize camera function before setting the view matrix or else the cubes won't render on the window
+	//camera->InitializeCamera();
+
+	/*viewMatrix = glm::lookAt(glm::vec3(camera->cameraX, 0.0, camera->cameraZ), glm::vec3(0.0, 0.0, 0.0),
+	glm::vec3(0.0, 1.0, 0.0)); */
+
+	// First we must set the camera position to the camera position vec3 we defined in the camera class
+
+	/* Second we must set the direction to add the camera's current position and the camera's direction vector. 
+	Basically, this will make sure however we move, the camera will keep looking at the target direction. */
+	viewMatrix = glm::lookAt(Camera::cameraPosition, Camera::cameraPosition + Camera::cameraFront, Camera::cameraUp);
 
 	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
@@ -179,6 +199,7 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
+	// Loop through all the cubes positions array
 	for (unsigned int renderCubes = 0; renderCubes < cubePositions.size(); renderCubes++)
 	{
 		// To be able to draw in 3D, we will need a model matrix
@@ -194,15 +215,11 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 		// Use the model matrix to place all the cube positions elements somewhere inside the window
 		modelMatrix = glm::translate(modelMatrix, cubePositions[renderCubes]);
 
-		// If the container array index is divisible by 3 (in other words, if the 3rd iteration of the loop is reached)
-		if (renderCubes % 3 == 0)
-		{
-			// Create an angle variable to determine the angle that each cube should rotate at
-			//float angle = 20.0f * renderCubes;
+		// Create an angle variable to determine the angle that each cube should rotate at
+		float angle = 20.0f * renderCubes;
 
-			// Rotate the container over time but only if the container array index is divisible by 3
-			modelMatrix = glm::rotate(modelMatrix, (float)glfwGetTime(), glm::vec3(1.0f, 0.3f, 0.5f));
-		}
+		// Rotate each container by the angle they're equal to
+		modelMatrix = glm::rotate(modelMatrix, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 
 		// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
 		modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");

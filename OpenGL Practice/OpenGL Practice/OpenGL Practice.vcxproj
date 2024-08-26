@@ -135,6 +135,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\..\GameDev\GLAD\src\glad.c" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="stb_image.h" />
