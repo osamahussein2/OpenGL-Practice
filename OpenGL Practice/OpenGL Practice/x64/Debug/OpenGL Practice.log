@@ -1,1 +1,21 @@
-﻿  OpenGL Practice.vcxproj -> C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Debug\OpenGL Practice.exe
+﻿  glad.c
+  Camera.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.cpp(59,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.cpp(60,31): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  FragmentShaderLoader.cpp
+  Main.cpp
+  ShaderProgram.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\ShaderProgram.cpp(70,21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  VertexShaderLoader.cpp
+  Window.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(66,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(132,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(133,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(150,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(151,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(153,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(154,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(188,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  OpenGL Practice.vcxproj -> C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Debug\OpenGL Practice.exe

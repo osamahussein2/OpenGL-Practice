@@ -17,6 +17,10 @@ glm::vec3 Camera::cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
 
 float Camera::fieldOfView = 45.0f;
 
+glm::vec3 Camera::Zaxis = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 Camera::Xaxis = glm::vec3(0.0f, 0.0f, 0.0f);
+glm::vec3 Camera::Yaxis = glm::vec3(0.0f, 0.0f, 0.0f);
+
 Camera::Camera()
 {
 	cameraX = 0.0f;
@@ -54,4 +58,38 @@ void Camera::InitializeCamera()
 
 	cameraX = sin(glfwGetTime()) * radius;
 	cameraZ = sin(glfwGetTime()) * radius;
+}
+
+glm::mat4 Camera::CameraLookAt()
+{
+	// Calculate the camera's direction using the camera's known position vector
+	Zaxis = glm::normalize(cameraPosition - (cameraPosition + cameraFront));
+
+	// Get the positive right vector axis
+	Xaxis = glm::normalize(glm::cross(glm::normalize(cameraUp), Zaxis));
+
+	// Calculate the camera up vector
+	Yaxis = glm::cross(Zaxis, Xaxis);
+
+	glm::mat4 translationMatrix = glm::mat4(1.0f); // Set the translation matrix equal to the identity matrix
+
+	translationMatrix[3][0] = -cameraPosition.x; // 4th column of the matrix and 1st row
+	translationMatrix[3][1] = -cameraPosition.y; // 4th column of the matrix and 2nd row
+	translationMatrix[3][2] = -cameraPosition.z; // 4th column of the matrix and 3rd row
+
+	glm::mat4 rotationMatrix = glm::mat4(1.0f); // Set the rotation matrix equal to the identity matrix
+
+	rotationMatrix[0][0] = Xaxis.x; // 1st column of the matrix and 1st row
+	rotationMatrix[1][0] = Xaxis.y; // 2nd column of the matrix and 1st row
+	rotationMatrix[2][0] = Xaxis.z; // 3rd column of the matrix and 1st row
+
+	rotationMatrix[0][1] = Yaxis.x; // 1st column of the matrix and 2nd row
+	rotationMatrix[1][1] = Yaxis.y; // 2nd column of the matrix and 2nd row
+	rotationMatrix[2][1] = Yaxis.z; // 3rd column of the matrix and 2nd row
+
+	rotationMatrix[0][2] = Zaxis.x; // 1st column of the matrix and 3rd row
+	rotationMatrix[1][2] = Zaxis.y; // 2nd column of the matrix and 3rd row
+	rotationMatrix[2][2] = Zaxis.z; // 3rd column of the matrix and 3rd row
+
+	return rotationMatrix * translationMatrix; // Read from right to left (first translate then rotate)
 }

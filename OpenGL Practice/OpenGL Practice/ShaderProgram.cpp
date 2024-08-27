@@ -182,7 +182,9 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 
 	/* Second we must set the direction to add the camera's current position and the camera's direction vector. 
 	Basically, this will make sure however we move, the camera will keep looking at the target direction. */
-	viewMatrix = glm::lookAt(Camera::cameraPosition, Camera::cameraPosition + Camera::cameraFront, Camera::cameraUp);
+	//viewMatrix = glm::lookAt(Camera::cameraPosition, Camera::cameraPosition + Camera::cameraFront, Camera::cameraUp);
+
+	viewMatrix = Camera::CameraLookAt(); // Use my very own LookAt function I defined in the Camera class
 
 	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));

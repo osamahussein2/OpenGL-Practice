@@ -17,9 +17,12 @@ public:
 
 	void InitializeCamera();
 
+	static glm::mat4 CameraLookAt();
+
 	// Create static instances of camera vec3s so that we can easily use them inside of another class
 	static glm::vec3 cameraPosition, cameraTarget, cameraDirection;
 	static glm::vec3 cameraUp, cameraRight, cameraFront;
+	static glm::vec3 Xaxis, Yaxis, Zaxis;
 
 	static float yaw;
 	static float pitch;
