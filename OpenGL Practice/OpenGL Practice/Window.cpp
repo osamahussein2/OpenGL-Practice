@@ -267,4 +267,6 @@ void Window::ProcessInput(GLFWwindow* window)
 		// Move the camera right when D key is pressed
 		Camera::cameraPosition += glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
 	}
+
+	Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }
