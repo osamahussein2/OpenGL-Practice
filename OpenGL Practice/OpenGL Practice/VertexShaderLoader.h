@@ -21,13 +21,13 @@ public:
 	VertexShaderLoader(const char* vertexShaderPath_);
 	void InitializeVertexShaderLoader();
 	void InitializeVertexObjects();
-	void LoadThreeTriangles();
+	//void InitializeLightColorVertexObjects();
 
 	unsigned int vertexShader;
 
 private:
-	unsigned int VAO, VBO;
-	unsigned int EBO;
+	unsigned int VAO, VBO, lightVAO;
+	//unsigned int EBO;
 	std::string vertexShaderCode;
 	std::ifstream vertexShaderFile;
 	std::stringstream vertexShaderStream;
@@ -40,8 +40,8 @@ private:
 	// Signed variable types can return positive and negative values
 	unsigned int texture1, texture2;
 
-	std::array<float, 180> vertices;
-	std::array<unsigned int, 6> indices;
+	std::array<float, 108> vertices;
+	//std::array<unsigned int, 6> indices;
 
 	// I tried to create vertices' and indices' variables as std::lists and the triangles wouldn't render at all
 	

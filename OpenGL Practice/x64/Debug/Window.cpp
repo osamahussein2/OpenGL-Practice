@@ -8,7 +8,17 @@ extern bool firstTimeMouseReceivesInput = true;
 
 Window::Window()
 {
-	vertexShaderLoader = new VertexShaderLoader("VertexShader.glsl");
+	vertexShaderLoader =
+	{ 
+		new VertexShaderLoader("ColorVertexShader.glsl"), 
+		new VertexShaderLoader("LightVertexShader.glsl")
+	};
+
+	fragmentShaderLoader =
+	{
+		new FragmentShaderLoader("ColorFragmentShader.glsl"),
+		new FragmentShaderLoader("LightFragmentShader.glsl")
+	};
 
 	openGLwindow = NULL;
 
@@ -23,6 +33,9 @@ Window::Window()
 
 	lastPositionX = 0.0f;
 	lastPositionY = 0.0f;
+
+	// To initialize an enum, just use the enum's name along with open parentheses
+	cameraMovement = CameraMovement();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -99,15 +112,20 @@ void Window::WindowStillRunning()
 		// Otherwise, the depth information of the previous frame stays in the buffer (and the cube won't render at all)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shaderProgram->InitializeShaderProgram();
-		vertexShaderLoader->InitializeVertexObjects();
+		shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
+		vertexShaderLoader[0]->InitializeVertexObjects();
+
+		// Call the 3D object initialization function to render 3D objects onto the OpenGL window
+		// The 800.0f/ 600.0f below also equals to 4.0f / 3.0f which is what most graphics aspect ratios are defaulted to
+		shaderProgram->InitializeCubeColor(800.0f / 600.0f, 0.1f, 100.0f);
+
+		shaderProgram->InitializeShaderProgram(vertexShaderLoader[1], fragmentShaderLoader[1]);
+		vertexShaderLoader[1]->InitializeVertexObjects();
 
 		// Call the second texture initialization function here to render the second container and scale it overtime
 		//shaderProgram->InitializeSecondTexture();
 
-		// Call the 3D object initialization function to render 3D objects onto the OpenGL window
-		// The 800.0f/ 600.0f below also equals to 4.0f / 3.0f which is what most graphics aspect ratios are defaulted to
-		shaderProgram->Initialize3Dobjects(800.0f / 600.0f, 0.1f, 100.0f);
+		shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -240,8 +258,15 @@ void Window::ProcessInput(GLFWwindow* window)
 	// Move the camera around with the WASD keys
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		// Move the camera towards the screen when W is pressed
-		Camera::cameraPosition += cameraMoveSpeed * Camera::cameraFront;
+		// Set the enum variable equal to move camera forward
+		cameraMovement = CameraMovement::MoveCameraForward;
+
+		// If the enum variable is definitely equal to move camera forward, which I already set to equal to it
+		if (cameraMovement == CameraMovement::MoveCameraForward)
+		{
+			// Move the camera towards the screen when W is pressed
+			Camera::cameraPosition += cameraMoveSpeed * Camera::cameraFront;
+		}
 
 		// I managed to get the up y-axis movement working here but I commented it out for the sake of the tutorial
 		//Camera::cameraPosition += cameraMoveSpeed * glm::normalize(glm::cross(Camera::cameraRight, Camera::cameraFront));
@@ -249,8 +274,15 @@ void Window::ProcessInput(GLFWwindow* window)
 
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 	{
-		// Move the camera away from the screen when S key is pressed
-		Camera::cameraPosition -= cameraMoveSpeed * Camera::cameraFront;
+		// Set the enum variable equal to move camera backward
+		cameraMovement = CameraMovement::MoveCameraBackward;
+
+		// If the enum variable is definitely equal to move camera backward, which I already set to equal to it
+		if (cameraMovement == CameraMovement::MoveCameraBackward)
+		{
+			// Move the camera away from the screen when S key is pressed
+			Camera::cameraPosition -= cameraMoveSpeed * Camera::cameraFront;
+		}
 		
 		// I managed to get the down y-axis movement working here but I commented it out for the sake of the tutorial
 		//Camera::cameraPosition -= cameraMoveSpeed * glm::normalize(glm::cross(Camera::cameraRight, Camera::cameraFront));
@@ -258,15 +290,29 @@ void Window::ProcessInput(GLFWwindow* window)
 
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
-		// Move the camera left when A key is pressed
-		Camera::cameraPosition -= glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
+		// Set the enum variable equal to move camera left
+		cameraMovement = CameraMovement::MoveCameraLeft;
+
+		// If the enum variable is definitely equal to move camera left, which I already set to equal to it
+		if (cameraMovement == CameraMovement::MoveCameraLeft)
+		{
+			// Move the camera left when A key is pressed
+			Camera::cameraPosition -= glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
+		}
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 	{
-		// Move the camera right when D key is pressed
-		Camera::cameraPosition += glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
+		// Set the enum variable equal to move camera right
+		cameraMovement = CameraMovement::MoveCameraRight;
+
+		// If the enum variable is definitely equal to move camera right, which I already set to equal to it
+		if (cameraMovement == CameraMovement::MoveCameraRight)
+		{
+			// Move the camera right when D key is pressed
+			Camera::cameraPosition += glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
+		}
 	}
 
-	Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
+	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }

@@ -5,6 +5,7 @@
 #include <iostream>
 #include "VertexShaderLoader.h"
 #include "FragmentShaderLoader.h"
+#include "Color.h"
 
 // Include the GLM header files (OpenGL Mathematics Library)
 #include <glm/glm.hpp>
@@ -16,21 +17,26 @@ class ShaderProgram
 public:
 	ShaderProgram();
 	~ShaderProgram();
-	void InitializeShaderProgram();
+	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
 	void InitializeSecondTexture();
-	void Initialize3Dobjects(float aspect_ratio, float near_plane, float far_plane);
+	void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
+	void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
 
 	float visibilityTextureValue;
 
 private:
-	VertexShaderLoader* vertexShaderLoader;
-	FragmentShaderLoader* fragmentShaderLoader;
+	std::array<VertexShaderLoader*, 2> vertexShaderLoader;
+	std::array<FragmentShaderLoader*, 2> fragmentShaderLoader;
+	Color* color;
 
 	unsigned int shaderProgram;
 	float timer;
 	float moveRight;
 	int movingPositionLocation;
 	unsigned int transformMatrixLocation;
+
+	unsigned int objectColorLocation;
+	unsigned int lightColorLocation;
 	
 	int modelMatrixLocation;
 	int viewMatrixLocation;
@@ -42,6 +48,8 @@ private:
 	glm::mat4 modelMatrix;
 	glm::mat4 viewMatrix;
 	glm::mat4 projectionMatrix;
+
+	glm::vec3 lightPosition;
 
 	std::array<glm::vec3, 10> cubePositions;
 };

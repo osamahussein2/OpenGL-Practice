@@ -16,11 +16,18 @@ int main()
 	// I don't need to make this window object a pointer because the constructor doesn't pass in anything
 	Window window;
 
-	VertexShaderLoader* vertexShaderLoader;
-	vertexShaderLoader = new VertexShaderLoader("VertexShader.glsl");
+	std::array <VertexShaderLoader*, 2> vertexShaderLoader;
+	vertexShaderLoader = { 
+		new VertexShaderLoader("ColorVertexShader.glsl"), 
+		new VertexShaderLoader("LightVertexShader.glsl")
+	};
 
-	FragmentShaderLoader* fragmentShaderLoader;
-	fragmentShaderLoader = new FragmentShaderLoader("FragmentShader.glsl");
+	std::array <FragmentShaderLoader*, 2> fragmentShaderLoader;
+
+	fragmentShaderLoader = {
+		new FragmentShaderLoader("ColorFragmentShader.glsl"),
+		new FragmentShaderLoader("LightFragmentShader.glsl")
+	};
 
 	// I don't need to make this shader program object a pointer because the constructor doesn't pass in anything
 	ShaderProgram shaderProgram;
@@ -28,8 +35,12 @@ int main()
 	// Just initialize the OpenGL window by filling in the right parameters below
 	window.InitializeOpenGLwindow(1280, 960, "OpenGL Practice", NULL, NULL);
 
-	vertexShaderLoader->InitializeVertexShaderLoader();
-	fragmentShaderLoader->InitializeFragmentShaderLoader();
+	vertexShaderLoader[0]->InitializeVertexShaderLoader();
+	vertexShaderLoader[1]->InitializeVertexShaderLoader();
+
+	fragmentShaderLoader[0]->InitializeFragmentShaderLoader();
+	fragmentShaderLoader[1]->InitializeFragmentShaderLoader();
+
 	shaderProgram.~ShaderProgram();
 
 	window.WindowStillRunning();

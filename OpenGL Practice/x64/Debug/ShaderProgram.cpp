@@ -3,8 +3,17 @@
 
 ShaderProgram::ShaderProgram()
 {
-	vertexShaderLoader = new VertexShaderLoader("VertexShader.glsl");
-	fragmentShaderLoader = new FragmentShaderLoader("FragmentShader.glsl");
+	vertexShaderLoader = { 
+		new VertexShaderLoader("ColorVertexShader.glsl"), 
+		new VertexShaderLoader("LightVertexShader.glsl")
+	};
+
+	fragmentShaderLoader = { 
+		new FragmentShaderLoader("ColorFragmentShader.glsl"), 
+		new FragmentShaderLoader("LightFragmentShader.glsl")
+	};
+
+	color = new Color();
 
 	timer = 0.0f;
 	moveRight = 0.0f;
@@ -15,6 +24,9 @@ ShaderProgram::ShaderProgram()
 	visibilityTextureValue = 0.2f;
 
 	transformMatrixLocation = NULL;
+
+	objectColorLocation = NULL;
+	lightColorLocation = NULL;
 
 	vector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 	translateMatrix = glm::mat4(0.0f);
@@ -27,6 +39,8 @@ ShaderProgram::ShaderProgram()
 	viewMatrixLocation = NULL;
 	projectionMatrixLocation = NULL;
 
+	lightPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+
 	for (int cubePositionsArray = 0; cubePositionsArray < cubePositions.size(); cubePositionsArray++)
 	{
 		// Initialize the vec3 array elements to 0 for all axes
@@ -37,21 +51,24 @@ ShaderProgram::ShaderProgram()
 ShaderProgram::~ShaderProgram()
 {
 	// Delete the vertex and fragment shaders after the shader objects have been linked with the shader program
-	glDeleteShader(vertexShaderLoader->vertexShader);
-	glDeleteShader(fragmentShaderLoader->fragmentShader);
+	glDeleteShader(vertexShaderLoader[0]->vertexShader);
+	glDeleteShader(fragmentShaderLoader[0]->fragmentShader);
+
+	glDeleteShader(vertexShaderLoader[1]->vertexShader);
+	glDeleteShader(fragmentShaderLoader[1]->fragmentShader);
 }
 
-void ShaderProgram::InitializeShaderProgram()
+void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
 {
 	// Create a shader program that will render both the vertex and fragment shaders to the window
 	shaderProgram = glCreateProgram();
 
-	vertexShaderLoader->InitializeVertexShaderLoader();
-	fragmentShaderLoader->InitializeFragmentShaderLoader();
+	vertexShader_->InitializeVertexShaderLoader();
+	fragmentShader_->InitializeFragmentShaderLoader();
 
 	// Attach the vertex and fragment shaders to our created shader program ID object
-	glAttachShader(shaderProgram, vertexShaderLoader->vertexShader);
-	glAttachShader(shaderProgram, fragmentShaderLoader->fragmentShader);
+	glAttachShader(shaderProgram, vertexShader_->vertexShader);
+	glAttachShader(shaderProgram, fragmentShader_->fragmentShader);
 
 	// Link the attached vertex and fragment shaders together into one shader program
 	glLinkProgram(shaderProgram);
@@ -94,7 +111,7 @@ void ShaderProgram::InitializeShaderProgram()
 	translateMatrix = glm::mat4(1.0f);
 
 	/* Since I rotated the matrix first, it will rotate along the z axis per frame and then translate it to the bottom
-	right of the window each time the rotation loop is occuring, meaning that the image will rotate around the screen. 
+	right of the window each time the rotation loop is occuring, meaning that the image will rotate around the screen.
 	It kind of looks like the container texture is swinging a pendulum. */
 
 	/* Whereas if I rotated the matrix after translating, it will immediately place the texture at the bottom right of
@@ -139,10 +156,10 @@ void ShaderProgram::InitializeSecondTexture()
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
-void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, float far_plane)
+void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane)
 {
 	// Initialize the translation vector array for each cube that specifies its position in world space
-	cubePositions = {
+	/*cubePositions = {
 		glm::vec3(0.0f, 0.0f, -3.0f),
 		glm::vec3(2.0f, 5.0f, -15.0f),
 		glm::vec3(-1.5f, -2.2f, -2.5f),
@@ -153,14 +170,40 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 		glm::vec3(1.5f, 2.0f, -2.5f),
 		glm::vec3(1.5f, 0.2f, -1.5f),
 		glm::vec3(-1.3f, 1.0f, -1.5f)
-	};
+	};*/
+
+	lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
+
+	color->InitializeColor();
+
+	objectColorLocation = glGetUniformLocation(shaderProgram, "objectColor");
+	glUniform3f(objectColorLocation, color->toyColor.x, color->toyColor.y, color->toyColor.z);
+
+	lightColorLocation = glGetUniformLocation(shaderProgram, "lightColor");
+	glUniform3f(lightColorLocation, 1.0f, 1.0f, 1.0f);
+
+	// To be able to draw in 3D, we will need a model matrix
+
+	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
+	vertices to the global world space */
+
+	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
+	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
+	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
+	modelMatrix = glm::mat4(1.0f);
+
+	// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+	// Set the uniform model matrix location to equal to the modelMatrix value pointer
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 
 	/* After the model matrix has been created and set up, we need to create a view matrix. We have to move
-	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world 
+	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world
 	space, we are located at the origin (or in other words, the coordinate (0, 0, 0). */
 
-	/* The view matrix basically moves the entire scene around inversed (or reversed) to where we want the camera to 
-	move. Because we want to move backwards and since OpenGL is a right-handed system we have to move in the positive 
+	/* The view matrix basically moves the entire scene around inversed (or reversed) to where we want the camera to
+	move. Because we want to move backwards and since OpenGL is a right-handed system we have to move in the positive
 	z-axis. This gives the impression that we're moving backwards. */
 	viewMatrix = glm::mat4(1.0f);
 	//viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -3.0f)); // Translate the scene in the reversed direction
@@ -180,7 +223,7 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 
 	// First we must set the camera position to the camera position vec3 we defined in the camera class
 
-	/* Second we must set the direction to add the camera's current position and the camera's direction vector. 
+	/* Second we must set the direction to add the camera's current position and the camera's direction vector.
 	Basically, this will make sure however we move, the camera will keep looking at the target direction. */
 	//viewMatrix = glm::lookAt(Camera::cameraPosition, Camera::cameraPosition + Camera::cameraFront, Camera::cameraUp);
 
@@ -193,7 +236,7 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 
 	/* The glm::perspective function passes in 4 float values: the first one passes in the field of view in the y
 	direction, the second one passes in the aspect ratio value, the third one passes in the near plane value (or the
-	distance from the viewer to the near clipping plane point (always positive, so most likely we need an unsigned int 
+	distance from the viewer to the near clipping plane point (always positive, so most likely we need an unsigned int
 	reference here), and the fourth one passes in the far plane value (or the distance from the viewer to the far
 	clipping plane point (again, always positive so another potential unsigned int is mandatory here) */
 	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
@@ -201,8 +244,11 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+
 	// Loop through all the cubes positions array
-	for (unsigned int renderCubes = 0; renderCubes < cubePositions.size(); renderCubes++)
+
+	//for (unsigned int renderCubes = 0; renderCubes < cubePositions.size(); renderCubes++)
 	{
 		// To be able to draw in 3D, we will need a model matrix
 
@@ -212,7 +258,7 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 		/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
 		coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
 		are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
-		modelMatrix = glm::mat4(1.0f);
+		/*modelMatrix = glm::mat4(1.0f);
 
 		// Use the model matrix to place all the cube positions elements somewhere inside the window
 		modelMatrix = glm::translate(modelMatrix, cubePositions[renderCubes]);
@@ -231,6 +277,75 @@ void ShaderProgram::Initialize3Dobjects(float aspect_ratio, float near_plane, fl
 
 		/* Make sure to draw arrays at the end of setting the model, view and projection matrices locations to render
 		the cube on the window */
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
+}
+
+void ShaderProgram::InitializeLightColor(float aspect_ratio, float near_plane, float far_plane)
+{
+	// To be able to draw in 3D, we will need a model matrix
+
+	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
+	vertices to the global world space */
+
+	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
+	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
+	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, lightPosition);
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(0.2f));
+
+	// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+	// Set the uniform model matrix location to equal to the modelMatrix value pointer
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+	/* After the model matrix has been created and set up, we need to create a view matrix. We have to move
+	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world
+	space, we are located at the origin (or in other words, the coordinate (0, 0, 0). */
+
+	/* The view matrix basically moves the entire scene around inversed (or reversed) to where we want the camera to
+	move. Because we want to move backwards and since OpenGL is a right-handed system we have to move in the positive
+	z-axis. This gives the impression that we're moving backwards. */
+	viewMatrix = glm::mat4(1.0f);
+	//viewMatrix = glm::translate(viewMatrix, glm::vec3(0.0f, 0.0f, -3.0f)); // Translate the scene in the reversed direction
+
+	/* The LookAt matrix defines a coordinate space using 3 perpendicular (or non-linear) axes and this is where
+	you can create a matrix with those 3 axes plus a translation vector, that way you can transform any vector to
+	to that coordinate space simply by multiplying it with the LookAt matrix. */
+
+	// LookAt function passes in 3 parameters, one for camera's position, two for target, and three for up vector
+	//viewMatrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+	// Call the initialize camera function before setting the view matrix or else the cubes won't render on the window
+	//camera->InitializeCamera();
+
+	/*viewMatrix = glm::lookAt(glm::vec3(camera->cameraX, 0.0, camera->cameraZ), glm::vec3(0.0, 0.0, 0.0),
+	glm::vec3(0.0, 1.0, 0.0)); */
+
+	// First we must set the camera position to the camera position vec3 we defined in the camera class
+
+	/* Second we must set the direction to add the camera's current position and the camera's direction vector.
+	Basically, this will make sure however we move, the camera will keep looking at the target direction. */
+	//viewMatrix = glm::lookAt(Camera::cameraPosition, Camera::cameraPosition + Camera::cameraFront, Camera::cameraUp);
+
+	viewMatrix = Camera::CameraLookAt(); // Use my very own LookAt function I defined in the Camera class
+
+	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
+	/* The last thing we need to define is the projection matrix where we're going to use it in our scene */
+
+	/* The glm::perspective function passes in 4 float values: the first one passes in the field of view in the y
+	direction, the second one passes in the aspect ratio value, the third one passes in the near plane value (or the
+	distance from the viewer to the near clipping plane point (always positive, so most likely we need an unsigned int
+	reference here), and the fourth one passes in the far plane value (or the distance from the viewer to the far
+	clipping plane point (again, always positive so another potential unsigned int is mandatory here) */
+	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
+
+	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 }

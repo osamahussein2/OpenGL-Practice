@@ -7,6 +7,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+static enum CameraMovement
+{
+	MoveCameraForward,
+	MoveCameraBackward,
+	MoveCameraLeft,
+	MoveCameraRight
+};
+
 class Camera
 {
 public:

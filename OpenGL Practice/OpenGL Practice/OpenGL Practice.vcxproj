@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\..\GameDev\GLAD\src\glad.c" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="stb_image.h" />
@@ -152,7 +154,11 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ColorFragmentShader.glsl" />
+    <None Include="ColorVertexShader.glsl" />
     <None Include="FragmentShader.glsl" />
+    <None Include="LightFragmentShader.glsl" />
+    <None Include="LightVertexShader.glsl" />
     <None Include="VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

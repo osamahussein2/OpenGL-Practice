@@ -37,16 +37,8 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 		vertices[verticesArray] = 0;
 	}
 
-	for (int indicesArray = 0; indicesArray < indices.size(); indicesArray++)
-	{
-		// Initialize all the indices elements to 0
-		indices[indicesArray] = 0;
-	}
-
 	VAO = NULL;
 	VBO = NULL;
-
-	EBO = NULL;
 
 	vertexShader = NULL;
 
@@ -95,9 +87,6 @@ void VertexShaderLoader::InitializeVertexObjects()
 		0.5f, 1.0f // top center of the OpenGL window
 	};*/
 
-	/* Apparently making the vertices a local variable makes the error go away compared to making it a global
-	variable inside the class itself, even though the variable is private to every other class, including Main.cpp */
-
 	// The vertices x, y, and z values must be in range of -1.0 and 1.0 for the object to render on the OpenGL window
 	/* If one of the values goes below - 1.0 or above 1.0, the object will not be rendered on the window, meaning
 	the object will go offscreen */
@@ -106,54 +95,47 @@ void VertexShaderLoader::InitializeVertexObjects()
 	vertices = {
 		// positions      // texture coordinates
 
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
 
+		-0.5f, -0.5f,  0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,
 
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
 
-		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
 
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,
 
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f
-	};
-
-
-	indices = {
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
+		-0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,
 	};
 
 	// Generate a vertex attribute object ID
@@ -162,43 +144,37 @@ void VertexShaderLoader::InitializeVertexObjects()
 	// Generate the buffer ID here
 	glGenBuffers(1, &VBO); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
 
-	// Generate the buffer ID here
-	glGenBuffers(1, &EBO);
-
-	// Bind the vertex array object using its ID
-	glBindVertexArray(VAO);
-
 	// This binds the buffers more than once at the same time as long as they're different buffer types
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	// Copies the previously defined vertex data into the buffer's memory
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
 
-	// This binds the buffers more than once at the same time as long as they're different buffer types
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-	// Copies the previously defined vertex data into the buffer's memory
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
+	// Bind the vertex array object using its ID
+	glBindVertexArray(VAO);
 
 	// Set the position attribute's location to 0 like our vertex shader GLSL file
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0); // Position attribute location occurs at 1
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0); // Position attribute location occurs at 0
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(VAO);
 
 	// Set the color attribute's location to 1 like our vertex shader GLSL file
 	// 3 * sizeof(float) in the last argument below is the offset of the color which is 3 * of our position offset
 	// The color offset is 12 bytes, and the position offset is at 0 and goes up to 3 bytes each time
 	// Since we have 5 position values, we need to multiply the sizeof(float) by 5
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1); // Color attribute location occurs at 1
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	//glEnableVertexAttribArray(1); // Color attribute location occurs at 1
 
 	// Let OpenGL know about the new vertex format using the newly created texture attribute
 	// // 3 * sizeof(float) in the last argument below is the offset of the texture which is 3 * of our position offset
 	// We have to adjust the stride parameter of the previous 2 vertex attributes to 5 * sizeof(float) as well
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(2);
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	//glEnableVertexAttribArray(2);
 
 	// The first parameter takes in an input of how many textures we want to generate and store them in the integer
-	glGenTextures(1, &texture1);
+	/*glGenTextures(1, &texture1);
 
 	// Then, we need to bind the textures to configure the currently bound texture on subsequent texture commands
 	glBindTexture(GL_TEXTURE_2D, texture1);
@@ -224,8 +200,8 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	// First parameter passes in the texture target, second parameter passes in the axes that we want to set
 	// And the third parameter passes in what we want the texture wrapping mode to be
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	// If we choose GL_CLAMP_TO_BORDER, we should also specify a border color (r, g, b, a)
 	/*float borderColor[] = {1.0f, 0.0f, 0.0f, 1.0f};
@@ -271,22 +247,22 @@ void VertexShaderLoader::InitializeVertexObjects()
 	GL_LINEAR_MIPMAP_LINEAR linearly interpolates between the 2 closest mipmaps and samples the interpolated level
 	via nearest neighbor interpolation */
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	/* Setting the mipmap filter on a magnifying fliter has no effect on the mipmaps since they are primarily used
 	when downscaling the textures as in texture magnification doesn't use mipmaps and passing in a mipmapping
 	filtering option will give an OpenGL INVALID_CODE_ENUM error code */
 
 	// Flip the image vertically
-	stbi_set_flip_vertically_on_load(true);
+	//stbi_set_flip_vertically_on_load(true);
 
 	// The 3 int parameters of stbi_load include a width (x), height (y) and number of color channels (nrChannels)
-	data = stbi_load("Textures/container.jpg", &width, &height, &nrChannels, 0);
+	//data = stbi_load("Textures/container.jpg", &width, &height, &nrChannels, 0);
 
 	// After the texture ahs been binded, we can generate textures using the previously loaded image data
 	// Textures are generated with glTexImage2D
-	if (data)
+	/*if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -320,22 +296,44 @@ void VertexShaderLoader::InitializeVertexObjects()
 	else
 	{
 		std::cout << "This texture has failed to load!" << std::endl;
-	}
+	}*/
 
 
 	// Free the image memory after generating the texture and its corresponding mipmaps
-	stbi_image_free(data);
+	//stbi_image_free(data);
 
 
 	// Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
 	// the fragment shader's sampler
 	// Bind the currently active texture here
-	glActiveTexture(GL_TEXTURE0); // Active texture unit first
+	/*glActiveTexture(GL_TEXTURE0); // Active texture unit first
 	glBindTexture(GL_TEXTURE_2D, texture1);
 
 	glActiveTexture(GL_TEXTURE1); // Active texture unit first
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
-	glBindVertexArray(VAO);
+	glBindVertexArray(VAO);*/
 	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 }
+
+/*void VertexShaderLoader::InitializeLightColorVertexObjects()
+{
+	// Generate a vertex attribute object ID
+	glGenVertexArrays(1, &lightVAO);
+
+	// Generate the buffer ID here
+	glGenBuffers(1, &VBO); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
+
+	// This binds the buffers more than once at the same time as long as they're different buffer types
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(lightVAO);
+
+	// Set the position attribute's location to 0 like our vertex shader GLSL file
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0); // Position attribute location occurs at 0
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(lightVAO);
+}*/
