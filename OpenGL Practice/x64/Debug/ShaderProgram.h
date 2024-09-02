@@ -42,6 +42,9 @@ private:
 	int viewMatrixLocation;
 	int projectionMatrixLocation;
 
+	int lightPositionLocation;
+	int viewPositionLocation;
+
 	glm::vec4 vector;
 	glm::mat4 translateMatrix;
 

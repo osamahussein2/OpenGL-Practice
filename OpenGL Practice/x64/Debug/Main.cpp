@@ -18,15 +18,15 @@ int main()
 
 	std::array <VertexShaderLoader*, 2> vertexShaderLoader;
 	vertexShaderLoader = { 
-		new VertexShaderLoader("ColorVertexShader.glsl"), 
-		new VertexShaderLoader("LightVertexShader.glsl")
+		new VertexShaderLoader("LightingVertexShader.glsl"), 
+		new VertexShaderLoader("LightCubeVertexShader.glsl")
 	};
 
 	std::array <FragmentShaderLoader*, 2> fragmentShaderLoader;
 
 	fragmentShaderLoader = {
-		new FragmentShaderLoader("ColorFragmentShader.glsl"),
-		new FragmentShaderLoader("LightFragmentShader.glsl")
+		new FragmentShaderLoader("LightingFragmentShader.glsl"),
+		new FragmentShaderLoader("LightCubeFragmentShader.glsl")
 	};
 
 	// I don't need to make this shader program object a pointer because the constructor doesn't pass in anything

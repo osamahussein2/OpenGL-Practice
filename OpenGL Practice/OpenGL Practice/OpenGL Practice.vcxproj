@@ -154,11 +154,11 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ColorFragmentShader.glsl" />
-    <None Include="ColorVertexShader.glsl" />
+    <None Include="LightingFragmentShader.glsl" />
+    <None Include="LightingVertexShader.glsl" />
     <None Include="FragmentShader.glsl" />
-    <None Include="LightFragmentShader.glsl" />
-    <None Include="LightVertexShader.glsl" />
+    <None Include="LightCubeFragmentShader.glsl" />
+    <None Include="LightCubeVertexShader.glsl" />
     <None Include="VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -66,9 +66,9 @@
   <ItemGroup>
     <None Include="VertexShader.glsl" />
     <None Include="FragmentShader.glsl" />
-    <None Include="LightVertexShader.glsl" />
-    <None Include="LightFragmentShader.glsl" />
-    <None Include="ColorVertexShader.glsl" />
-    <None Include="ColorFragmentShader.glsl" />
+    <None Include="LightCubeVertexShader.glsl" />
+    <None Include="LightCubeFragmentShader.glsl" />
+    <None Include="LightingVertexShader.glsl" />
+    <None Include="LightingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

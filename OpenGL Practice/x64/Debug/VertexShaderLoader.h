@@ -40,7 +40,7 @@ private:
 	// Signed variable types can return positive and negative values
 	unsigned int texture1, texture2;
 
-	std::array<float, 108> vertices;
+	std::array<float, 288> vertices;
 	//std::array<unsigned int, 6> indices;
 
 	// I tried to create vertices' and indices' variables as std::lists and the triangles wouldn't render at all

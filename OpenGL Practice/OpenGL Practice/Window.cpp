@@ -10,14 +10,14 @@ Window::Window()
 {
 	vertexShaderLoader =
 	{ 
-		new VertexShaderLoader("ColorVertexShader.glsl"), 
-		new VertexShaderLoader("LightVertexShader.glsl")
+		new VertexShaderLoader("LightingVertexShader.glsl"), 
+		new VertexShaderLoader("LightCubeVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
 	{
-		new FragmentShaderLoader("ColorFragmentShader.glsl"),
-		new FragmentShaderLoader("LightFragmentShader.glsl")
+		new FragmentShaderLoader("LightingFragmentShader.glsl"),
+		new FragmentShaderLoader("LightCubeFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;

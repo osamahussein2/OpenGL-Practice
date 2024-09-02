@@ -4,13 +4,13 @@
 ShaderProgram::ShaderProgram()
 {
 	vertexShaderLoader = { 
-		new VertexShaderLoader("ColorVertexShader.glsl"), 
-		new VertexShaderLoader("LightVertexShader.glsl")
+		new VertexShaderLoader("LightingVertexShader.glsl"), 
+		new VertexShaderLoader("LightCubeVertexShader.glsl")
 	};
 
 	fragmentShaderLoader = { 
-		new FragmentShaderLoader("ColorFragmentShader.glsl"), 
-		new FragmentShaderLoader("LightFragmentShader.glsl")
+		new FragmentShaderLoader("LightingFragmentShader.glsl"), 
+		new FragmentShaderLoader("LightCubeFragmentShader.glsl")
 	};
 
 	color = new Color();
@@ -27,6 +27,9 @@ ShaderProgram::ShaderProgram()
 
 	objectColorLocation = NULL;
 	lightColorLocation = NULL;
+
+	lightPositionLocation = NULL;
+	viewPositionLocation = NULL;
 
 	vector = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 	translateMatrix = glm::mat4(0.0f);
@@ -181,6 +184,12 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 	lightColorLocation = glGetUniformLocation(shaderProgram, "lightColor");
 	glUniform3f(lightColorLocation, 1.0f, 1.0f, 1.0f);
+
+	lightPositionLocation = glGetUniformLocation(shaderProgram, "lightPosition");
+	glUniform3f(lightPositionLocation, lightPosition.x, lightPosition.y, lightPosition.z);
+
+	viewPositionLocation = glGetUniformLocation(shaderProgram, "viewPosition");
+	glUniform3f(viewPositionLocation, Camera::cameraPosition.x, Camera::cameraPosition.y, Camera::cameraPosition.z);
 
 	// To be able to draw in 3D, we will need a model matrix
 
