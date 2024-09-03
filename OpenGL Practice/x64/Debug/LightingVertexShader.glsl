@@ -16,9 +16,9 @@ void main()
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 
 	// Multiply the fragment position using the model matrix to transform it to world space coordinates
-	FragPosition = vec3(modelMatrix * vec4(position, 1.0));
+	FragPosition = vec3(viewMatrix * modelMatrix * vec4(position, 1.0));
 
 	// Generate the normal matrix by using the transpose and inverse functions (only if the vec3 is non-uniform scale)
 	// The matrix has to be casted as a mat3 to make sure it doesn't have translation properties anymore
-	Normal =  mat3(transpose(inverse(modelMatrix))) * normal;
+	Normal =  mat3(transpose(inverse(viewMatrix * modelMatrix))) * normal;
 }

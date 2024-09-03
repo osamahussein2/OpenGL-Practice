@@ -175,10 +175,10 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 		glm::vec3(-1.3f, 1.0f, -1.5f)
 	};*/
 
-	//lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
+	lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 
 	// Move the light around the OpenGL window overtime
-	lightPosition = glm::vec3(sin(glfwGetTime() * 1.2f), sin(glfwGetTime() * 1.0f), sin(glfwGetTime() * 2.0f));
+	//lightPosition = glm::vec3(sin(glfwGetTime() * 1.2f), sin(glfwGetTime() * 1.0f), sin(glfwGetTime() * 2.0f));
 
 	color->InitializeColor();
 
