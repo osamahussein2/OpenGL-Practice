@@ -1,8 +1,9 @@
-C:\GameDev\GLAD\src\glad.c;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\glad.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Camera.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Color.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Color.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\FragmentShaderLoader.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\FragmentShaderLoader.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Main.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Main.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\ShaderProgram.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\ShaderProgram.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\VertexShaderLoader.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\VertexShaderLoader.obj
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp;C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Window.obj
+C:\GameDev\GLAD\src\glad.c;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\glad.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Camera.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Color.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Color.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\FragmentShaderLoader.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\FragmentShaderLoader.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Lighting.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Lighting.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Main.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Main.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\ShaderProgram.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\ShaderProgram.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\VertexShaderLoader.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\VertexShaderLoader.obj
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp;C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\x64\Debug\Window.obj

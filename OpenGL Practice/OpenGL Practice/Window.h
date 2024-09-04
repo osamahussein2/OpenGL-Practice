@@ -7,6 +7,8 @@
 #include "VertexShaderLoader.h"
 #include "ShaderProgram.h"
 #include "Camera.h"
+#include "Color.h"
+#include "Lighting.h"
 
 class Window
 {
@@ -39,6 +41,9 @@ private:
 	ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
 	Camera* camera;
+
+	Color* color;
+	Lighting* lighting;
 
 	float cameraMoveSpeed;
 

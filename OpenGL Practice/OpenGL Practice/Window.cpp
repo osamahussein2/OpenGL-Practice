@@ -36,6 +36,9 @@ Window::Window()
 
 	// To initialize an enum, just use the enum's name along with open parentheses
 	cameraMovement = CameraMovement();
+
+	color = new Color();
+	lighting = new Lighting();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -224,6 +227,9 @@ void Window::ProcessInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
+
+		color->~Color();
+		lighting->~Lighting();
 	}
 
 	// Increase the texture visibility whenever we press the UP arrow key

@@ -10,7 +10,10 @@ Color::Color()
 
 Color::~Color()
 {
-
+	coral = glm::vec3(0.0f, 0.0f, 0.0f);
+	lightColor = glm::vec3(0.0f, 0.0f, 0.0f);
+	toyColor = glm::vec3(0.0f, 0.0f, 0.0f);
+	resultingColor = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
 void Color::InitializeColor()

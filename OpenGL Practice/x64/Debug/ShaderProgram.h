@@ -6,6 +6,7 @@
 #include "VertexShaderLoader.h"
 #include "FragmentShaderLoader.h"
 #include "Color.h"
+#include "Lighting.h"
 
 // Include the GLM header files (OpenGL Mathematics Library)
 #include <glm.hpp>
@@ -27,7 +28,9 @@ public:
 private:
 	std::array<VertexShaderLoader*, 2> vertexShaderLoader;
 	std::array<FragmentShaderLoader*, 2> fragmentShaderLoader;
+
 	Color* color;
+	Lighting* lighting;
 
 	unsigned int shaderProgram;
 	float timer;
@@ -44,11 +47,6 @@ private:
 
 	int lightPositionLocation;
 	int viewPositionLocation;
-
-	int materialAmbientLightingLocation;
-	int materialDiffuseLightingLocation;
-	int materialSpecularLightingLocation;
-	int materialShininessValueLocation;
 
 	glm::vec4 vector;
 	glm::mat4 translateMatrix;

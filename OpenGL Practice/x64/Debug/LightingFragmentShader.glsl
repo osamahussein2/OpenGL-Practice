@@ -29,6 +29,21 @@ struct Material
 	float shininess;
 };
 
+struct Light
+{
+	// The position light vector will determine where the light's brightness be located
+	vec3 positionalLight;
+
+	// The ambient light vector will determine the light's ambient intensity
+	vec3 ambientLight;
+
+	// The diffuse light vector will determine the light's diffuse intensity
+	vec3 diffuseLight;
+
+	// The specular light vector will determine the light's specular intensity
+	vec3 specularLight;
+};
+
 out vec4 fragColor;
 
 in vec3 FragPosition;
@@ -41,12 +56,13 @@ uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 
 uniform Material material;
+uniform Light light;
 
 void main()
 {
 	// Ambient lighting
 	ambientLightBrightness = 0.1;
-	ambientLight = lightColor * material.ambientLight;
+	ambientLight = light.ambientLight * material.ambientLight;
 
 	// Diffuse lighting
 
@@ -56,7 +72,7 @@ void main()
 	// We know the light direction is equal to the light's position minus the fragment's position
 	lightDirection = normalize(lightPosition - FragPosition);
 
-	diffuseLight = lightColor * (max(dot(normalizeNormals, lightDirection), 0.0) * material.diffuseLight);
+	diffuseLight = light.diffuseLight * (max(dot(normalizeNormals, lightDirection), 0.0) * material.diffuseLight);
 
 	specularBrightness = 0.5;
 
@@ -76,9 +92,9 @@ void main()
 	smaller. */
 
 	specularValue = pow(max(dot(viewDirection, reflectionDirection), 0.0), material.shininess);
-	specularLight = specularBrightness * (specularValue * material.specularLight) * lightColor;
+	specularLight = light.specularLight * (specularValue * material.specularLight) * lightColor;
 
-	resultingLight = (ambientLight + diffuseLight + specularLight) * objectColor;
+	resultingLight = (ambientLight + diffuseLight + specularLight);
 
 	fragColor = vec4(resultingLight, 1.0);
 }
