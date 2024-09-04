@@ -122,7 +122,7 @@ void Window::WindowStillRunning()
 		// The 800.0f/ 600.0f below also equals to 4.0f / 3.0f which is what most graphics aspect ratios are defaulted to
 		shaderProgram->InitializeCubeColor(800.0f / 600.0f, 0.1f, 100.0f);
 
-		shaderProgram->InitializeShaderProgram(vertexShaderLoader[1], fragmentShaderLoader[1]);
+		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
 		vertexShaderLoader[1]->InitializeVertexObjects();
 
 		// Call the second texture initialization function here to render the second container and scale it overtime

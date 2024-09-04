@@ -339,6 +339,61 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 void ShaderProgram::InitializeLightColor(float aspect_ratio, float near_plane, float far_plane)
 {
+	objectColorLocation = glGetUniformLocation(shaderProgram, "objectColor");
+	glUniform3f(objectColorLocation, color->toyColor.x, color->toyColor.y, color->toyColor.z);
+
+	lightColorLocation = glGetUniformLocation(shaderProgram, "lightColor");
+	glUniform3f(lightColorLocation, 1.0f, 1.0f, 1.0f);
+
+	lightPositionLocation = glGetUniformLocation(shaderProgram, "lightPosition");
+	glUniform3f(lightPositionLocation, lightPosition.x, lightPosition.y, lightPosition.z);
+
+	viewPositionLocation = glGetUniformLocation(shaderProgram, "viewPosition");
+	glUniform3f(viewPositionLocation, Camera::cameraPosition.x, Camera::cameraPosition.y, Camera::cameraPosition.z);
+
+	/* Let's set the uniform vector 3 to find a uniform type of material.ambientLight and set the vec3 values to
+	the ambient lighting vector 3 that I set inside the Lighting class (go to Lighting.h and .cpp for more clarity) */
+	glUniform3fv(glGetUniformLocation(shaderProgram, "material.ambientLight"), 1,
+		glm::value_ptr(lighting->SetMaterialAmbientLighting(glm::vec3(1.0f, 0.5f, 0.31f))));
+
+	/* Let's set the uniform vector 3 to find a uniform type of material.diffuseLight and set the vec3 values to
+	the diffuse lighting vector 3 that I set inside the Lighting class */
+	glUniform3fv(glGetUniformLocation(shaderProgram, "material.diffuseLight"), 1,
+		glm::value_ptr(lighting->SetMaterialDiffuseLighting(glm::vec3(1.0f, 0.5f, 0.31f))));
+
+	/* Let's set the uniform vector 3 to find a uniform type of material.specularLight and set the vec3 values to
+	the specular lighting vector 3 that I set inside the Lighting class */
+	glUniform3fv(glGetUniformLocation(shaderProgram, "material.specularLight"), 1,
+		glm::value_ptr(lighting->SetMaterialSpecularLighting(glm::vec3(0.5f, 0.5f, 0.5f))));
+
+	/* Let's set the uniform vector 3 to find a uniform type of light.ambientLight and set the vec3 values to
+	the ambient lighting intensity vector 3 that I set inside the Lighting class */
+
+	/* Set the ambient lighting intensity color to a lower value so that it doesn't have a lot of impact of the
+	surface's final color */
+	glUniform3fv(glGetUniformLocation(shaderProgram, "light.ambientLight"), 1,
+		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(sin(glfwGetTime() * 2.0f) * 0.5f,
+			sin(glfwGetTime() * 0.7f) * 0.5f, sin(glfwGetTime() * 1.3f) * 0.5f))));
+
+	/* Let's set the uniform vector 3 to find a uniform type of light.diffuseLight and set the vec3 values to
+	the diffuse lighting intensity vector 3 that I set inside the Lighting class */
+
+	/* Set the diffuse lighting intensity to be the light color we want */
+	glUniform3fv(glGetUniformLocation(shaderProgram, "light.diffuseLight"), 1,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(sin(glfwGetTime() * 2.0f) * 1.0f,
+			sin(glfwGetTime() * 0.7f) * 1.0f, sin(glfwGetTime() * 1.3f) * 1.0f))));
+
+	/* Let's set the uniform vector 3 to find a uniform type of light.specularLight and set the vec3 values to
+	the specular lighting intensity vector 3 that I set inside the Lighting class */
+
+	/* Set the specular lighting intensity to shine at full intensity */
+	glUniform3fv(glGetUniformLocation(shaderProgram, "light.specularLight"), 1,
+		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(2.0f, 2.0f, 2.0f))));
+
+	/* Let's set the uniform float to find a uniform type of material.shininess and set the float value to the shininess
+	value that I set inside the Lighting class */
+	glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"), lighting->SetShininessLighting(32.0));
+
 	// To be able to draw in 3D, we will need a model matrix
 
 	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
