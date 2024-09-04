@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;C:\GameDev\OpenGL\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;C:\GameDev\OpenGL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
