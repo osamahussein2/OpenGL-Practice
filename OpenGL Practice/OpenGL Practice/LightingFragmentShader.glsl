@@ -17,10 +17,13 @@ vec3 specularLight;
 struct Material
 {
 	// The ambient material vector defines what color the surface reflects under ambient lighting (in most cases, it's the same color as the surface color)
-	vec3 ambientLight;
+	//vec3 ambientLight;
 
 	// The diffuse material vector defines the color of the surface under diffuse lighting
-	vec3 diffuseLight;
+	//vec3 diffuseLight;
+
+	// The diffuse map vector defines not only the diffuse color of the object, but also its texture image
+	sampler2D diffuseMap;
 
 	// The specular material vector defines the color of the specular highlight on the surface
 	vec3 specularLight;
@@ -46,6 +49,7 @@ struct Light
 
 out vec4 fragColor;
 
+in vec2 texCoords;
 in vec3 FragPosition;
 in vec3 Normal;
 
@@ -61,8 +65,7 @@ uniform Light light;
 void main()
 {
 	// Ambient lighting
-	ambientLightBrightness = 0.1;
-	ambientLight = light.ambientLight * material.ambientLight;
+	ambientLight = light.ambientLight * vec3(texture(material.diffuseMap, texCoords));
 
 	// Diffuse lighting
 
@@ -70,11 +73,10 @@ void main()
 	normalizeNormals = normalize(Normal);
 
 	// We know the light direction is equal to the light's position minus the fragment's position
-	lightDirection = normalize(lightPosition - FragPosition);
+	lightDirection = normalize(light.positionalLight - FragPosition);
 
-	diffuseLight = light.diffuseLight * (max(dot(normalizeNormals, lightDirection), 0.0) * material.diffuseLight);
-
-	specularBrightness = 0.5;
+	diffuseLight = light.diffuseLight * (max(dot(normalizeNormals, lightDirection), 0.0) * 
+	vec3(texture(material.diffuseMap, texCoords)));
 
 	viewDirection = normalize(viewPosition - FragPosition);
 
@@ -92,9 +94,9 @@ void main()
 	smaller. */
 
 	specularValue = pow(max(dot(viewDirection, reflectionDirection), 0.0), material.shininess);
-	specularLight = light.specularLight * (specularValue * material.specularLight) * lightColor;
+	specularLight = light.specularLight * (specularValue * material.specularLight);
 
-	resultingLight = (ambientLight + diffuseLight + specularLight);
+	resultingLight = ambientLight + diffuseLight + specularLight;
 
 	fragColor = vec4(resultingLight, 1.0);
 }

@@ -44,8 +44,7 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 
 	data = nullptr;
 
-	texture1 = NULL;
-	texture2 = NULL;
+	diffuseMapTexture = NULL;
 
 	width = 0; 
 	height = 0;
@@ -159,7 +158,50 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	// Set the normals attribute's location to 1 like our vertex shader GLSL file
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1); // Position attribute location occurs at 0
+	glEnableVertexAttribArray(1); // Position attribute location occurs at 1
+
+	// Set the textute coordinates attribute's location to 2 like our vertex shader GLSL file
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2); // Position attribute location occurs at 2
+
+	// Generate the texture in OpenGL first before binding it
+	glGenTextures(1, &diffuseMapTexture);
+
+	// Then, we need to bind the textures to configure the currently bound texture on subsequent texture commands
+	glBindTexture(GL_TEXTURE_2D, diffuseMapTexture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Flip the image vertically
+	stbi_set_flip_vertically_on_load(true);
+
+	data = stbi_load("Textures/container2.png", &width, &height, &nrChannels, 0);
+
+	// After the texture ahs been binded, we can generate textures using the previously loaded image data
+	// Textures are generated with glTexImage2D
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	else
+	{
+		std::cout << "This texture has failed to load!" << std::endl;
+	}
+
+	// Free the image memory after generating the texture and its corresponding mipmaps
+	stbi_image_free(data);
+
+	// Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
+	// the fragment shader's sampler
+	// Bind the currently active texture here
+	glActiveTexture(GL_TEXTURE0); // Active texture unit first
+	glBindTexture(GL_TEXTURE_2D, diffuseMapTexture);
 
 	// Bind the vertex array object using its ID
 	glBindVertexArray(VAO);
