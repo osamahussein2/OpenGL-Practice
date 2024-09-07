@@ -97,7 +97,7 @@ void main()
 	smaller. */
 
 	specularValue = pow(max(dot(viewDirection, reflectionDirection), 0.0), material.shininess);
-	specularLight = light.specularLight * specularValue * vec3(1.0) - vec3(texture(material.specularMap, texCoords));
+	specularLight = light.specularLight * specularValue * vec3(texture(material.specularMap, texCoords));
 
 	resultingLight = ambientLight + diffuseLight + specularLight;
 

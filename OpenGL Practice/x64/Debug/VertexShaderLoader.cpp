@@ -213,13 +213,13 @@ void VertexShaderLoader::InitializeVertexObjects()
 	stbi_set_flip_vertically_on_load(true);
 
 	// Load the specular texture image of container2
-	data = stbi_load("Textures/container2_specular.png", &width, &height, &nrChannels, 0);
+	data = stbi_load("Textures/container2_specular_colored.png", &width, &height, &nrChannels, 0);
 
 	// After the texture ahs been binded, we can generate textures using the previously loaded image data
 	// Textures are generated with glTexImage2D
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 
