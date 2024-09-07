@@ -207,13 +207,16 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	glUniform3fv(glGetUniformLocation(shaderProgram, "material.diffuseLight"), 1, 
 		glm::value_ptr(lighting->SetMaterialDiffuseLighting(glm::vec3(0.0f, 0.50980392f, 0.50980392f))));*/
 
-	/* Let's set the uniform int to find a uniform type of material.diffuseMap and set it to 0 */
+	/* Let's set the uniform vector 3 to find a uniform type of material.specularLight and set the vec3 values to
+	the specular lighting vector 3 that I set inside the Lighting class
+	glUniform3fv(glGetUniformLocation(shaderProgram, "material.specularLight"), 1,
+		glm::value_ptr(lighting->SetMaterialSpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f)))); */
+
+	// Let's set the uniform int to find a uniform type of material.diffuseMap and set it to 0
 	glUniform1i(glGetUniformLocation(shaderProgram, "material.diffuseMap"), 0);
 
-	/* Let's set the uniform vector 3 to find a uniform type of material.specularLight and set the vec3 values to
-	the specular lighting vector 3 that I set inside the Lighting class */
-	glUniform3fv(glGetUniformLocation(shaderProgram, "material.specularLight"), 1,
-		glm::value_ptr(lighting->SetMaterialSpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
+	// Let's set the uniform int to find a uniform type of material.specularMap and set it to 1
+	glUniform1i(glGetUniformLocation(shaderProgram, "material.specularMap"), 1);
 
 	/* Let's set the uniform float to find a uniform type of material.shininess and set the float value to the shininess
 	value that I set inside the Lighting class */

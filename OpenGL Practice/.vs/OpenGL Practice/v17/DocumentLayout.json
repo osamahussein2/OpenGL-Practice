@@ -11,12 +11,12 @@
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\VertexShaderLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\VertexShaderLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\LightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\VertexShaderLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -104,20 +104,20 @@
               "RelativeDocumentMoniker": "OpenGL Practice\\VertexShaderLoader.cpp",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.cpp",
               "RelativeToolTip": "OpenGL Practice\\VertexShaderLoader.cpp",
-              "ViewState": "AQIAAJAAAAAAAAAAAAAAAK8AAABCAAAA",
+              "ViewState": "AQIAAOAAAAAAAAAAAAAAAO0AAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-25T22:46:44.744Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "LightingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\LightingFragmentShader.glsl",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl",
               "RelativeToolTip": "OpenGL Practice\\LightingFragmentShader.glsl",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAAADMAAAASAAAA",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGMAAABmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-08-29T12:48:21.712Z",
               "EditorCaption": ""
@@ -132,8 +132,7 @@
               "RelativeToolTip": "OpenGL Practice\\LightingVertexShader.glsl",
               "ViewState": "AQIAAAcAAAAAAAAAAAAAABMAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-08-29T12:48:07.076Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-29T12:48:07.076Z"
             },
             {
               "$type": "Document",
@@ -143,20 +142,20 @@
               "RelativeDocumentMoniker": "OpenGL Practice\\ShaderProgram.cpp",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\ShaderProgram.cpp",
               "RelativeToolTip": "OpenGL Practice\\ShaderProgram.cpp",
-              "ViewState": "AQIAAM0AAAAAAAAAAAAAANYAAABPAAAA",
+              "ViewState": "AQIAAM0AAAAAAAAAAAAAANoAAABNAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-26T17:43:39.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "VertexShaderLoader.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\VertexShaderLoader.h",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.h",
               "RelativeToolTip": "OpenGL Practice\\VertexShaderLoader.h",
-              "ViewState": "AQIAACAAAAAAAAAAAAAAACgAAAAfAAAA",
+              "ViewState": "AQIAACAAAAAAAAAAAAAAACgAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-25T22:45:58.912Z",
               "EditorCaption": ""
@@ -171,8 +170,7 @@
               "RelativeToolTip": "OpenGL Practice\\LightCubeVertexShader.glsl",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-08-29T11:58:39.969Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-29T11:58:39.969Z"
             },
             {
               "$type": "Document",
@@ -184,8 +182,7 @@
               "RelativeToolTip": "OpenGL Practice\\Window.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAHUAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-17T23:35:08.675Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-17T23:35:08.675Z"
             },
             {
               "$type": "Document",

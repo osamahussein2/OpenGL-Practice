@@ -38,7 +38,7 @@ private:
 
 	// Unsigned variable types can only return positive values (or zero)
 	// Signed variable types can return positive and negative values
-	unsigned int diffuseMapTexture;
+	unsigned int diffuseMapTexture, specularMapTexture;
 
 	std::array<float, 288> vertices;
 	//std::array<unsigned int, 6> indices;

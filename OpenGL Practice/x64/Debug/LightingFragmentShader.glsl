@@ -22,11 +22,14 @@ struct Material
 	// The diffuse material vector defines the color of the surface under diffuse lighting
 	//vec3 diffuseLight;
 
-	// The diffuse map vector defines not only the diffuse color of the object, but also its texture image
+	// The specular material vector defines the color of the specular highlight on the surface
+	//vec3 specularLight;
+
+	// The diffuse map sampler2D defines texture image of the diffuse material
 	sampler2D diffuseMap;
 
-	// The specular material vector defines the color of the specular highlight on the surface
-	vec3 specularLight;
+	// The specular map sampler2D defines texture image of the specular material
+	sampler2D specularMap;
 
 	// The shininess value defines how much the scatter/radius value of the specular highlight will equal to
 	float shininess;
@@ -94,7 +97,7 @@ void main()
 	smaller. */
 
 	specularValue = pow(max(dot(viewDirection, reflectionDirection), 0.0), material.shininess);
-	specularLight = light.specularLight * (specularValue * material.specularLight);
+	specularLight = light.specularLight * (specularValue * vec3(texture(material.specularMap, texCoords)));
 
 	resultingLight = ambientLight + diffuseLight + specularLight;
 
