@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\LightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\ShaderProgram.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\ShaderProgram.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\VertexShaderLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\LightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -94,11 +94,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "VertexShaderLoader.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\VertexShaderLoader.cpp",
@@ -106,18 +106,17 @@
               "RelativeToolTip": "OpenGL Practice\\VertexShaderLoader.cpp",
               "ViewState": "AQIAAOAAAAAAAAAAAAAAAO0AAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-25T22:46:44.744Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-25T22:46:44.744Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "LightingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\LightingFragmentShader.glsl",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl",
               "RelativeToolTip": "OpenGL Practice\\LightingFragmentShader.glsl",
-              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGMAAABmAAAA",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAAAGMAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-08-29T12:48:21.712Z",
               "EditorCaption": ""
@@ -136,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ShaderProgram.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\ShaderProgram.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\ShaderProgram.cpp",
@@ -157,8 +156,7 @@
               "RelativeToolTip": "OpenGL Practice\\VertexShaderLoader.h",
               "ViewState": "AQIAACAAAAAAAAAAAAAAACgAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-25T22:45:58.912Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-25T22:45:58.912Z"
             },
             {
               "$type": "Document",
