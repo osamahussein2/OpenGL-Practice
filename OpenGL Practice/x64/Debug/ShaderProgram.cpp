@@ -218,6 +218,9 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	// Let's set the uniform int to find a uniform type of material.specularMap and set it to 1
 	glUniform1i(glGetUniformLocation(shaderProgram, "material.specularMap"), 1);
 
+	// Let's set the uniform int to find a uniform type of material.emissionMap and set it to 2
+	glUniform1i(glGetUniformLocation(shaderProgram, "material.emissionMap"), 2);
+
 	/* Let's set the uniform float to find a uniform type of material.shininess and set the float value to the shininess
 	value that I set inside the Lighting class */
 	glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"), lighting->SetShininessLighting(64.0f));

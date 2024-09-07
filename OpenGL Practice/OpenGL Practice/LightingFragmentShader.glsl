@@ -31,6 +31,10 @@ struct Material
 	// The specular map sampler2D defines texture image of the specular material
 	sampler2D specularMap;
 
+	/* Create an emission map texture that stores emission values per fragment. Emission values are colors an object
+	may emit as if it contains a light source itself.  */
+	sampler2D emissionMap;
+
 	// The shininess value defines how much the scatter/radius value of the specular highlight will equal to
 	float shininess;
 };
@@ -101,5 +105,6 @@ void main()
 
 	resultingLight = ambientLight + diffuseLight + specularLight;
 
-	fragColor = vec4(resultingLight, 1.0);
+	// Add the emission map texture inside of frag color
+	fragColor = vec4(resultingLight + vec3(texture(material.emissionMap, texCoords)), 1.0);
 }
