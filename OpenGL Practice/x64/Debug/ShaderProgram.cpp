@@ -45,11 +45,11 @@ ShaderProgram::ShaderProgram()
 
 	lightPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
-	for (int cubePositionsArray = 0; cubePositionsArray < cubePositions.size(); cubePositionsArray++)
-	{
 		// Initialize the vec3 array elements to 0 for all axes
-		cubePositions[cubePositionsArray] = glm::vec3(0.0f, 0.0f, 0.0f);
-	}
+	cubePositions = { glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f) };
 }
 
 ShaderProgram::~ShaderProgram()
@@ -163,8 +163,8 @@ void ShaderProgram::InitializeSecondTexture()
 void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane)
 {
 	// Initialize the translation vector array for each cube that specifies its position in world space
-	/*cubePositions = {
-		glm::vec3(0.0f, 0.0f, -3.0f),
+	cubePositions = {
+		glm::vec3(0.0f, 0.0f, 0.0f),
 		glm::vec3(2.0f, 5.0f, -15.0f),
 		glm::vec3(-1.5f, -2.2f, -2.5f),
 		glm::vec3(-3.8f, -2.0f, -12.3f),
@@ -174,7 +174,7 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 		glm::vec3(1.5f, 2.0f, -2.5f),
 		glm::vec3(1.5f, 0.2f, -1.5f),
 		glm::vec3(-1.3f, 1.0f, -1.5f)
-	};*/
+	};
 
 	lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 
@@ -191,6 +191,9 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 	lightPositionLocation = glGetUniformLocation(shaderProgram, "light.positionalLight");
 	glUniform3f(lightPositionLocation, lightPosition.x, lightPosition.y, lightPosition.z);
+
+	/*glUniform3fv(glGetUniformLocation(shaderProgram, "light.directionalLight"), 1,
+		glm::value_ptr(lighting->SetDirectionalLighting(glm::vec3(-0.2f, -1.0f, -0.3f))));*/
 
 	viewPositionLocation = glGetUniformLocation(shaderProgram, "viewPosition");
 	glUniform3f(viewPositionLocation, Camera::cameraPosition.x, Camera::cameraPosition.y, Camera::cameraPosition.z);
@@ -219,11 +222,11 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	glUniform1i(glGetUniformLocation(shaderProgram, "material.specularMap"), 1);
 
 	// Let's set the uniform int to find a uniform type of material.emissionMap and set it to 2
-	glUniform1i(glGetUniformLocation(shaderProgram, "material.emissionMap"), 2);
+	//glUniform1i(glGetUniformLocation(shaderProgram, "material.emissionMap"), 2);
 
 	/* Let's set the uniform float to find a uniform type of material.shininess and set the float value to the shininess
 	value that I set inside the Lighting class */
-	glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"), lighting->SetShininessLighting(64.0f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "material.shininess"), lighting->SetShininessLighting(32.0f));
 
 	/* Let's set the uniform vector 3 to find a uniform type of light.ambientLight and set the vec3 values to
 	the ambient lighting intensity vector 3 that I set inside the Lighting class */
@@ -247,6 +250,11 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	glUniform3fv(glGetUniformLocation(shaderProgram, "light.specularLight"), 1,
 		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
 
+	// Try to cover the light distance of up to 50
+	glUniform1f(glGetUniformLocation(shaderProgram, "attenuation.constant"), lighting->SetAttenuationConstant(1.0f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "attenuation.linear"), lighting->SetAttenuationLinear(0.09f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "attenuation.quadratic"), lighting->SetAttenuationQuadratic(0.032f));
+
 	// To be able to draw in 3D, we will need a model matrix
 
 	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
@@ -255,13 +263,13 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
 	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
 	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
-	modelMatrix = glm::mat4(1.0f);
+	//modelMatrix = glm::mat4(1.0f);
 
 	// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
-	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+	//modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
 
 	// Set the uniform model matrix location to equal to the modelMatrix value pointer
-	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	//glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 
 	/* After the model matrix has been created and set up, we need to create a view matrix. We have to move
 	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world
@@ -313,7 +321,7 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 	// Loop through all the cubes positions array
 
-	//for (unsigned int renderCubes = 0; renderCubes < cubePositions.size(); renderCubes++)
+	for (unsigned int renderCubes = 0; renderCubes < cubePositions.size(); renderCubes++)
 	{
 		// To be able to draw in 3D, we will need a model matrix
 
@@ -323,7 +331,7 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 		/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
 		coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
 		are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
-		/*modelMatrix = glm::mat4(1.0f);
+		modelMatrix = glm::mat4(1.0f);
 
 		// Use the model matrix to place all the cube positions elements somewhere inside the window
 		modelMatrix = glm::translate(modelMatrix, cubePositions[renderCubes]);
@@ -342,7 +350,7 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 		/* Make sure to draw arrays at the end of setting the model, view and projection matrices locations to render
 		the cube on the window */
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
 }
 

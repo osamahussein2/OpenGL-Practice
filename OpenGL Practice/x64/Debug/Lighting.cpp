@@ -3,15 +3,17 @@
 Lighting::Lighting()
 {
 	// Initialize all the light sources to 0
-	materialAmbientLighting = glm::vec3(0.0f, 0.0f, 0.0f);
-	materialDiffuseLighting = glm::vec3(0.0f, 0.0f, 0.0f);
-	materialSpecularLighting = glm::vec3(0.0f, 0.0f, 0.0f);
+	materialAmbientLighting = vec3(0.0f, 0.0f, 0.0f);
+	materialDiffuseLighting = vec3(0.0f, 0.0f, 0.0f);
+	materialSpecularLighting = vec3(0.0f, 0.0f, 0.0f);
 
 	shininessOfSpecularHighlight = 0.0f;
 
-	ambientLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
-	diffuseLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
-	specularLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
+	ambientLightingIntensity = vec3(0.0f, 0.0f, 0.0f);
+	diffuseLightingIntensity = vec3(0.0f, 0.0f, 0.0f);
+	specularLightingIntensity = vec3(0.0f, 0.0f, 0.0f);
+
+	directionalLighting = vec3(0.0f, 0.0f, 0.0f);
 }
 
 Lighting::~Lighting()
@@ -28,7 +30,7 @@ Lighting::~Lighting()
 	specularLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
-glm::vec3 Lighting::SetMaterialAmbientLighting(glm::vec3 materialAmbientLighting_)
+vec3 Lighting::SetMaterialAmbientLighting(vec3 materialAmbientLighting_)
 {
 	// Let's set the ambient light source to the numbers we want by passing in a vec3 as an argument
 	materialAmbientLighting = materialAmbientLighting_;
@@ -36,7 +38,7 @@ glm::vec3 Lighting::SetMaterialAmbientLighting(glm::vec3 materialAmbientLighting
 	return materialAmbientLighting;
 }
 
-glm::vec3 Lighting::SetMaterialDiffuseLighting(glm::vec3 materialDiffuseLighting_)
+vec3 Lighting::SetMaterialDiffuseLighting(vec3 materialDiffuseLighting_)
 {
 	// Let's set the diffuse light source to the numbers we want by passing in a vec3 as an argument
 	materialDiffuseLighting = materialDiffuseLighting_;
@@ -44,7 +46,7 @@ glm::vec3 Lighting::SetMaterialDiffuseLighting(glm::vec3 materialDiffuseLighting
 	return materialDiffuseLighting;
 }
 
-glm::vec3 Lighting::SetMaterialSpecularLighting(glm::vec3 materialSpecularLighting_)
+vec3 Lighting::SetMaterialSpecularLighting(vec3 materialSpecularLighting_)
 {
 	// Let's set the specular light source to the numbers we want by passing in a vec3 as an argument
 	materialSpecularLighting = materialSpecularLighting_;
@@ -60,23 +62,51 @@ float Lighting::SetShininessLighting(float shininessLighting_)
 	return shininessOfSpecularHighlight;
 }
 
-glm::vec3 Lighting::SetIntensityAmbientLighting(glm::vec3 ambientLightingIntensity_)
+vec3 Lighting::SetIntensityAmbientLighting(vec3 ambientLightingIntensity_)
 {
 	ambientLightingIntensity = ambientLightingIntensity_;
 
 	return ambientLightingIntensity;
 }
 
-glm::vec3 Lighting::SetIntensityDiffuseLighting(glm::vec3 diffuseLightingIntensity_)
+vec3 Lighting::SetIntensityDiffuseLighting(vec3 diffuseLightingIntensity_)
 {
 	diffuseLightingIntensity = diffuseLightingIntensity_;
 
 	return diffuseLightingIntensity;
 }
 
-glm::vec3 Lighting::SetIntensitySpecularLighting(glm::vec3 specularLightingIntensity_)
+vec3 Lighting::SetIntensitySpecularLighting(vec3 specularLightingIntensity_)
 {
 	specularLightingIntensity = specularLightingIntensity_;
 
 	return specularLightingIntensity;
+}
+
+vec3 Lighting::SetDirectionalLighting(vec3 directionalLighting_)
+{
+	directionalLighting = directionalLighting_;
+
+	return directionalLighting;
+}
+
+float Lighting::SetAttenuationConstant(float attenuationConstant_)
+{
+	attenuationConstant = attenuationConstant_;
+
+	return attenuationConstant;
+}
+
+float Lighting::SetAttenuationLinear(float attenuationLinear_)
+{
+	attenuationLinear = attenuationLinear_;
+
+	return attenuationLinear;
+}
+
+float Lighting::SetAttenuationQuadratic(float attenuationQuadratic_)
+{
+	attenuationQuadratic = attenuationQuadratic_;
+
+	return attenuationQuadratic;
 }

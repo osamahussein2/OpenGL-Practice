@@ -233,39 +233,6 @@ void VertexShaderLoader::InitializeVertexObjects()
 	// Free the image memory after generating the texture and its corresponding mipmaps
 	stbi_image_free(data);
 
-	// Generate the emission texture in OpenGL first before binding it
-	glGenTextures(1, &emissionMapTexture);
-
-	// Then, we need to bind the emission texture to configure the currently bound texture on subsequent texture commands
-	glBindTexture(GL_TEXTURE_2D, emissionMapTexture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// Flip the image vertically
-	stbi_set_flip_vertically_on_load(true);
-
-	data = stbi_load("Textures/matrix.jpg", &width, &height, &nrChannels, 0);
-
-	// After the texture ahs been binded, we can generate textures using the previously loaded image data
-	// Textures are generated with glTexImage2D
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-
-	else
-	{
-		std::cout << "This texture has failed to load!" << std::endl;
-	}
-
-	// Free the image memory after generating the texture and its corresponding mipmaps
-	stbi_image_free(data);
-
 	/* Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
 	the fragment shader's sampler */
 
@@ -276,10 +243,6 @@ void VertexShaderLoader::InitializeVertexObjects()
 	// Bind the specular map texture here
 	glActiveTexture(GL_TEXTURE1); // Active next texture unit to render the specular map texture
 	glBindTexture(GL_TEXTURE_2D, specularMapTexture);
-
-	// Bind the emission map texture here
-	glActiveTexture(GL_TEXTURE2); // Active next texture unit to render the emission map texture
-	glBindTexture(GL_TEXTURE_2D, emissionMapTexture);
 
 	// Bind the vertex array object using its ID
 	glBindVertexArray(VAO);

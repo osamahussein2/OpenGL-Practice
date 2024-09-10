@@ -14,6 +14,9 @@ vec3 reflectionDirection;
 float specularValue;
 vec3 specularLight;
 
+float distanceToLightSource;
+float attenuationValue;
+
 struct Material
 {
 	// The ambient material vector defines what color the surface reflects under ambient lighting (in most cases, it's the same color as the surface color)
@@ -44,6 +47,9 @@ struct Light
 	// The position light vector will determine where the light's brightness be located
 	vec3 positionalLight;
 
+	// Instead of calculating the light's direction vector, we can just use the directional light vector directly here
+	//vec3 directionalLight;
+
 	// The ambient light vector will determine the light's ambient intensity
 	vec3 ambientLight;
 
@@ -52,6 +58,22 @@ struct Light
 
 	// The specular light vector will determine the light's specular intensity
 	vec3 specularLight;
+};
+
+// Attenuation means reducing the light intensity over the distance that the light ray is travelling
+struct Attenuation
+{
+	/* The constant value is usually equal to 1 so that the denominator never gets smaller than 1. If it does get
+	smaller than 1, then the light intensity will be boosted even if the distance is far away. */
+	float constant;
+
+	/* The linear value is used to multiply with the distance value that will help reduce light intensity as
+	the distance is farther away in a linear way. */
+	float linear;
+
+	/* The quadratic value is used to multiply with the quadrant of the distance and sets a quadratic decrease of
+	light intensity. */
+	float quadratic;
 };
 
 out vec4 fragColor;
@@ -68,9 +90,17 @@ uniform vec3 viewPosition;
 
 uniform Material material;
 uniform Light light;
+uniform Attenuation attenuation;
 
 void main()
 {
+	// Attenuation equation
+	distanceToLightSource = length(light.positionalLight - FragPosition);
+
+	// I can do either (distanceToLightSource * distanceToLightSource) or pow(distanceToLightSource, 2)
+	attenuationValue = 1.0 / (attenuation.constant + attenuation.linear * distanceToLightSource + attenuation.quadratic
+	* pow(distanceToLightSource, 2));
+
 	// Ambient lighting
 	ambientLight = light.ambientLight * vec3(texture(material.diffuseMap, texCoords));
 
@@ -81,6 +111,9 @@ void main()
 
 	// We know the light direction is equal to the light's position minus the fragment's position
 	lightDirection = normalize(light.positionalLight - FragPosition);
+
+	// We have to negate the directional light vector first (switching its direction)
+	//lightDirection = normalize(-light.directionalLight);
 
 	diffuseLight = light.diffuseLight * (max(dot(normalizeNormals, lightDirection), 0.0) * 
 	vec3(texture(material.diffuseMap, texCoords)));
@@ -103,8 +136,11 @@ void main()
 	specularValue = pow(max(dot(viewDirection, reflectionDirection), 0.0), material.shininess);
 	specularLight = light.specularLight * specularValue * vec3(texture(material.specularMap, texCoords));
 
+	ambientLight *= attenuationValue;
+	diffuseLight *= attenuationValue;
+	specularLight *= attenuationValue;
+
 	resultingLight = ambientLight + diffuseLight + specularLight;
 
-	// Add the emission map texture inside of frag color
-	fragColor = vec4(resultingLight + vec3(texture(material.emissionMap, texCoords)), 1.0);
+	fragColor = vec4(resultingLight, 1.0);
 }

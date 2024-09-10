@@ -17,8 +17,6 @@ uniform mat4 projectionMatrix;
 
 void main()
 {
-	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
-
 	// Multiply the fragment position using the model matrix to transform it to world space coordinates
 	FragPosition = vec3(modelMatrix * vec4(position, 1.0));
 
@@ -27,4 +25,6 @@ void main()
 	Normal =  mat3(transpose(inverse(modelMatrix))) * normal;
 
 	texCoords = textureCoordinates;
+
+	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(FragPosition, 1.0);
 }
