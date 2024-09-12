@@ -17,6 +17,10 @@ vec3 specularLight;
 float distanceToLightSource;
 float attenuationValue;
 
+float thetaAngle;
+float epsilon;
+float spotlightIntensity;
+
 struct Material
 {
 	// The ambient material vector defines what color the surface reflects under ambient lighting (in most cases, it's the same color as the surface color)
@@ -48,7 +52,10 @@ struct Light
 	vec3 positionalLight;
 
 	// Instead of calculating the light's direction vector, we can just use the directional light vector directly here
-	//vec3 directionalLight;
+	vec3 directionalLight;
+
+	float cutoffAngle;
+	float outerCutoffAngle; // In other words, this is the angle of the spotlight's outer cone 
 
 	// The ambient light vector will determine the light's ambient intensity
 	vec3 ambientLight;
@@ -98,8 +105,20 @@ void main()
 	distanceToLightSource = length(light.positionalLight - FragPosition);
 
 	// I can do either (distanceToLightSource * distanceToLightSource) or pow(distanceToLightSource, 2)
-	attenuationValue = 1.0 / (attenuation.constant + attenuation.linear * distanceToLightSource + attenuation.quadratic
-	* pow(distanceToLightSource, 2));
+	attenuationValue = 1.0 / (attenuation.constant + attenuation.linear * distanceToLightSource + 
+	attenuation.quadratic * (pow(distanceToLightSource, 2)));
+
+	// We know the light direction is equal to the light's position minus the fragment's position
+	lightDirection = normalize(light.positionalLight - FragPosition);
+
+	// Check if the light is inside the spotlight cone
+	thetaAngle = dot(lightDirection, normalize(-light.directionalLight));
+
+	// Epsilon is the difference between the inner cone (in angle) and the outer cone (also, in angle)
+	epsilon = light.cutoffAngle - light.outerCutoffAngle;
+
+	// The clamp function ensures that the number can't go below the minimum value and can't go above the maximum value
+	spotlightIntensity = clamp((thetaAngle - light.cutoffAngle) / epsilon, 0.0, 1.0);
 
 	// Ambient lighting
 	ambientLight = light.ambientLight * vec3(texture(material.diffuseMap, texCoords));
@@ -108,9 +127,6 @@ void main()
 
 	// Make sure these newly defined vec3s are unit vectors, hence why they should be normalized
 	normalizeNormals = normalize(Normal);
-
-	// We know the light direction is equal to the light's position minus the fragment's position
-	lightDirection = normalize(light.positionalLight - FragPosition);
 
 	// We have to negate the directional light vector first (switching its direction)
 	//lightDirection = normalize(-light.directionalLight);
@@ -135,6 +151,10 @@ void main()
 
 	specularValue = pow(max(dot(viewDirection, reflectionDirection), 0.0), material.shininess);
 	specularLight = light.specularLight * specularValue * vec3(texture(material.specularMap, texCoords));
+
+	// The ambient lighting will be unaffected by the intensity of the spot light because we want to have some light
+	diffuseLight *= spotlightIntensity;
+	specularLight *= spotlightIntensity;
 
 	ambientLight *= attenuationValue;
 	diffuseLight *= attenuationValue;

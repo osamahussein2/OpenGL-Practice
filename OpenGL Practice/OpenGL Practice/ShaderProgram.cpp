@@ -190,13 +190,13 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	glUniform3f(lightColorLocation, 1.0f, 1.0f, 1.0f);
 
 	lightPositionLocation = glGetUniformLocation(shaderProgram, "light.positionalLight");
-	glUniform3f(lightPositionLocation, lightPosition.x, lightPosition.y, lightPosition.z);
+	glUniform3fv(lightPositionLocation, 1, glm::value_ptr(Camera::cameraPosition));
 
-	/*glUniform3fv(glGetUniformLocation(shaderProgram, "light.directionalLight"), 1,
-		glm::value_ptr(lighting->SetDirectionalLighting(glm::vec3(-0.2f, -1.0f, -0.3f))));*/
+	glUniform3fv(glGetUniformLocation(shaderProgram, "light.directionalLight"), 1,
+		glm::value_ptr(lighting->SetDirectionalLighting(glm::vec3(Camera::cameraFront))));
 
 	viewPositionLocation = glGetUniformLocation(shaderProgram, "viewPosition");
-	glUniform3f(viewPositionLocation, Camera::cameraPosition.x, Camera::cameraPosition.y, Camera::cameraPosition.z);
+	glUniform3fv(viewPositionLocation, 1, glm::value_ptr(Camera::cameraPosition));
 
 	/* Let's set the uniform vector 3 to find a uniform type of material.ambientLight and set the vec3 values to 
 	the ambient lighting vector 3 that I set inside the Lighting class (go to Lighting.h and .cpp for more clarity)
@@ -241,7 +241,7 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 	/* Set the diffuse lighting intensity to be the light color we want */
 	glUniform3fv(glGetUniformLocation(shaderProgram, "light.diffuseLight"), 1,
-		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.5f, 0.5f, 0.5f))));
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.8f, 0.8f, 0.8f))));
 
 	/* Let's set the uniform vector 3 to find a uniform type of light.specularLight and set the vec3 values to
 	the specular lighting intensity vector 3 that I set inside the Lighting class */
@@ -254,6 +254,13 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	glUniform1f(glGetUniformLocation(shaderProgram, "attenuation.constant"), lighting->SetAttenuationConstant(1.0f));
 	glUniform1f(glGetUniformLocation(shaderProgram, "attenuation.linear"), lighting->SetAttenuationLinear(0.09f));
 	glUniform1f(glGetUniformLocation(shaderProgram, "attenuation.quadratic"), lighting->SetAttenuationQuadratic(0.032f));
+
+	// Calculate the cos value based on an angle and this angle to the fragment shader
+	glUniform1f(glGetUniformLocation(shaderProgram, "light.cutoffAngle"), 
+		glm::cos(glm::radians(lighting->SetCutoffAngle(12.5f))));
+
+	glUniform1f(glGetUniformLocation(shaderProgram, "light.outerCutoffAngle"),
+		glm::cos(glm::radians(lighting->SetOuterCutoffAngle(17.5f))));
 
 	// To be able to draw in 3D, we will need a model matrix
 

@@ -14,6 +14,13 @@ Lighting::Lighting()
 	specularLightingIntensity = vec3(0.0f, 0.0f, 0.0f);
 
 	directionalLighting = vec3(0.0f, 0.0f, 0.0f);
+
+	attenuationConstant = 0.0f;
+	attenuationLinear = 0.0f;
+	attenuationQuadratic = 0.0f;
+
+	cutoffAngle = static_cast<int>(0); // I'm starting to learn about data conversions correctly here
+	outerCutoffAngle = static_cast<int>(0);
 }
 
 Lighting::~Lighting()
@@ -28,6 +35,15 @@ Lighting::~Lighting()
 	ambientLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
 	diffuseLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
 	specularLightingIntensity = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	directionalLighting = vec3(0.0f, 0.0f, 0.0f);
+
+	attenuationConstant = 0.0f;
+	attenuationLinear = 0.0f;
+	attenuationQuadratic = 0.0f;
+
+	cutoffAngle = static_cast<int>(0);
+	outerCutoffAngle = static_cast<int>(0);
 }
 
 vec3 Lighting::SetMaterialAmbientLighting(vec3 materialAmbientLighting_)
@@ -109,4 +125,18 @@ float Lighting::SetAttenuationQuadratic(float attenuationQuadratic_)
 	attenuationQuadratic = attenuationQuadratic_;
 
 	return attenuationQuadratic;
+}
+
+float Lighting::SetCutoffAngle(float cutoffAngle_)
+{
+	cutoffAngle = cutoffAngle_;
+
+	return cutoffAngle;
+}
+
+float Lighting::SetOuterCutoffAngle(float outerCutoffAngle_)
+{
+	outerCutoffAngle = outerCutoffAngle_;
+
+	return outerCutoffAngle;
 }

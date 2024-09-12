@@ -25,6 +25,8 @@ public:
 	float SetAttenuationConstant(float attenuationConstant_);
 	float SetAttenuationLinear(float attenuationLinear_);
 	float SetAttenuationQuadratic(float attenuationQuadratic_);
+	float SetCutoffAngle(float cutoffAngle_);
+	float SetOuterCutoffAngle(float outerCutoffAngle_);
 private:
 	vec3 materialAmbientLighting, ambientLightingIntensity;
 	vec3 materialDiffuseLighting, diffuseLightingIntensity;
@@ -32,4 +34,5 @@ private:
 	float shininessOfSpecularHighlight;
 	vec3 directionalLighting;
 	float attenuationConstant, attenuationLinear, attenuationQuadratic;
+	float cutoffAngle, outerCutoffAngle;
 };
