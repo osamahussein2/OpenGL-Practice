@@ -58,5 +58,6 @@ private:
 	glm::vec3 lightPosition;
 
 	std::array<glm::vec3, 10> cubePositions;
+	std::array<glm::vec3, 4> pointLightPositions;
 };
 

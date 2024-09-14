@@ -176,6 +176,13 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 		glm::vec3(-1.3f, 1.0f, -1.5f)
 	};
 
+	pointLightPositions = {
+		glm::vec3(0.7f, 0.2f, 2.0f),
+		glm::vec3(2.3f, -3.3f, -4.0f),
+		glm::vec3(-4.0f, 2.0f, -12.0f),
+		glm::vec3(0.0f, 0.0f, -3.0f)
+	};
+
 	lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 
 	// Move the light around the OpenGL window overtime
@@ -192,7 +199,13 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 	lightPositionLocation = glGetUniformLocation(shaderProgram, "light.positionalLight");
 	glUniform3fv(lightPositionLocation, 1, glm::value_ptr(Camera::cameraPosition));
 
-	glUniform3fv(glGetUniformLocation(shaderProgram, "light.directionalLight"), 1,
+	glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.lightPosition"), 1,
+		glm::value_ptr(Camera::cameraPosition));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "directionalLight.lightDirection"), 1,
+		glm::value_ptr(lighting->SetDirectionalLighting(glm::vec3(-0.2f, -1.0f, -0.3f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.directionalLight"), 1,
 		glm::value_ptr(lighting->SetDirectionalLighting(glm::vec3(Camera::cameraFront))));
 
 	viewPositionLocation = glGetUniformLocation(shaderProgram, "viewPosition");
@@ -233,21 +246,81 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 	/* Set the ambient lighting intensity color to a lower value so that it doesn't have a lot of impact of the
 	surface's final color */
-	glUniform3fv(glGetUniformLocation(shaderProgram, "light.ambientLight"), 1,
-		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(0.2f, 0.2f, 0.2f))));
+	glUniform3fv(glGetUniformLocation(shaderProgram, "directionalLight.ambientLight"), 1,
+		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(0.05f, 0.05f, 0.05f))));
 
 	/* Let's set the uniform vector 3 to find a uniform type of light.diffuseLight and set the vec3 values to
 	the diffuse lighting intensity vector 3 that I set inside the Lighting class */
 
 	/* Set the diffuse lighting intensity to be the light color we want */
-	glUniform3fv(glGetUniformLocation(shaderProgram, "light.diffuseLight"), 1,
-		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.8f, 0.8f, 0.8f))));
+	glUniform3fv(glGetUniformLocation(shaderProgram, "directionalLight.diffuseLight"), 1,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.4f, 0.4f, 0.4f))));
 
 	/* Let's set the uniform vector 3 to find a uniform type of light.specularLight and set the vec3 values to
 	the specular lighting intensity vector 3 that I set inside the Lighting class */
 
 	/* Set the specular lighting intensity to shine at full intensity */
-	glUniform3fv(glGetUniformLocation(shaderProgram, "light.specularLight"), 1,
+	glUniform3fv(glGetUniformLocation(shaderProgram, "directionalLight.specularLight"), 1,
+		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(0.5f, 0.5f, 0.5f))));
+
+	// Set the point light uniform positions array
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLights[0].lightPosition"), 1,
+		glm::value_ptr(pointLightPositions[0]));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLights[1].lightPosition"), 2,
+		glm::value_ptr(pointLightPositions[1]));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLights[2].lightPosition"), 3,
+		glm::value_ptr(pointLightPositions[2]));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLights[3].lightPosition"), 4,
+		glm::value_ptr(pointLightPositions[3]));
+
+	// Set the point lighting ambient, diffuse and specular light uniforms
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[0].ambientLight"), 1,
+		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(0.05f, 0.05f, 0.05f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[0].diffuseLight"), 1,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.8f, 0.8f, 0.8f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[0].specularLight"), 1,
+		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[1].ambientLight"), 2,
+		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(0.05f, 0.05f, 0.05f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[1].diffuseLight"), 2,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.8f, 0.8f, 0.8f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[1].specularLight"), 2,
+		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[2].ambientLight"), 3,
+		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(0.05f, 0.05f, 0.05f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[2].diffuseLight"), 3,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.8f, 0.8f, 0.8f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[2].specularLight"), 3,
+		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[3].ambientLight"), 4,
+		glm::value_ptr(lighting->SetIntensityAmbientLighting(glm::vec3(0.05f, 0.05f, 0.05f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[3].diffuseLight"), 4,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.8f, 0.8f, 0.8f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "pointLight[3].specularLight"), 4,
+		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
+
+	// Set the spot lighting diffuse and specular light uniforms
+	glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.ambientLight"), 1,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(0.0f, 0.0f, 0.0f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.diffuseLight"), 1,
+		glm::value_ptr(lighting->SetIntensityDiffuseLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
+
+	glUniform3fv(glGetUniformLocation(shaderProgram, "spotLight.specularLight"), 1,
 		glm::value_ptr(lighting->SetIntensitySpecularLighting(glm::vec3(1.0f, 1.0f, 1.0f))));
 
 	// Try to cover the light distance of up to 50
@@ -260,7 +333,22 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 		glm::cos(glm::radians(lighting->SetCutoffAngle(12.5f))));
 
 	glUniform1f(glGetUniformLocation(shaderProgram, "light.outerCutoffAngle"),
-		glm::cos(glm::radians(lighting->SetOuterCutoffAngle(17.5f))));
+		glm::cos(glm::radians(lighting->SetOuterCutoffAngle(15.5f))));
+
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[0].constant"), lighting->SetAttenuationConstant(1.0f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[1].constant"), lighting->SetAttenuationConstant(1.0f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[2].constant"), lighting->SetAttenuationConstant(1.0f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[3].constant"), lighting->SetAttenuationConstant(1.0f));
+
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[0].linear"), lighting->SetAttenuationLinear(0.09f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[1].linear"), lighting->SetAttenuationLinear(0.09f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[2].linear"), lighting->SetAttenuationLinear(0.09f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[3].linear"), lighting->SetAttenuationLinear(0.09f));
+
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[0].quadratic"), lighting->SetAttenuationQuadratic(0.032f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[1].quadratic"), lighting->SetAttenuationQuadratic(0.032f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[2].quadratic"), lighting->SetAttenuationQuadratic(0.032f));
+	glUniform1f(glGetUniformLocation(shaderProgram, "pointLights[3].quadratic"), lighting->SetAttenuationQuadratic(0.032f));
 
 	// To be able to draw in 3D, we will need a model matrix
 
@@ -363,24 +451,6 @@ void ShaderProgram::InitializeCubeColor(float aspect_ratio, float near_plane, fl
 
 void ShaderProgram::InitializeLightColor(float aspect_ratio, float near_plane, float far_plane)
 {
-	// To be able to draw in 3D, we will need a model matrix
-
-	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
-	vertices to the global world space */
-
-	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
-	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
-	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
-	modelMatrix = glm::mat4(1.0f);
-	modelMatrix = glm::translate(modelMatrix, lightPosition);
-	modelMatrix = glm::scale(modelMatrix, glm::vec3(0.2f));
-
-	// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
-	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
-
-	// Set the uniform model matrix location to equal to the modelMatrix value pointer
-	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-
 	/* After the model matrix has been created and set up, we need to create a view matrix. We have to move
 	slightly backwards in the scene so that the objects are visible inside the OpenGL window (when we're in world
 	space, we are located at the origin (or in other words, the coordinate (0, 0, 0). */
@@ -427,5 +497,26 @@ void ShaderProgram::InitializeLightColor(float aspect_ratio, float near_plane, f
 	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	// To be able to draw in 3D, we will need a model matrix
+
+	/* The model matrix includes translations, scaling and /or rotations we want to make to transform all the object's
+	vertices to the global world space */
+
+	/* By multiplying the vertex coordinates with the model matrix, we are essentially converting the vertex
+	coordinates from local space to the world space. That means whatever we're doing using the model matrix, we
+	are forcing the vertex coordinates to represent the plane in world space rather than the space of itself. */
+	for (unsigned int i = 0; i < pointLightPositions.size(); i++)
+	{
+		modelMatrix = glm::mat4(1.0f);
+		modelMatrix = glm::translate(modelMatrix, pointLightPositions[i]);
+		modelMatrix = glm::scale(modelMatrix, glm::vec3(0.2f));
+
+		// Set the model matrix location to look for the modelMatrix uniform set inside the vertex shader GLSL file
+		modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+		// Set the uniform model matrix location to equal to the modelMatrix value pointer
+		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
 }
