@@ -22,6 +22,10 @@ public:
 	void InitializeSecondTexture();
 	void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
 	void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
+	void CreateDesertLighting();
+	void CreateFactoryLighting();
+	void CreateHorrorLighting();
+	void CreateBioChemicalLabLighting();
 
 	float visibilityTextureValue;
 

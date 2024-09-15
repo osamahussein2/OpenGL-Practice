@@ -108,7 +108,16 @@ void Window::WindowStillRunning()
 		glEnable(GL_DEPTH_TEST);
 
 		// Add our own color to the window
-		glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+		//glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+
+		// Give a window a desert look (I got the colors using Adobe Color Wheel generator website)
+		//glClearColor(0.91372549019f, 0.72549019607f, 0.38823529411f, 0.91f);
+
+		// Make the window black (factory and horror)
+		//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+		// Make the window white (biochemical lab)
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		// If I get rid of this, my window will be black because then we didn't clear any color buffer bit first before rendering
 		// Since we're also using depth buffer, we need to clear the depth buffer before each render iteration
