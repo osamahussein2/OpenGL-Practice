@@ -22,12 +22,14 @@ public:
 	void InitializeSecondTexture();
 	void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
 	void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
-	void CreateDesertLighting();
-	void CreateFactoryLighting();
-	void CreateHorrorLighting();
-	void CreateBioChemicalLabLighting();
+	//void CreateDesertLighting();
+	//void CreateFactoryLighting();
+	//void CreateHorrorLighting();
+	//void CreateBioChemicalLabLighting();
 
 	float visibilityTextureValue;
+
+	unsigned int shaderProgram;
 
 private:
 	std::array<VertexShaderLoader*, 2> vertexShaderLoader;
@@ -36,7 +38,6 @@ private:
 	Color* color;
 	Lighting* lighting;
 
-	unsigned int shaderProgram;
 	float timer;
 	float moveRight;
 	int movingPositionLocation;

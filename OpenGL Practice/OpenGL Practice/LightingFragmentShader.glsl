@@ -140,6 +140,13 @@ uniform PointLight pointLights[NUMBER_OF_POINT_LIGHTS];
 
 uniform SpotLight spotLight;
 
+uniform sampler2D TextureDiffuse1;
+uniform sampler2D TextureDiffuse2;
+uniform sampler2D TextureDiffuse3;
+
+uniform sampler2D TextureSpecular1;
+uniform sampler2D TextureSpecular2;
+
 vec3 CalculateDirectionalLighting(DirectionalLight directionalLight, vec3 normal, vec3 viewDirection)
 {
 	lightDirection = normalize(-directionalLight.lightDirection);

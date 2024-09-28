@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\GameDev\Assimp\lib\x64;C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\GameDev\Assimp\include;C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,6 +141,7 @@
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="Lighting.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="VertexShaderLoader.h" />
