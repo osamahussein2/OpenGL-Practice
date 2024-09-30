@@ -45,6 +45,9 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -74,6 +77,9 @@
     <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -82,5 +88,7 @@
     <None Include="LightCubeFragmentShader.glsl" />
     <None Include="LightingVertexShader.glsl" />
     <None Include="LightingFragmentShader.glsl" />
+    <None Include="ModelVertexShader.glsl" />
+    <None Include="ModelFragmentShader.glsl" />
   </ItemGroup>
 </Project>

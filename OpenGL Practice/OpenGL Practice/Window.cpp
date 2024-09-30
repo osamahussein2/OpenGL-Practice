@@ -11,13 +11,15 @@ Window::Window()
 	vertexShaderLoader =
 	{ 
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
-		new VertexShaderLoader("LightCubeVertexShader.glsl")
+		new VertexShaderLoader("LightCubeVertexShader.glsl"),
+		new VertexShaderLoader("ModelVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
 	{
 		new FragmentShaderLoader("LightingFragmentShader.glsl"),
-		new FragmentShaderLoader("LightCubeFragmentShader.glsl")
+		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
+		new FragmentShaderLoader("ModelFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
@@ -39,6 +41,8 @@ Window::Window()
 
 	color = new Color();
 	lighting = new Lighting();
+
+	model = nullptr;
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -74,6 +78,9 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 
 void Window::WindowStillRunning()
 {
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[2], fragmentShaderLoader[2]);
+	model = new Model("Models/Backpack/backpack.obj");
+
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
 	process any events waiting for us to do something to it */
@@ -108,7 +115,7 @@ void Window::WindowStillRunning()
 		glEnable(GL_DEPTH_TEST);
 
 		// Add our own color to the window
-		glClearColor(0.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 
 		// Give a window a desert look (I got the colors using Adobe Color Wheel generator website)
 		//glClearColor(0.91372549019f, 0.72549019607f, 0.38823529411f, 0.91f);
@@ -124,20 +131,24 @@ void Window::WindowStillRunning()
 		// Otherwise, the depth information of the previous frame stays in the buffer (and the cube won't render at all)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
-		vertexShaderLoader[0]->InitializeVertexObjects();
+		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
+		//vertexShaderLoader[0]->InitializeVertexObjects();
 
 		// Call the 3D object initialization function to render 3D objects onto the OpenGL window
 		// The 800.0f/ 600.0f below also equals to 4.0f / 3.0f which is what most graphics aspect ratios are defaulted to
-		shaderProgram->InitializeCubeColor(800.0f / 600.0f, 0.1f, 100.0f);
+		//shaderProgram->InitializeCubeColor(800.0f / 600.0f, 0.1f, 100.0f);
 
-		shaderProgram->InitializeShaderProgram(vertexShaderLoader[1], fragmentShaderLoader[1]);
-		vertexShaderLoader[1]->InitializeVertexObjects();
+		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[1], fragmentShaderLoader[1]);
+		//vertexShaderLoader[1]->InitializeVertexObjects();
 
 		// Call the second texture initialization function here to render the second container and scale it overtime
 		//shaderProgram->InitializeSecondTexture();
 
-		shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
+		//shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
+
+		shaderProgram->UseShaderProgram();
+		shaderProgram->InitializeModeling(800.0f / 600.0f, 0.1f, 100.0f);
+		model->DrawModel();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time

@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Color.h"
 #include "Lighting.h"
+#include "Model.h"
 
 class Window
 {
@@ -36,8 +37,8 @@ private:
 
 	static void MouseScrollCallback(GLFWwindow* window, double offsetX, double offsetY);
 
-	std::array<VertexShaderLoader*, 2> vertexShaderLoader;
-	std::array<FragmentShaderLoader*, 2> fragmentShaderLoader;
+	std::array<VertexShaderLoader*, 3> vertexShaderLoader;
+	std::array<FragmentShaderLoader*, 3> fragmentShaderLoader;
 	ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
 	Camera* camera;
@@ -52,6 +53,8 @@ private:
 	static float lastPositionX, lastPositionY;
 
 	CameraMovement cameraMovement;
+
+	Model* model;
 };
 
 #endif

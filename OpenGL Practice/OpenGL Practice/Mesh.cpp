@@ -11,7 +11,7 @@ Mesh::Mesh(vector<Vertex> vertices_, vector<unsigned int> indices_, vector<Textu
 	diffuseNumber = NULL;
 	specularNumber = NULL;
 
-	shaderProgram = new ShaderProgram();
+	SetupMesh();
 }
 
 void Mesh::SetupMesh()
@@ -31,7 +31,7 @@ void Mesh::SetupMesh()
 
 	/* The offsetof macro passes in a struct name as the first argument, and the variable name inside the struct for 
 	the second argument. */
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, meshPosition));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 	glEnableVertexAttribArray(0); // Position attribute location occurs at 0
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, meshNormal));
@@ -68,9 +68,7 @@ void Mesh::DrawMesh()
 			number = to_string(specularNumber++);
 		}
 
-		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
-
-		glUniform1f(glGetUniformLocation(shaderProgram->shaderProgram, ("material." + name + number).c_str()), i);
+		glUniform1f(glGetUniformLocation(ShaderProgram::shaderProgram, (name + number).c_str()), i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].textureID);
 	}
 

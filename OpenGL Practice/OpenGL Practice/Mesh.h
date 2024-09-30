@@ -1,5 +1,4 @@
 #pragma once
-#include "VertexShaderLoader.h"
 #include "ShaderProgram.h"
 #include <vector>
 
@@ -16,6 +15,7 @@ struct Texture
 {
 	unsigned int textureID;
 	string textureType;
+	string texturePath;
 };
 
 class Mesh
@@ -36,6 +36,4 @@ private:
 
 	// Create diffuse and specular textures number here to use the texture diffuse and specular uniforms in the shader
 	unsigned int diffuseNumber, specularNumber;
-
-	ShaderProgram* shaderProgram;
 };

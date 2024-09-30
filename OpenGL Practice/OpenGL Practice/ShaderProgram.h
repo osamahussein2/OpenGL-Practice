@@ -19,9 +19,11 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
-	void InitializeSecondTexture();
-	void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
-	void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
+	void UseShaderProgram();
+	void InitializeModeling(float aspect_ratio, float near_plane, float far_plane);
+	//void InitializeSecondTexture();
+	//void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
+	//void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
 	//void CreateDesertLighting();
 	//void CreateFactoryLighting();
 	//void CreateHorrorLighting();
@@ -29,7 +31,7 @@ public:
 
 	float visibilityTextureValue;
 
-	unsigned int shaderProgram;
+	static unsigned int shaderProgram;
 
 private:
 	std::array<VertexShaderLoader*, 2> vertexShaderLoader;
