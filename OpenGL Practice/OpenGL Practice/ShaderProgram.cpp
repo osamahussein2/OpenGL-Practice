@@ -187,6 +187,9 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 	// Set the texture image uniform
 	glUniform1i(glGetUniformLocation(shaderProgram, "textureImage"), 0);
 
+	glUniform1f(glGetUniformLocation(shaderProgram, "near"), near_plane);
+	glUniform1f(glGetUniformLocation(shaderProgram, "far"), far_plane);
+
 	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
 
 	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
