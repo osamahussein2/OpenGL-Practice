@@ -7,12 +7,16 @@ ShaderProgram::ShaderProgram()
 {
 	vertexShaderLoader = { 
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
-		new VertexShaderLoader("LightCubeVertexShader.glsl")
+		new VertexShaderLoader("LightCubeVertexShader.glsl"),
+		new VertexShaderLoader("ModelVertexShader.glsl"),
+		new VertexShaderLoader("DepthTestVertexShader.glsl")
 	};
 
 	fragmentShaderLoader = { 
 		new FragmentShaderLoader("LightingFragmentShader.glsl"), 
-		new FragmentShaderLoader("LightCubeFragmentShader.glsl")
+		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
+		new FragmentShaderLoader("ModelFragmentShader.glsl"),
+		new FragmentShaderLoader("DepthTestFragmentShader.glsl")
 	};
 
 	color = new Color();
@@ -63,6 +67,12 @@ ShaderProgram::~ShaderProgram()
 
 	glDeleteShader(vertexShaderLoader[1]->vertexShader);
 	glDeleteShader(fragmentShaderLoader[1]->fragmentShader);
+
+	glDeleteShader(vertexShaderLoader[2]->vertexShader);
+	glDeleteShader(fragmentShaderLoader[2]->fragmentShader);
+
+	glDeleteShader(vertexShaderLoader[3]->vertexShader);
+	glDeleteShader(fragmentShaderLoader[3]->fragmentShader);
 }
 
 void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
@@ -170,6 +180,45 @@ void ShaderProgram::InitializeModeling(float aspect_ratio, float near_plane, flo
 	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
 
 	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+}
+
+void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane)
+{
+	// Set the texture image uniform
+	glUniform1i(glGetUniformLocation(shaderProgram, "textureImage"), 0);
+
+	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
+
+	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+	viewMatrix = Camera::CameraLookAt();
+
+	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(-1.0f, 0.0f, -1.0f));
+
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(2.0f, 0.0f, 0.0f));
+
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+}
+
+void ShaderProgram::InitializeFloorDepthTesting()
+{
+	modelMatrix = glm::mat4(1.0f);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 // Render the second container texture in the window

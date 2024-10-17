@@ -12,14 +12,16 @@ Window::Window()
 	{ 
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
-		new VertexShaderLoader("ModelVertexShader.glsl")
+		new VertexShaderLoader("ModelVertexShader.glsl"),
+		new VertexShaderLoader("DepthTestVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
 	{
 		new FragmentShaderLoader("LightingFragmentShader.glsl"),
 		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
-		new FragmentShaderLoader("ModelFragmentShader.glsl")
+		new FragmentShaderLoader("ModelFragmentShader.glsl"),
+		new FragmentShaderLoader("DepthTestFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
@@ -78,8 +80,8 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 
 void Window::WindowStillRunning()
 {
-	shaderProgram->InitializeShaderProgram(vertexShaderLoader[2], fragmentShaderLoader[2]);
-	model = new Model("Models/Backpack/backpack.obj");
+	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[2], fragmentShaderLoader[2]);
+	//model = new Model("Models/Backpack/backpack.obj");
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -131,6 +133,30 @@ void Window::WindowStillRunning()
 		// Otherwise, the depth information of the previous frame stays in the buffer (and the cube won't render at all)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		/* OpenGL can make it possible to NOT write to the depth buffer by setting OpenGL's built in
+		depth mask to false using GL_FALSE, obviously (this only works when the depth testing in enabled) */
+		//glDepthMask(GL_FALSE);
+
+		/* glDepthFunc accepts several comparison operators like:
+		
+			GL_ALWAYS - The depth test always passes
+			GL_NEVER - The depth test never passes
+			GL_LESS - Passes if the fragment's depth value is less than the stored depth value
+			GL_EQUAL - Passes if the fragment's depth value is equal to the stored depth value
+			GL_LEQUAL - Passes if the fragemnt's depth value is less than or equal to the stored depth value
+			GL_GREATER - Passes if the fragment's depth value is greater than the stored depth value
+			GL_NOTEQUAL - Passes if the fragment's depth value is not equal to the stored depth value
+			GL_GEQUAL - Passes if the fragment's depth value is greater than or equal to the stored depth value
+
+		*/
+
+		/* OpenGL also makes it possible to change the comparison operators it will use for depth testing. This means
+		we can control when OpenGL should pass or discard fragments and when to update the depth buffer */
+
+		/* By default, the depth function "GL_LESS" is used that discards all the fragments that have a depth value
+		higher than or equal to the current depth buffer's value */
+		glDepthFunc(GL_LESS);
+
 		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
 		//vertexShaderLoader[0]->InitializeVertexObjects();
 
@@ -146,13 +172,22 @@ void Window::WindowStillRunning()
 
 		//shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
 
+		shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
+		vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
+
 		shaderProgram->UseShaderProgram();
-		shaderProgram->InitializeModeling(800.0f / 600.0f, 0.1f, 100.0f);
-		model->DrawModel();
+		shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
+
+		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
+
+		shaderProgram->InitializeFloorDepthTesting();
+		//model->DrawModel();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
 	}
+
+	vertexShaderLoader[3]->~VertexShaderLoader();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();

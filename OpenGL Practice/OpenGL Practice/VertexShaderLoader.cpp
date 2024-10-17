@@ -31,11 +31,10 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 
 	vShaderCode = vertexShaderCode.c_str();
 
-	for (int verticesArray = 0; verticesArray < vertices.size(); verticesArray++)
+	vertices = 
 	{
-		// Initialize all the vertices elements to 0
-		vertices[verticesArray] = 0;
-	}
+		NULL
+	};
 
 	VAO = NULL;
 	VBO = NULL;
@@ -52,7 +51,72 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 	height = 0;
 	nrChannels = 0;
 
+	lightVAO = NULL;
+
+	cubeTexture = NULL;
+	floorTexture = NULL;
+
+	cubeVAO = NULL;
+	cubeVBO = NULL;
+
+	planeVAO = NULL;
+	planeVBO = NULL;
+
+	cubeVertices =
+	{
+		NULL
+	};
+
+	planeVertices =
+	{
+		NULL
+	};
+
 	//shaderProg = ShaderProgram();
+}
+
+VertexShaderLoader::~VertexShaderLoader()
+{
+	// Deallocate all the VAOs and VBOs
+	glDeleteVertexArrays(1, &cubeVAO);
+	glDeleteVertexArrays(1, &planeVAO);
+	glDeleteBuffers(1, &cubeVBO);
+	glDeleteBuffers(1, &planeVBO);
+
+	vertices =
+	{
+		NULL
+	};
+
+	VAO = NULL;
+	VBO = NULL;
+
+	vertexShader = NULL;
+
+	data = nullptr;
+
+	diffuseMapTexture = NULL;
+	specularMapTexture = NULL;
+	emissionMapTexture = NULL;
+
+	width = 0;
+	height = 0;
+	nrChannels = 0;
+
+	lightVAO = NULL;
+
+	cubeTexture = NULL;
+	floorTexture = NULL;
+
+	cubeVertices =
+	{
+		NULL
+	};
+
+	planeVertices =
+	{
+		NULL
+	};
 }
 
 void VertexShaderLoader::InitializeVertexShaderLoader()
@@ -401,6 +465,200 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	glBindVertexArray(VAO);*/
 	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+}
+
+void VertexShaderLoader::InitializeCubeDepthTestingVertices()
+{
+	cubeVertices = 
+	{
+		// position           // texture coord
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+	};
+
+	// Generate a vertex attribute object ID
+	glGenVertexArrays(1, &cubeVAO);
+
+	// Generate the buffer ID here
+	glGenBuffers(1, &cubeVBO); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
+
+	// This binds the buffers more than once at the same time as long as they're different buffer types
+	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+
+	// Copies the previously defined vertex data into the buffer's memory
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(cubeVAO);
+
+	// Set the position attribute's location to 0 like our vertex shader GLSL file
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+
+	glEnableVertexAttribArray(0); // Position attribute location occurs at 0
+
+	// Set the texture coordinates attribute's location to 1 like our vertex shader GLSL file
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+
+	glEnableVertexAttribArray(1); // Position attribute location occurs at 1
+
+	// Generate the texture in OpenGL first before binding it
+	glGenTextures(1, &cubeTexture);
+
+	// Then, we need to bind the textures to configure the currently bound texture on subsequent texture commands
+	glBindTexture(GL_TEXTURE_2D, cubeTexture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Flip the image vertically
+	stbi_set_flip_vertically_on_load(true);
+
+	data = stbi_load("Textures/marble.jpg", &width, &height, &nrChannels, 0);
+
+	// After the texture ahs been binded, we can generate textures using the previously loaded image data
+	// Textures are generated with glTexImage2D
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	else
+	{
+		std::cout << "This texture has failed to load!" << std::endl;
+	}
+
+	// Free the image memory after generating the texture and its corresponding mipmaps
+	stbi_image_free(data);
+
+	// Bind the diffuse map texture here
+	glActiveTexture(GL_TEXTURE0); // Active the first texture unit first before binding it
+	glBindTexture(GL_TEXTURE_2D, cubeTexture);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(cubeVAO);
+}
+
+void VertexShaderLoader::InitializeFloorDepthTestingVertices()
+{
+	planeVertices = 
+	{
+		// position           // texture coord
+		 5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
+		-5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
+		-5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
+
+		 5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
+		-5.0f, -0.5f, -5.0f,  0.0f, 2.0f,
+		 5.0f, -0.5f, -5.0f,  2.0f, 2.0f
+	};
+
+	// Generate a vertex attribute object ID
+	glGenVertexArrays(1, &planeVAO);
+
+	// Generate the buffer ID here
+	glGenBuffers(1, &planeVBO); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
+
+	// This binds the buffers more than once at the same time as long as they're different buffer types
+	glBindBuffer(GL_ARRAY_BUFFER, planeVBO);
+
+	// Copies the previously defined vertex data into the buffer's memory
+	glBufferData(GL_ARRAY_BUFFER, sizeof(planeVertices), &planeVertices, GL_STATIC_DRAW);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(planeVAO);
+
+	// Set the position attribute's location to 0 like our vertex shader GLSL file
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+
+	glEnableVertexAttribArray(0); // Position attribute location occurs at 0
+
+	// Set the texture coordinates attribute's location to 1 like our vertex shader GLSL file
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+
+	glEnableVertexAttribArray(1); // Position attribute location occurs at 1
+
+	// Generate the specular texture in OpenGL first before binding it
+	glGenTextures(1, &floorTexture);
+
+	glBindTexture(GL_TEXTURE_2D, floorTexture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	// Flip the image vertically
+	stbi_set_flip_vertically_on_load(true);
+
+	// Load the specular texture image of container2
+	data = stbi_load("Textures/metal.png", &width, &height, &nrChannels, 0);
+
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	else
+	{
+		std::cout << "This texture has failed to load!" << std::endl;
+	}
+
+	// Free the image memory after generating the texture and its corresponding mipmaps
+	stbi_image_free(data);
+
+	/* Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
+	the fragment shader's sampler */
+	// Bind the specular map texture here
+	glActiveTexture(GL_TEXTURE1); // Active next texture unit to render the specular map texture
+	glBindTexture(GL_TEXTURE_2D, floorTexture);
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(planeVAO);
 }
 
 /*void VertexShaderLoader::InitializeLightColorVertexObjects()

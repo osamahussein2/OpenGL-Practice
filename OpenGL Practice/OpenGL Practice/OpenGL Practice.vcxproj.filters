@@ -90,5 +90,7 @@
     <None Include="LightingFragmentShader.glsl" />
     <None Include="ModelVertexShader.glsl" />
     <None Include="ModelFragmentShader.glsl" />
+    <None Include="DepthTestVertexShader.glsl" />
+    <None Include="DepthTestFragmentShader.glsl" />
   </ItemGroup>
 </Project>

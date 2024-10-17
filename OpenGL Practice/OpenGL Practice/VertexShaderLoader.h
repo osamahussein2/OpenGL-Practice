@@ -19,14 +19,21 @@ class VertexShaderLoader
 {
 public:
 	VertexShaderLoader(const char* vertexShaderPath_);
+	~VertexShaderLoader();
 	void InitializeVertexShaderLoader();
 	void InitializeVertexObjects();
+	void InitializeCubeDepthTestingVertices();
+	void InitializeFloorDepthTestingVertices();
 	//void InitializeLightColorVertexObjects();
 
 	unsigned int vertexShader;
 
 private:
 	unsigned int VAO, VBO, lightVAO;
+
+	unsigned int cubeVAO, cubeVBO;
+	unsigned int planeVAO, planeVBO;
+
 	//unsigned int EBO;
 	std::string vertexShaderCode;
 	std::ifstream vertexShaderFile;
@@ -39,6 +46,11 @@ private:
 	// Unsigned variable types can only return positive values (or zero)
 	// Signed variable types can return positive and negative values
 	unsigned int diffuseMapTexture, specularMapTexture, emissionMapTexture;
+
+	unsigned int cubeTexture, floorTexture;
+
+	std::array<float, 180> cubeVertices;
+	std::array<float, 30> planeVertices;
 
 	std::array<float, 288> vertices;
 	//std::array<unsigned int, 6> indices;

@@ -21,6 +21,8 @@ public:
 	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
 	void UseShaderProgram();
 	void InitializeModeling(float aspect_ratio, float near_plane, float far_plane);
+	void InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane);
+	void InitializeFloorDepthTesting();
 	//void InitializeSecondTexture();
 	//void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
 	//void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
@@ -34,8 +36,8 @@ public:
 	static unsigned int shaderProgram;
 
 private:
-	std::array<VertexShaderLoader*, 2> vertexShaderLoader;
-	std::array<FragmentShaderLoader*, 2> fragmentShaderLoader;
+	std::array<VertexShaderLoader*, 4> vertexShaderLoader;
+	std::array<FragmentShaderLoader*, 4> fragmentShaderLoader;
 
 	Color* color;
 	Lighting* lighting;
