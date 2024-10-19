@@ -13,7 +13,8 @@ Window::Window()
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
 		new VertexShaderLoader("ModelVertexShader.glsl"),
-		new VertexShaderLoader("DepthTestVertexShader.glsl")
+		new VertexShaderLoader("DepthTestVertexShader.glsl"),
+		new VertexShaderLoader("ColorVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
@@ -21,7 +22,8 @@ Window::Window()
 		new FragmentShaderLoader("LightingFragmentShader.glsl"),
 		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
 		new FragmentShaderLoader("ModelFragmentShader.glsl"),
-		new FragmentShaderLoader("DepthTestFragmentShader.glsl")
+		new FragmentShaderLoader("DepthTestFragmentShader.glsl"),
+		new FragmentShaderLoader("ColorFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
@@ -116,6 +118,19 @@ void Window::WindowStillRunning()
 		other fragment it is discarded, otherwise it's overwritten. This process is called depth testing. */
 		glEnable(GL_DEPTH_TEST);
 
+		/* OpenGL also makes it possible to change the comparison operators it will use for depth testing. This means
+		we can control when OpenGL should pass or discard fragments and when to update the depth buffer */
+
+		/* By default, the depth function "GL_LESS" is used that discards all the fragments that have a depth value
+		higher than or equal to the current depth buffer's value */
+		glDepthFunc(GL_LESS);
+
+		/* We can discard certain fragments of other drawn objects in the scene by using the stencil buffer. By 
+		enabling stencil testing, all rendering calls will influence the stencil buffer one way or another */
+		glEnable(GL_STENCIL_TEST);
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
 		// Add our own color to the window
 		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 
@@ -131,7 +146,7 @@ void Window::WindowStillRunning()
 		// If I get rid of this, my window will be black because then we didn't clear any color buffer bit first before rendering
 		// Since we're also using depth buffer, we need to clear the depth buffer before each render iteration
 		// Otherwise, the depth information of the previous frame stays in the buffer (and the cube won't render at all)
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		/* OpenGL can make it possible to NOT write to the depth buffer by setting OpenGL's built in
 		depth mask to false using GL_FALSE, obviously (this only works when the depth testing in enabled) */
@@ -150,12 +165,50 @@ void Window::WindowStillRunning()
 
 		*/
 
-		/* OpenGL also makes it possible to change the comparison operators it will use for depth testing. This means
-		we can control when OpenGL should pass or discard fragments and when to update the depth buffer */
+		/* glStencilMask allows us to set a bitmask that is ANDed with the stencil value about to be written to the
+		buffer. By default this is set to a bitmask of all 1s not affecting the output, but if we set it to 0x00
+		all the stencil values written to the buffer end up as 0s */
+		//glStencilMask(0xFF);
+		//glStencilMask(0x00);
 
-		/* By default, the depth function "GL_LESS" is used that discards all the fragments that have a depth value
-		higher than or equal to the current depth buffer's value */
-		glDepthFunc(GL_LESS);
+		/* glStencilFunc passes in 3 parameters:
+			
+			func - sets the stencil test function to determine whether the fragment passes or is discarded. The test
+			applies to the stored stencil value and the glStencilFunc's ref value. Possible options are similar to
+			the depth buffer's func.
+
+			ref - specifies the reference value for the stencil test. The stencil's buffer content is compared to this
+			value
+
+			mask - specifies a mask that is ANDed with both reference value and the stored stencil value before the
+			test compares them, which initializes to be 1 by default
+
+		*/
+
+		/* Whenever the stencil value of a fragment is equal to 1, the fragment passes the test and is drawn, or else
+		it will be discarded */
+		//glStencilFunc(GL_EQUAL, 1, 0xFF);
+
+		/* glStencilOp passes in 3 parameters:
+			
+			sfail - if the stencil test fails, what action should it take?
+			defail - if the stencil test passes but the stencil test fails, what action should it take?
+			depass - if both the stencil and depth tests pass, what action should it take?
+
+		*/
+
+		/* For each of the glStencilOp parameters, we can pick any action we want:
+			
+			GL_KEEP - the currently stored stencil value is kept
+			GL_ZERO - the stencil value is set to 0
+			GL_REPLACE - the stencil value is replaced with the reference value set with glStencilFunc
+			GL_INCR - the stencil value is increased by 1 if it's lower than maximum value
+			GL_INCR_WRAP - Same as GL_INCR, except wraps it back to 0 as soon as the maximum value is exceeded
+			GL_DECR - the stencil value is decreased by 1 if it's higher than maximum value
+			GL_DECR_WRAP - Same as GL_DECR, except wraps it back to the maximum value if it ends up lower than 0
+			GL_INVERT - Bitwise inverts the current stencil buffer value
+
+		*/
 
 		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[0], fragmentShaderLoader[0]);
 		//vertexShaderLoader[0]->InitializeVertexObjects();
@@ -172,15 +225,36 @@ void Window::WindowStillRunning()
 
 		//shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
 
+		// Use the depth testing shader first before we use the border color shader
 		shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
-		vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
 
-		shaderProgram->UseShaderProgram();
+		// Good thing I have a static variable of my very own shader program variable
+		glUseProgram(ShaderProgram::shaderProgram);
+
+		glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		glStencilMask(0xFF);
+
+		vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
 		shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
 
-		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
+		glStencilMask(0x00);
 
+		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
 		shaderProgram->InitializeFloorDepthTesting();
+
+		// Now we can use the border color shader
+		shaderProgram->InitializeShaderProgram(vertexShaderLoader[4], fragmentShaderLoader[4]);
+		glUseProgram(ShaderProgram::shaderProgram);
+
+		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+		glStencilMask(0x00);
+		glDisable(GL_DEPTH_TEST);
+
+		// Use the border color vertex shader to initialize the cube's vertices
+		vertexShaderLoader[4]->InitializeCubeDepthTestingVertices();
+
+		// Then use the border color shader to render the border color on the scaled cube
+		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f);
 		//model->DrawModel();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
@@ -188,6 +262,7 @@ void Window::WindowStillRunning()
 	}
 
 	vertexShaderLoader[3]->~VertexShaderLoader();
+	vertexShaderLoader[4]->~VertexShaderLoader();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -344,7 +419,7 @@ void Window::ProcessInput(GLFWwindow* window)
 			// Move the camera away from the screen when S key is pressed
 			Camera::cameraPosition -= cameraMoveSpeed * Camera::cameraFront;
 		}
-		
+
 		// I managed to get the down y-axis movement working here but I commented it out for the sake of the tutorial
 		//Camera::cameraPosition -= cameraMoveSpeed * glm::normalize(glm::cross(Camera::cameraRight, Camera::cameraFront));
 	}

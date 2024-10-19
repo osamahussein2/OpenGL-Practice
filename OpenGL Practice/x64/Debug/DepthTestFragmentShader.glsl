@@ -21,10 +21,10 @@ float LinearDepthValue(float depth)
 
 void main()
 {
-	//fragColor = texture(textureImage, texCoords);
+	fragColor = texture(textureImage, texCoords);
 
 	// OpenGL's built in gl_FragCoord vector contains the depth value of that particular fragment
 	//fragColor = vec4(vec3(gl_FragCoord.z), 1.0);
 
-	fragColor = vec4(vec3(LinearDepthValue(gl_FragCoord.z) / far), 1.0);
+	//fragColor = vec4(vec3(LinearDepthValue(gl_FragCoord.z) / far), 1.0);
 }

@@ -16,21 +16,23 @@ int main()
 	// I don't need to make this window object a pointer because the constructor doesn't pass in anything
 	Window window;
 
-	std::array <VertexShaderLoader*, 4> vertexShaderLoader;
+	std::array <VertexShaderLoader*, 5> vertexShaderLoader;
 	vertexShaderLoader = { 
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
 		new VertexShaderLoader("ModelVertexShader.glsl"),
-		new VertexShaderLoader("DepthTestVertexShader.glsl")
+		new VertexShaderLoader("DepthTestVertexShader.glsl"),
+		new VertexShaderLoader("ColorVertexShader.glsl")
 	};
 
-	std::array <FragmentShaderLoader*, 4> fragmentShaderLoader;
+	std::array <FragmentShaderLoader*, 5> fragmentShaderLoader;
 
 	fragmentShaderLoader = {
 		new FragmentShaderLoader("LightingFragmentShader.glsl"),
 		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
 		new FragmentShaderLoader("ModelFragmentShader.glsl"),
-		new FragmentShaderLoader("DepthTestFragmentShader.glsl")
+		new FragmentShaderLoader("DepthTestFragmentShader.glsl"),
+		new FragmentShaderLoader("ColorFragmentShader.glsl")
 	};
 
 	// I don't need to make this shader program object a pointer because the constructor doesn't pass in anything
@@ -43,11 +45,13 @@ int main()
 	vertexShaderLoader[1]->InitializeVertexShaderLoader();
 	vertexShaderLoader[2]->InitializeVertexShaderLoader();
 	vertexShaderLoader[3]->InitializeVertexShaderLoader();
+	vertexShaderLoader[4]->InitializeVertexShaderLoader();
 
 	fragmentShaderLoader[0]->InitializeFragmentShaderLoader();
 	fragmentShaderLoader[1]->InitializeFragmentShaderLoader();
 	fragmentShaderLoader[2]->InitializeFragmentShaderLoader();
 	fragmentShaderLoader[3]->InitializeFragmentShaderLoader();
+	fragmentShaderLoader[4]->InitializeFragmentShaderLoader();
 
 	shaderProgram.~ShaderProgram();
 

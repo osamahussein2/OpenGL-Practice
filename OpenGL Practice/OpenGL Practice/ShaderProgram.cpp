@@ -9,14 +9,16 @@ ShaderProgram::ShaderProgram()
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
 		new VertexShaderLoader("ModelVertexShader.glsl"),
-		new VertexShaderLoader("DepthTestVertexShader.glsl")
+		new VertexShaderLoader("DepthTestVertexShader.glsl"),
+		new VertexShaderLoader("ColorVertexShader.glsl")
 	};
 
 	fragmentShaderLoader = { 
 		new FragmentShaderLoader("LightingFragmentShader.glsl"), 
 		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
 		new FragmentShaderLoader("ModelFragmentShader.glsl"),
-		new FragmentShaderLoader("DepthTestFragmentShader.glsl")
+		new FragmentShaderLoader("DepthTestFragmentShader.glsl"),
+		new FragmentShaderLoader("ColorFragmentShader.glsl")
 	};
 
 	color = new Color();
@@ -73,6 +75,9 @@ ShaderProgram::~ShaderProgram()
 
 	glDeleteShader(vertexShaderLoader[3]->vertexShader);
 	glDeleteShader(fragmentShaderLoader[3]->fragmentShader);
+
+	glDeleteShader(vertexShaderLoader[4]->vertexShader);
+	glDeleteShader(fragmentShaderLoader[4]->fragmentShader);
 }
 
 void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
@@ -156,11 +161,6 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, glm::value_ptr(translateMatrix));*/
 }
 
-void ShaderProgram::UseShaderProgram()
-{
-	glUseProgram(shaderProgram);
-}
-
 void ShaderProgram::InitializeModeling(float aspect_ratio, float near_plane, float far_plane)
 {
 	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
@@ -186,7 +186,7 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 {
 	// Set the texture image uniform
 	glUniform1i(glGetUniformLocation(shaderProgram, "textureImage"), 0);
-
+	
 	glUniform1f(glGetUniformLocation(shaderProgram, "near"), near_plane);
 	glUniform1f(glGetUniformLocation(shaderProgram, "far"), far_plane);
 
@@ -211,6 +211,48 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 
 	modelMatrix = glm::mat4(1.0f);
 	modelMatrix = glm::translate(modelMatrix, glm::vec3(2.0f, 0.0f, 0.0f));
+
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+}
+
+void ShaderProgram::InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane)
+{
+	glUniform1i(glGetUniformLocation(shaderProgram, "textureImage"), 0);
+
+	glUniform1f(glGetUniformLocation(shaderProgram, "near"), near_plane);
+	glUniform1f(glGetUniformLocation(shaderProgram, "far"), far_plane);
+
+	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
+
+	projectionMatrixLocation = glGetUniformLocation(shaderProgram, "projectionMatrix");
+	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+	viewMatrix = Camera::CameraLookAt();
+
+	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
+	glUniform1f(glGetUniformLocation(shaderProgram, "redValue"), 0.04f);
+	glUniform1f(glGetUniformLocation(shaderProgram, "greenValue"), 0.28f);
+	glUniform1f(glGetUniformLocation(shaderProgram, "blueValue"), 0.26f);
+	glUniform1f(glGetUniformLocation(shaderProgram, "alphaValue"), 1.0f);
+
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(-1.0f, 0.0f, -1.0f));
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(1.1f, 1.1f, 1.1f));
+
+	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	modelMatrix = glm::mat4(1.0f);
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(2.0f, 0.0f, 0.0f));
+	modelMatrix = glm::scale(modelMatrix, glm::vec3(1.1f, 1.1f, 1.1f));
 
 	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
 

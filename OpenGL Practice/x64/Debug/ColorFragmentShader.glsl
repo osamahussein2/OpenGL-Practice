@@ -2,10 +2,13 @@
 
 out vec4 fragColor;
 
-uniform vec3 objectColor;
-uniform vec3 lightColor;
+uniform float redValue;
+uniform float greenValue;
+uniform float blueValue;
+uniform float alphaValue;
 
 void main()
 {
-	fragColor = vec4(lightColor * objectColor, 1.0);
+	// Hardcode a border color
+	fragColor = vec4(redValue, greenValue, blueValue, alphaValue);
 }

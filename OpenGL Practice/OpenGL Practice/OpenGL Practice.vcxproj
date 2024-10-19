@@ -160,6 +160,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ColorFragmentShader.glsl" />
+    <None Include="ColorVertexShader.glsl" />
     <None Include="DepthTestFragmentShader.glsl" />
     <None Include="DepthTestVertexShader.glsl" />
     <None Include="LightingFragmentShader.glsl" />
