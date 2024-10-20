@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Blending.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Blending.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Blending.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Blending.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Blending.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -124,22 +124,10 @@
               "RelativeDocumentMoniker": "OpenGL Practice\\Blending.cpp",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Blending.cpp",
               "RelativeToolTip": "OpenGL Practice\\Blending.cpp",
-              "ViewState": "AQIAAEAAAAAAAAAAAAAAAE4AAABbAAAA",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAAAKEAAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-20T12:44:34.093Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Camera.h",
-              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.h",
-              "RelativeDocumentMoniker": "OpenGL Practice\\Camera.h",
-              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.h",
-              "RelativeToolTip": "OpenGL Practice\\Camera.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-08-26T12:37:10.72Z"
             },
             {
               "$type": "Document",
@@ -167,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Window.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Window.h",
@@ -179,40 +167,51 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Blending.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Blending.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Blending.h",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Blending.h",
               "RelativeToolTip": "OpenGL Practice\\Blending.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAWAAAA",
+              "ViewState": "AQIAABcAAAAAAAAAAAAAACAAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-10-20T12:44:25.271Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Window.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Window.cpp",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.cpp",
               "RelativeToolTip": "OpenGL Practice\\Window.cpp",
-              "ViewState": "AQIAAOcAAAAAAAAAAAAAAPgAAAAlAAAA",
+              "ViewState": "AQIAABcBAAAAAAAAAAAAACgBAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-07T21:51:22.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-07T21:51:22.216Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "DepthTestFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\DepthTestFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\DepthTestFragmentShader.glsl",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\DepthTestFragmentShader.glsl",
               "RelativeToolTip": "OpenGL Practice\\DepthTestFragmentShader.glsl",
-              "ViewState": "AQIAABgAAAAAAAAAAAAAACcAAABQAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-10-20T16:24:10.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Camera.h",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.h",
+              "RelativeDocumentMoniker": "OpenGL Practice\\Camera.h",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.h",
+              "RelativeToolTip": "OpenGL Practice\\Camera.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-08-26T12:37:10.72Z"
             },
             {
               "$type": "Document",

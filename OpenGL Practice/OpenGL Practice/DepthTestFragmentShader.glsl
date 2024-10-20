@@ -32,10 +32,12 @@ void main()
 	vec4 textureColor = texture(textureImage, texCoords);
 
 	// If the alpha channel of the fragment is less than 0.1, discard it as if it's never been processed
-	if (textureColor.a < 0.1)
+	// If we enable binding, there's no need to discard fragments (this conditional statement can be commented out)
+
+	/*if (textureColor.a < 0.1)
 	{
 		discard;
-	}
+	}*/
 
 	// Use the newly created texture color vector and make it equal to the fragment color
 	fragColor = textureColor;

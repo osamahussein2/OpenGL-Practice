@@ -11,8 +11,10 @@
 #include "stb_image.h"
 
 #include <vector>
+#include <map>
 
 #include "ShaderProgram.h"
+#include "Camera.h"
 
 using namespace std;
 using namespace glm;
@@ -24,14 +26,16 @@ public:
 	~Blending();
 
 	void SetBlending();
-	void UseShaderProgramForBlending();
+	void IncludeGrassBlending();
+	void IncludeTransparentWindowBlending();
 private:
 	vector<vec3> vegetation;
+	vector<vec3> windows;
 
-	unsigned int vegetationVAO, vegetationVBO;
-	unsigned int vegetationTexture;
+	unsigned int transparentVAO, transparentVBO;
+	unsigned int transparentTexture;
 
-	unsigned char* vegetationData;
+	unsigned char* transparentData;
 
 	int width, height, nrChannels;
 

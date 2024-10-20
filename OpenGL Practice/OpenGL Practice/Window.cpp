@@ -129,9 +129,9 @@ void Window::WindowStillRunning()
 
 		/* We can discard certain fragments of other drawn objects in the scene by using the stencil buffer. By 
 		enabling stencil testing, all rendering calls will influence the stencil buffer one way or another */
-		glEnable(GL_STENCIL_TEST);
+		/*glEnable(GL_STENCIL_TEST);
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);*/
 
 		// Add our own color to the window
 		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
@@ -227,19 +227,61 @@ void Window::WindowStillRunning()
 
 		//shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
 
+		// To render images with different levels of transparency, enable OpenGL blending
+		glEnable(GL_BLEND);
+
+		// The glBlendFunc function passes in 2 parameters that set the option for the source and destination factor
+
+		/* OpenGL has multiple blending options including:
+			
+			GL_ZERO - Factor is equal to 0
+			GL_ONE - Factor is equal to 1
+			GL_SRC_COLOR - Factor is equal to the source color vector (Cs)
+			GL_ONE_MINUS_SRC_COLOR - Factor is equal to 1 minus the source color vector (1 - Cs)
+			GL_DST_COLOR - Factor is equal to the destination color vector (Cd)
+			GL_ONE_MINUS_DST_COLOR - Factor is equal to 1 minus the destination color vector (1 - Cd)
+			GL_SRC_ALPHA - Factor is equal to the alpha component of the source color vector (Cs)
+			GL_ONE_MINUS_SRC_ALPHA - Factor is equal to 1 minus alpha of the source color vector (1 - Cs)
+			GL_DST_ALPHA - Factor is equal to the alpha component of the destination color vector (Cd)
+			GL_ONE_MINUS_DST_ALPHA - Factor is equal to 1 minus alpha of the destination color vector (1 - Cd)
+			GL_CONSTANT_COLOR - Factor is equal to the constant color vector (Cc)
+			GL_ONE_MINUS_CONSTANT_COLOR - Factor is equal to 1 minus the constant color vector (1 - Cc)
+			GL_CONSTANT_ALPHA - Factor is equal to the alpha component of the constant color vector (Cca)
+			GL_ONE_MINUS_CONSTANT_ALPHA - Factor is equal to 1 minus alpha of the constant color vector (1 - Cca)
+
+		*/
+
+		// Take the alpha component of the source color vector for the source factor
+		// Then take 1 - alpha of the same color (source) vector for the destination factor
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		/* This function sets the RGB components, as I set it above but only lets the resulting alpha component be
+		influenced by the source's alpha value */
+		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+		/* glBlendEquation(GLenum mode) has 5 possible options that can be passed in inside the GLenum parameter:
+			
+			GL_FUNC_ADD - the default, adds both colors to each other (Cr = Src + Dst)
+			GL_FUNC_SUBTRACT - subtracts both colors from each other (Cr = Src - Dst)
+			GL_FUNC_REVERSE_SUBTRACT - subtracts both colors, but reverses order (Cr = Dst - Src)
+			GL_MIN - takes the component-wise minimum of both colors (Cr = min(Dst, Src))
+			GL_MAX - takes the component-wise maximum of both colors (Cr = max(Dst, Src))
+
+		*/
+
 		// Use the depth testing shader first before we use the border color shader
 		shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
 
 		// Good thing I have a static variable of my very own shader program variable
 		glUseProgram(ShaderProgram::shaderProgram);
 
-		glStencilFunc(GL_ALWAYS, 1, 0xFF);
-		glStencilMask(0xFF);
+		//glStencilFunc(GL_ALWAYS, 1, 0xFF);
+		//glStencilMask(0xFF);
 
 		vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
 		shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
 
-		glStencilMask(0x00);
+		//glStencilMask(0x00);
 
 		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
 		shaderProgram->InitializeFloorDepthTesting();
@@ -247,8 +289,12 @@ void Window::WindowStillRunning()
 		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
 
 		// Use the grass blend texture here
+		/*blendTexture->SetBlending();
+		blendTexture->IncludeGrassBlending();*/
+
+		// Use the transparent window blend texture here
 		blendTexture->SetBlending();
-		blendTexture->UseShaderProgramForBlending();
+		blendTexture->IncludeTransparentWindowBlending();
 
 		// Now we can use the border color shader
 		/*shaderProgram->InitializeShaderProgram(vertexShaderLoader[4], fragmentShaderLoader[4]);
