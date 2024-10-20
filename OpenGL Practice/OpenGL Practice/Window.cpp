@@ -47,6 +47,8 @@ Window::Window()
 	lighting = new Lighting();
 
 	model = nullptr;
+
+	blendTexture = new Blending();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -242,8 +244,14 @@ void Window::WindowStillRunning()
 		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
 		shaderProgram->InitializeFloorDepthTesting();
 
+		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
+
+		// Use the grass blend texture here
+		blendTexture->SetBlending();
+		blendTexture->UseShaderProgramForBlending();
+
 		// Now we can use the border color shader
-		shaderProgram->InitializeShaderProgram(vertexShaderLoader[4], fragmentShaderLoader[4]);
+		/*shaderProgram->InitializeShaderProgram(vertexShaderLoader[4], fragmentShaderLoader[4]);
 		glUseProgram(ShaderProgram::shaderProgram);
 
 		glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
@@ -254,7 +262,7 @@ void Window::WindowStillRunning()
 		vertexShaderLoader[4]->InitializeCubeDepthTestingVertices();
 
 		// Then use the border color shader to render the border color on the scaled cube
-		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f);
+		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f); */
 		//model->DrawModel();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
@@ -263,6 +271,8 @@ void Window::WindowStillRunning()
 
 	vertexShaderLoader[3]->~VertexShaderLoader();
 	vertexShaderLoader[4]->~VertexShaderLoader();
+
+	blendTexture->~Blending();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();

@@ -21,10 +21,22 @@ float LinearDepthValue(float depth)
 
 void main()
 {
-	fragColor = texture(textureImage, texCoords);
+	//fragColor = texture(textureImage, texCoords);
 
 	// OpenGL's built in gl_FragCoord vector contains the depth value of that particular fragment
 	//fragColor = vec4(vec3(gl_FragCoord.z), 1.0);
 
 	//fragColor = vec4(vec3(LinearDepthValue(gl_FragCoord.z) / far), 1.0);
+
+	// Create a local vec4 for the texture color to use it inside of the conditional statement
+	vec4 textureColor = texture(textureImage, texCoords);
+
+	// If the alpha channel of the fragment is less than 0.1, discard it as if it's never been processed
+	if (textureColor.a < 0.1)
+	{
+		discard;
+	}
+
+	// Use the newly created texture color vector and make it equal to the fragment color
+	fragColor = textureColor;
 }

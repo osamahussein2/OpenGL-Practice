@@ -10,6 +10,9 @@
 #include "Color.h"
 #include "Lighting.h"
 #include "Model.h"
+#include "Blending.h"
+
+class Blending;
 
 class Window
 {
@@ -55,6 +58,8 @@ private:
 	CameraMovement cameraMovement;
 
 	Model* model;
+
+	Blending* blendTexture;
 };
 
 #endif
