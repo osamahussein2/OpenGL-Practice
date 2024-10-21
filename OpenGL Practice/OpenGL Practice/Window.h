@@ -11,6 +11,7 @@
 #include "Lighting.h"
 #include "Model.h"
 #include "Blending.h"
+#include "FaceCulling.h"
 
 class Blending;
 
@@ -60,6 +61,7 @@ private:
 	Model* model;
 
 	Blending* blendTexture;
+	FaceCulling* faceCulling;
 };
 
 #endif

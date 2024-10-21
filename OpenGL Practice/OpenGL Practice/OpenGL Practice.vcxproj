@@ -139,6 +139,7 @@
     <ClCompile Include="Blending.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="FaceCulling.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Blending.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="FaceCulling.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="Lighting.h" />
     <ClInclude Include="Mesh.h" />

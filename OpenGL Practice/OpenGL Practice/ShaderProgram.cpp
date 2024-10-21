@@ -201,7 +201,7 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 
 	modelMatrix = glm::mat4(1.0f);
-	modelMatrix = glm::translate(modelMatrix, glm::vec3(-1.0f, 0.0f, -1.0f));
+	modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
 
 	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
 
@@ -209,12 +209,12 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
-	modelMatrix = glm::mat4(1.0f);
+	/*modelMatrix = glm::mat4(1.0f);
 	modelMatrix = glm::translate(modelMatrix, glm::vec3(2.0f, 0.0f, 0.0f));
 
 	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
 
-	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));*/
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 

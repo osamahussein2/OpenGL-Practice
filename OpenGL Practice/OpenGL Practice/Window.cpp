@@ -49,6 +49,7 @@ Window::Window()
 	model = nullptr;
 
 	blendTexture = new Blending();
+	faceCulling = new FaceCulling();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -278,23 +279,25 @@ void Window::WindowStillRunning()
 		//glStencilFunc(GL_ALWAYS, 1, 0xFF);
 		//glStencilMask(0xFF);
 
-		vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
+		//vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
+
+		faceCulling->SetFaceCullingVertices();
 		shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
 
 		//glStencilMask(0x00);
 
-		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
-		shaderProgram->InitializeFloorDepthTesting();
+		//vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
+		//shaderProgram->InitializeFloorDepthTesting();
 
-		vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
+		//vertexShaderLoader[3]->InitializeFloorDepthTestingVertices();
 
 		// Use the grass blend texture here
 		/*blendTexture->SetBlending();
 		blendTexture->IncludeGrassBlending();*/
 
 		// Use the transparent window blend texture here
-		blendTexture->SetBlending();
-		blendTexture->IncludeTransparentWindowBlending();
+		//blendTexture->SetBlending();
+		//blendTexture->IncludeTransparentWindowBlending();
 
 		// Now we can use the border color shader
 		/*shaderProgram->InitializeShaderProgram(vertexShaderLoader[4], fragmentShaderLoader[4]);
@@ -318,7 +321,8 @@ void Window::WindowStillRunning()
 	vertexShaderLoader[3]->~VertexShaderLoader();
 	vertexShaderLoader[4]->~VertexShaderLoader();
 
-	blendTexture->~Blending();
+	//blendTexture->~Blending();
+	faceCulling->~FaceCulling();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
