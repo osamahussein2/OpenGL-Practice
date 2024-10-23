@@ -112,5 +112,13 @@
     <None Include="DepthTestFragmentShader.glsl" />
     <None Include="ColorVertexShader.glsl" />
     <None Include="ColorFragmentShader.glsl" />
+    <None Include="TextureVertexShader.glsl" />
+    <None Include="TextureFragmentShader.glsl" />
+    <None Include="InversionVertexShader.glsl" />
+    <None Include="InversionFragmentShader.glsl" />
+    <None Include="GreyscaleVertexShader.glsl" />
+    <None Include="GreyscaleFragmentShader.glsl" />
+    <None Include="KernelVertexShader.glsl" />
+    <None Include="KernelFragmentShader.glsl" />
   </ItemGroup>
 </Project>

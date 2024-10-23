@@ -170,6 +170,12 @@
     <None Include="ColorVertexShader.glsl" />
     <None Include="DepthTestFragmentShader.glsl" />
     <None Include="DepthTestVertexShader.glsl" />
+    <None Include="GreyscaleFragmentShader.glsl" />
+    <None Include="GreyscaleVertexShader.glsl" />
+    <None Include="InversionFragmentShader.glsl" />
+    <None Include="InversionVertexShader.glsl" />
+    <None Include="KernelFragmentShader.glsl" />
+    <None Include="KernelVertexShader.glsl" />
     <None Include="LightingFragmentShader.glsl" />
     <None Include="LightingVertexShader.glsl" />
     <None Include="FragmentShader.glsl" />
@@ -177,6 +183,8 @@
     <None Include="LightCubeVertexShader.glsl" />
     <None Include="ModelFragmentShader.glsl" />
     <None Include="ModelVertexShader.glsl" />
+    <None Include="TextureFragmentShader.glsl" />
+    <None Include="TextureVertexShader.glsl" />
     <None Include="VertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -14,7 +14,11 @@ Window::Window()
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
 		new VertexShaderLoader("ModelVertexShader.glsl"),
 		new VertexShaderLoader("DepthTestVertexShader.glsl"),
-		new VertexShaderLoader("ColorVertexShader.glsl")
+		new VertexShaderLoader("ColorVertexShader.glsl"),
+		new VertexShaderLoader("TextureVertexShader.glsl"),
+		new VertexShaderLoader("InversionVertexShader.glsl"),
+		new VertexShaderLoader("GreyscaleVertexShader.glsl"),
+		new VertexShaderLoader("KernelVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
@@ -23,7 +27,11 @@ Window::Window()
 		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
 		new FragmentShaderLoader("ModelFragmentShader.glsl"),
 		new FragmentShaderLoader("DepthTestFragmentShader.glsl"),
-		new FragmentShaderLoader("ColorFragmentShader.glsl")
+		new FragmentShaderLoader("ColorFragmentShader.glsl"),
+		new FragmentShaderLoader("TextureFragmentShader.glsl"),
+		new FragmentShaderLoader("InversionFragmentShader.glsl"),
+		new FragmentShaderLoader("GreyscaleFragmentShader.glsl"),
+		new FragmentShaderLoader("KernelFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
@@ -518,14 +526,23 @@ void Window::ProcessInput(GLFWwindow* window)
 // I created a function to store all the frame buffer methods in the FrameBuffer class and execute it during runtime
 void Window::IncludeFrameBufferMethods()
 {
-	// Use the depth testing shader
-	shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
+	// Use the texture shaders
+	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
+
+	// Use the inversion texture shaders
+	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[6], fragmentShaderLoader[6]);
+
+	// Use the greyscale texturing shaders
+	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[7], fragmentShaderLoader[7]);
+
+	// Use the kernel texturing shaders
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[8], fragmentShaderLoader[8]);
 
 	framebuffer->InitializeCubeVertices();
 	framebuffer->InitializePlaneVertices();
 	framebuffer->InitializeQuadVertices();
 
-	framebuffer->AddFrameBuffer();
+	//framebuffer->AddFrameBuffer(); // needs to be commented for inversion texturing to work
 
 	framebuffer->RenderScene();
 
@@ -538,6 +555,6 @@ void Window::IncludeFrameBufferMethods()
 	framebuffer->InitializePlaneTextures();
 	shaderProgram->InitializeFloorDepthTesting();
 
-	framebuffer->BindToDefaultFrameBuffer();
-	framebuffer->InitializeQuadTextures();
+	//framebuffer->BindToDefaultFrameBuffer(); // needs to be commented for inversion texturing to work
+	//framebuffer->InitializeQuadTextures(); // needs to be commented to show how inversion textures work
 }

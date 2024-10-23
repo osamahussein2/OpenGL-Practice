@@ -16,23 +16,31 @@ int main()
 	// I don't need to make this window object a pointer because the constructor doesn't pass in anything
 	Window window;
 
-	std::array <VertexShaderLoader*, 5> vertexShaderLoader;
+	std::array <VertexShaderLoader*, 9> vertexShaderLoader;
 	vertexShaderLoader = { 
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
 		new VertexShaderLoader("ModelVertexShader.glsl"),
 		new VertexShaderLoader("DepthTestVertexShader.glsl"),
-		new VertexShaderLoader("ColorVertexShader.glsl")
+		new VertexShaderLoader("ColorVertexShader.glsl"),
+		new VertexShaderLoader("TextureVertexShader.glsl"),
+		new VertexShaderLoader("InversionVertexShader.glsl"),
+		new VertexShaderLoader("GreyscaleVertexShader.glsl"),
+		new VertexShaderLoader("KernelVertexShader.glsl")
 	};
 
-	std::array <FragmentShaderLoader*, 5> fragmentShaderLoader;
+	std::array <FragmentShaderLoader*, 9> fragmentShaderLoader;
 
 	fragmentShaderLoader = {
 		new FragmentShaderLoader("LightingFragmentShader.glsl"),
 		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
 		new FragmentShaderLoader("ModelFragmentShader.glsl"),
 		new FragmentShaderLoader("DepthTestFragmentShader.glsl"),
-		new FragmentShaderLoader("ColorFragmentShader.glsl")
+		new FragmentShaderLoader("ColorFragmentShader.glsl"),
+		new FragmentShaderLoader("TextureFragmentShader.glsl"),
+		new FragmentShaderLoader("InversionFragmentShader.glsl"),
+		new FragmentShaderLoader("GreyscaleFragmentShader.glsl"),
+		new FragmentShaderLoader("KernelFragmentShader.glsl")
 	};
 
 	// I don't need to make this shader program object a pointer because the constructor doesn't pass in anything
@@ -41,17 +49,15 @@ int main()
 	// Just initialize the OpenGL window by filling in the right parameters below
 	window.InitializeOpenGLwindow(1280, 960, "OpenGL Practice", NULL, NULL);
 
-	vertexShaderLoader[0]->InitializeVertexShaderLoader();
-	vertexShaderLoader[1]->InitializeVertexShaderLoader();
-	vertexShaderLoader[2]->InitializeVertexShaderLoader();
-	vertexShaderLoader[3]->InitializeVertexShaderLoader();
-	vertexShaderLoader[4]->InitializeVertexShaderLoader();
+	for (unsigned int i = 0; i < vertexShaderLoader.size(); i++)
+	{
+		vertexShaderLoader[i]->InitializeVertexShaderLoader();
+	}
 
-	fragmentShaderLoader[0]->InitializeFragmentShaderLoader();
-	fragmentShaderLoader[1]->InitializeFragmentShaderLoader();
-	fragmentShaderLoader[2]->InitializeFragmentShaderLoader();
-	fragmentShaderLoader[3]->InitializeFragmentShaderLoader();
-	fragmentShaderLoader[4]->InitializeFragmentShaderLoader();
+	for (unsigned int j = 0; j < fragmentShaderLoader.size(); j++)
+	{
+		fragmentShaderLoader[j]->InitializeFragmentShaderLoader();
+	}
 
 	shaderProgram.~ShaderProgram();
 

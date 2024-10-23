@@ -44,8 +44,8 @@ private:
 
 	static void MouseScrollCallback(GLFWwindow* window, double offsetX, double offsetY);
 
-	std::array<VertexShaderLoader*, 5> vertexShaderLoader;
-	std::array<FragmentShaderLoader*, 5> fragmentShaderLoader;
+	std::array<VertexShaderLoader*, 9> vertexShaderLoader;
+	std::array<FragmentShaderLoader*, 9> fragmentShaderLoader;
 	ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
 	Camera* camera;
