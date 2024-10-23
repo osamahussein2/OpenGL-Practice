@@ -54,7 +54,6 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 	lightVAO = NULL;
 
 	cubeTexture = NULL;
-	floorTexture = NULL;
 
 	cubeVAO = NULL;
 	cubeVBO = NULL;
@@ -106,7 +105,6 @@ VertexShaderLoader::~VertexShaderLoader()
 	lightVAO = NULL;
 
 	cubeTexture = NULL;
-	floorTexture = NULL;
 
 	cubeVertices =
 	{
@@ -623,24 +621,26 @@ void VertexShaderLoader::InitializeFloorDepthTestingVertices()
 	// Generate the specular texture in OpenGL first before binding it
 	glGenTextures(1, &floorTexture);
 
-	glBindTexture(GL_TEXTURE_2D, floorTexture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	// Flip the image vertically
-	stbi_set_flip_vertically_on_load(true);
-
-	// Load the specular texture image of container2
 	data = stbi_load("Textures/metal.png", &width, &height, &nrChannels, 0);
 
 	if (data)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		GLenum format;
+		if (nrChannels == 1)
+			format = GL_RED;
+		else if (nrChannels == 3)
+			format = GL_RGB;
+		else if (nrChannels == 4)
+			format = GL_RGBA;
+
+		glBindTexture(GL_TEXTURE_2D, floorTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
 	else
@@ -651,14 +651,13 @@ void VertexShaderLoader::InitializeFloorDepthTestingVertices()
 	// Free the image memory after generating the texture and its corresponding mipmaps
 	stbi_image_free(data);
 
+	// Bind the vertex array object using its ID
+	glBindVertexArray(planeVAO);
+
 	/* Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
 	the fragment shader's sampler */
 	// Bind the specular map texture here
-	glActiveTexture(GL_TEXTURE1); // Active next texture unit to render the specular map texture
 	glBindTexture(GL_TEXTURE_2D, floorTexture);
-
-	// Bind the vertex array object using its ID
-	glBindVertexArray(planeVAO);
 }
 
 /*void VertexShaderLoader::InitializeLightColorVertexObjects()

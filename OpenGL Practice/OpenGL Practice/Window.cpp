@@ -50,6 +50,7 @@ Window::Window()
 
 	blendTexture = new Blending();
 	faceCulling = new FaceCulling();
+	framebuffer = new FrameBuffer();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -119,14 +120,14 @@ void Window::WindowStillRunning()
 		/* The depth is stored within each fragment (as the fragment's z value) and whenever the fragment wants to 
 		output its color, OpenGL compares its depth values with the z-buffer. If the current fragment is behind the 
 		other fragment it is discarded, otherwise it's overwritten. This process is called depth testing. */
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 
 		/* OpenGL also makes it possible to change the comparison operators it will use for depth testing. This means
 		we can control when OpenGL should pass or discard fragments and when to update the depth buffer */
 
 		/* By default, the depth function "GL_LESS" is used that discards all the fragments that have a depth value
 		higher than or equal to the current depth buffer's value */
-		glDepthFunc(GL_LESS);
+		//glDepthFunc(GL_LESS);
 
 		/* We can discard certain fragments of other drawn objects in the scene by using the stencil buffer. By 
 		enabling stencil testing, all rendering calls will influence the stencil buffer one way or another */
@@ -135,7 +136,7 @@ void Window::WindowStillRunning()
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);*/
 
 		// Add our own color to the window
-		glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+		//glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 
 		// Give a window a desert look (I got the colors using Adobe Color Wheel generator website)
 		//glClearColor(0.91372549019f, 0.72549019607f, 0.38823529411f, 0.91f);
@@ -149,7 +150,7 @@ void Window::WindowStillRunning()
 		// If I get rid of this, my window will be black because then we didn't clear any color buffer bit first before rendering
 		// Since we're also using depth buffer, we need to clear the depth buffer before each render iteration
 		// Otherwise, the depth information of the previous frame stays in the buffer (and the cube won't render at all)
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		/* OpenGL can make it possible to NOT write to the depth buffer by setting OpenGL's built in
 		depth mask to false using GL_FALSE, obviously (this only works when the depth testing in enabled) */
@@ -229,7 +230,7 @@ void Window::WindowStillRunning()
 		//shaderProgram->InitializeLightColor(800.0f / 600.0f, 0.1f, 100.0f);
 
 		// To render images with different levels of transparency, enable OpenGL blending
-		glEnable(GL_BLEND);
+		//glEnable(GL_BLEND);
 
 		// The glBlendFunc function passes in 2 parameters that set the option for the source and destination factor
 
@@ -254,11 +255,11 @@ void Window::WindowStillRunning()
 
 		// Take the alpha component of the source color vector for the source factor
 		// Then take 1 - alpha of the same color (source) vector for the destination factor
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		/* This function sets the RGB components, as I set it above but only lets the resulting alpha component be
 		influenced by the source's alpha value */
-		glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+		//glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
 		/* glBlendEquation(GLenum mode) has 5 possible options that can be passed in inside the GLenum parameter:
 			
@@ -269,20 +270,20 @@ void Window::WindowStillRunning()
 			GL_MAX - takes the component-wise maximum of both colors (Cr = max(Dst, Src))
 
 		*/
+		
+		IncludeFrameBufferMethods();
 
-		// Use the depth testing shader first before we use the border color shader
-		shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
-
-		// Good thing I have a static variable of my very own shader program variable
-		glUseProgram(ShaderProgram::shaderProgram);
+		// Use the depth testing shader
+		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
 
 		//glStencilFunc(GL_ALWAYS, 1, 0xFF);
 		//glStencilMask(0xFF);
 
 		//vertexShaderLoader[3]->InitializeCubeDepthTestingVertices();
+		//faceCulling->SetFaceCullingVertices();
 
-		faceCulling->SetFaceCullingVertices();
-		shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
+		//framebuffer->AddFrameBuffer();
+		//shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
 
 		//glStencilMask(0x00);
 
@@ -322,7 +323,8 @@ void Window::WindowStillRunning()
 	vertexShaderLoader[4]->~VertexShaderLoader();
 
 	//blendTexture->~Blending();
-	faceCulling->~FaceCulling();
+	//faceCulling->~FaceCulling();
+	framebuffer->~FrameBuffer();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -511,4 +513,31 @@ void Window::ProcessInput(GLFWwindow* window)
 	}
 
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
+}
+
+// I created a function to store all the frame buffer methods in the FrameBuffer class and execute it during runtime
+void Window::IncludeFrameBufferMethods()
+{
+	// Use the depth testing shader
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
+
+	framebuffer->InitializeCubeVertices();
+	framebuffer->InitializePlaneVertices();
+	framebuffer->InitializeQuadVertices();
+
+	framebuffer->AddFrameBuffer();
+
+	framebuffer->RenderScene();
+
+	// Good thing I have a static variable of my very own shader program variable
+	glUseProgram(ShaderProgram::shaderProgram);
+
+	framebuffer->InitializeCubeTextures();
+	shaderProgram->InitializeCubeDepthTesting(800.0f / 600.0f, 0.1f, 100.0f);
+
+	framebuffer->InitializePlaneTextures();
+	shaderProgram->InitializeFloorDepthTesting();
+
+	framebuffer->BindToDefaultFrameBuffer();
+	framebuffer->InitializeQuadTextures();
 }

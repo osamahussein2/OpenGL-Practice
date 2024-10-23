@@ -141,6 +141,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="FaceCulling.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
+    <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="FaceCulling.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
+    <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="Lighting.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />

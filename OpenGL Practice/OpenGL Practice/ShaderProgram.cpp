@@ -184,9 +184,11 @@ void ShaderProgram::InitializeModeling(float aspect_ratio, float near_plane, flo
 
 void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane)
 {
-	// Set the texture image uniform
-	glUniform1i(glGetUniformLocation(shaderProgram, "textureImage"), 0);
-	
+	std::vector<glm::vec3> cubes;
+
+	cubes.push_back(glm::vec3(-1.0f, 0.0f, -1.0f));
+	cubes.push_back(glm::vec3(2.0f, 0.0f, 0.0f));
+
 	glUniform1f(glGetUniformLocation(shaderProgram, "near"), near_plane);
 	glUniform1f(glGetUniformLocation(shaderProgram, "far"), far_plane);
 
@@ -200,22 +202,17 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
 
-	modelMatrix = glm::mat4(1.0f);
-	modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
+	for (unsigned int i = 0; i < cubes.size(); i++)
+	{
+		modelMatrix = glm::mat4(1.0f);
+		modelMatrix = glm::translate(modelMatrix, cubes[i]);
 
-	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
+		modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
 
-	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+		glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-
-	/*modelMatrix = glm::mat4(1.0f);
-	modelMatrix = glm::translate(modelMatrix, glm::vec3(2.0f, 0.0f, 0.0f));
-
-	modelMatrixLocation = glGetUniformLocation(shaderProgram, "modelMatrix");
-
-	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));*/
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
 }
 
 void ShaderProgram::InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane)
@@ -264,6 +261,7 @@ void ShaderProgram::InitializeFloorDepthTesting()
 {
 	modelMatrix = glm::mat4(1.0f);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindVertexArray(0);
 }
 
 // Render the second container texture in the window

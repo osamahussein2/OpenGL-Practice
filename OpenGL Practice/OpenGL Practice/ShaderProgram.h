@@ -7,6 +7,7 @@
 #include "FragmentShaderLoader.h"
 #include "Color.h"
 #include "Lighting.h"
+#include "FrameBuffer.h"
 
 // Include the GLM header files (OpenGL Mathematics Library)
 #include <glm.hpp>

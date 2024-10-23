@@ -24,6 +24,8 @@ public:
 	void InitializeVertexObjects();
 	void InitializeCubeDepthTestingVertices();
 	void InitializeFloorDepthTestingVertices();
+
+	void SetUpPlaneTexture();
 	//void InitializeLightColorVertexObjects();
 
 	unsigned int vertexShader;

@@ -12,6 +12,7 @@
 #include "Model.h"
 #include "Blending.h"
 #include "FaceCulling.h"
+#include "FrameBuffer.h"
 
 class Blending;
 
@@ -28,6 +29,8 @@ public:
 
 	// Get the keyboard input whenever we want to close the window
 	void ProcessInput(GLFWwindow* window);
+
+	void IncludeFrameBufferMethods();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
@@ -62,6 +65,7 @@ private:
 
 	Blending* blendTexture;
 	FaceCulling* faceCulling;
+	FrameBuffer* framebuffer;
 };
 
 #endif
