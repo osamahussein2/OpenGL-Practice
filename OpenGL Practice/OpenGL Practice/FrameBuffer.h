@@ -10,6 +10,9 @@
 
 #include <array>
 #include <iostream>
+#include <vector>
+
+#include "ShaderProgram.h"
 
 using namespace glm;
 using namespace std;

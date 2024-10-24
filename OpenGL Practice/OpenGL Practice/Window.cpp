@@ -386,14 +386,17 @@ void Window::MouseCallback(GLFWwindow* window, double positionX, double position
 
 	/* We need to restrict the pitch value not to exceed 89 and not to go below -89 to prevent the LookAt view matrix
 	from flipping. */
-	if (Camera::pitch >= 89.0f)
+	if (Camera::constrainPitch == true)
 	{
-		Camera::pitch = 89.0f;
-	}
+		if (Camera::pitch >= 89.0f)
+		{
+			Camera::pitch = 89.0f;
+		}
 
-	else if (Camera::pitch <= -89.0f)
-	{
-		Camera::pitch = -89.0f;
+		else if (Camera::pitch <= -89.0f)
+		{
+			Camera::pitch = -89.0f;
+		}
 	}
 
 	Camera::cameraDirection = glm::vec3(cos(glm::radians(Camera::yaw)) * cos(glm::radians(Camera::pitch)),
@@ -527,7 +530,7 @@ void Window::ProcessInput(GLFWwindow* window)
 void Window::IncludeFrameBufferMethods()
 {
 	// Use the texture shaders
-	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
 
 	// Use the inversion texture shaders
 	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[6], fragmentShaderLoader[6]);
@@ -536,13 +539,13 @@ void Window::IncludeFrameBufferMethods()
 	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[7], fragmentShaderLoader[7]);
 
 	// Use the kernel texturing shaders
-	shaderProgram->InitializeShaderProgram(vertexShaderLoader[8], fragmentShaderLoader[8]);
+	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[8], fragmentShaderLoader[8]);
 
 	framebuffer->InitializeCubeVertices();
 	framebuffer->InitializePlaneVertices();
 	framebuffer->InitializeQuadVertices();
 
-	//framebuffer->AddFrameBuffer(); // needs to be commented for inversion texturing to work
+	framebuffer->AddFrameBuffer(); // needs to be commented for inversion texturing to work
 
 	framebuffer->RenderScene();
 
@@ -555,6 +558,6 @@ void Window::IncludeFrameBufferMethods()
 	framebuffer->InitializePlaneTextures();
 	shaderProgram->InitializeFloorDepthTesting();
 
-	//framebuffer->BindToDefaultFrameBuffer(); // needs to be commented for inversion texturing to work
-	//framebuffer->InitializeQuadTextures(); // needs to be commented to show how inversion textures work
+	framebuffer->BindToDefaultFrameBuffer(); // needs to be commented for inversion texturing to work
+	framebuffer->InitializeQuadTextures(); // needs to be commented to show how inversion textures work
 }

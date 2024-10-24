@@ -199,8 +199,12 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 
 	viewMatrix = Camera::CameraLookAt();
 
+	Camera::yaw -= 180.0f;
+	Camera::constrainPitch = true;
+
 	viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+
 
 	for (unsigned int i = 0; i < cubes.size(); i++)
 	{
@@ -213,6 +217,9 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
+
+	Camera::yaw += 180.0f;
+	Camera::constrainPitch = false;
 }
 
 void ShaderProgram::InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane)

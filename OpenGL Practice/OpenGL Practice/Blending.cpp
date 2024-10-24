@@ -34,6 +34,16 @@ Blending::~Blending()
 
 void Blending::SetBlending()
 {
+	/* Blending in OpenGL equation: 
+	
+		Cr = Cs * Fs + Cd * Fd
+
+		Csource: the source color vector. This is the color output of the fragment shader
+		Cdestination: the destination color vector. This is the color vector that is currently stored in the color buffer
+		Fsource: the source factor value. Sets the impact of the alpha value on the source color
+		Fdestination: the destination factor value. Sets the impact of the alpha value on the destination color
+	*/
+
 	float transparentVertices[] = {
 		// position          // texture coordinate
 		0.0f, 0.5f, 0.0f, 0.0f, 0.0f,

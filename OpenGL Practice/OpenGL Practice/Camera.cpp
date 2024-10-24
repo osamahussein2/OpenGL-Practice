@@ -21,6 +21,8 @@ glm::vec3 Camera::Zaxis = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 Camera::Xaxis = glm::vec3(0.0f, 0.0f, 0.0f);
 glm::vec3 Camera::Yaxis = glm::vec3(0.0f, 0.0f, 0.0f);
 
+bool Camera::constrainPitch = true;
+
 Camera::Camera()
 {
 	cameraX = 0.0f;

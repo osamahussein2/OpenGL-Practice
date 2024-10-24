@@ -40,6 +40,5 @@ public:
 	const float radius = 10.0f;
 	float cameraX, cameraZ;
 
-private:
-
+	static bool constrainPitch;
 };

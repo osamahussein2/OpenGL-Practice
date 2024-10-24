@@ -169,14 +169,14 @@ void FrameBuffer::InitializeQuadVertices()
 {
 	quadVertices =
 	{
-		// positions // texCoords
-		-1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-		1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		// position        // texture coordinates
+		-0.3f, 1.0f, 0.0f, 0.0f, 1.0f,
+		-0.3f, 0.7f, 0.0f, 0.0f, 0.0f,
+		 0.3f, 0.7f, 0.0f, 1.0f, 0.0f,
 
-		-1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-		1.0f, -1.0f,  0.0f, 1.0f, 0.0f,
-		1.0f, 1.0f,  0.0f, 1.0f, 1.0f
+		-0.3f, 1.0f, 0.0f, 0.0f, 1.0f,
+		 0.3f, 0.7f, 0.0f, 1.0f, 0.0f,
+		 0.3f, 1.0f, 0.0f, 1.0f, 1.0f
 	};
 
 	// Generate a vertex attribute object ID
@@ -399,6 +399,6 @@ void FrameBuffer::BindToDefaultFrameBuffer()
 	glDisable(GL_DEPTH_TEST);
 
 	// Clear only the color buffer
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
