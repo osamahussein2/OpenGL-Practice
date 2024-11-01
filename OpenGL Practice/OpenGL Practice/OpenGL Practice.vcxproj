@@ -147,6 +147,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="VertexShaderLoader.h" />
     <ClInclude Include="Window.h" />
@@ -183,6 +185,8 @@
     <None Include="LightCubeVertexShader.glsl" />
     <None Include="ModelFragmentShader.glsl" />
     <None Include="ModelVertexShader.glsl" />
+    <None Include="SkyboxFragmentShader.glsl" />
+    <None Include="SkyboxVertexShader.glsl" />
     <None Include="TextureFragmentShader.glsl" />
     <None Include="TextureVertexShader.glsl" />
     <None Include="VertexShader.glsl" />

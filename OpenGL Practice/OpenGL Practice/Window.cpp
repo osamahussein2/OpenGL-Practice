@@ -18,7 +18,8 @@ Window::Window()
 		new VertexShaderLoader("TextureVertexShader.glsl"),
 		new VertexShaderLoader("InversionVertexShader.glsl"),
 		new VertexShaderLoader("GreyscaleVertexShader.glsl"),
-		new VertexShaderLoader("KernelVertexShader.glsl")
+		new VertexShaderLoader("KernelVertexShader.glsl"),
+		new VertexShaderLoader("SkyboxVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
@@ -31,7 +32,8 @@ Window::Window()
 		new FragmentShaderLoader("TextureFragmentShader.glsl"),
 		new FragmentShaderLoader("InversionFragmentShader.glsl"),
 		new FragmentShaderLoader("GreyscaleFragmentShader.glsl"),
-		new FragmentShaderLoader("KernelFragmentShader.glsl")
+		new FragmentShaderLoader("KernelFragmentShader.glsl"),
+		new FragmentShaderLoader("SkyboxFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
@@ -59,6 +61,7 @@ Window::Window()
 	blendTexture = new Blending();
 	faceCulling = new FaceCulling();
 	framebuffer = new FrameBuffer();
+	skybox = new Skybox();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -96,6 +99,11 @@ void Window::WindowStillRunning()
 {
 	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[2], fragmentShaderLoader[2]);
 	//model = new Model("Models/Backpack/backpack.obj");
+
+	glEnable(GL_DEPTH_TEST);
+
+	skybox->SetCubeObject();
+	skybox->SetSkyboxObject();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -279,7 +287,8 @@ void Window::WindowStillRunning()
 
 		*/
 		
-		IncludeFrameBufferMethods();
+		//IncludeFrameBufferMethods();
+		UseSkybox();
 
 		// Use the depth testing shader
 		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
@@ -327,12 +336,15 @@ void Window::WindowStillRunning()
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
 	}
 
-	vertexShaderLoader[3]->~VertexShaderLoader();
-	vertexShaderLoader[4]->~VertexShaderLoader();
+	for (int i = 0; i < vertexShaderLoader.size(); i++)
+	{
+		vertexShaderLoader[i]->~VertexShaderLoader();
+	}
 
 	//blendTexture->~Blending();
 	//faceCulling->~FaceCulling();
-	framebuffer->~FrameBuffer();
+	//framebuffer->~FrameBuffer();
+	skybox->~Skybox();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -560,4 +572,26 @@ void Window::IncludeFrameBufferMethods()
 
 	framebuffer->BindToDefaultFrameBuffer(); // needs to be commented for inversion texturing to work
 	framebuffer->InitializeQuadTextures(); // needs to be commented to show how inversion textures work
+}
+
+void Window::UseSkybox()
+{
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Use the texture shader files
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
+
+	skybox->SetCubeTexture();
+	skybox->UseShaderProgramForCube(800.0f / 600.0f, 0.1f, 100.0f);
+
+	glDepthFunc(GL_LEQUAL);
+
+	// Use the skybox shader files for me
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[9], fragmentShaderLoader[9]);
+
+	skybox->SetSkyboxTexture();
+	skybox->UseShaderProgramForSkybox(800.0f / 600.0f, 0.1f, 100.0f);
+
+	glDepthFunc(GL_LESS);
 }

@@ -16,7 +16,7 @@ int main()
 	// I don't need to make this window object a pointer because the constructor doesn't pass in anything
 	Window window;
 
-	std::array <VertexShaderLoader*, 9> vertexShaderLoader;
+	std::array <VertexShaderLoader*, 10> vertexShaderLoader;
 	vertexShaderLoader = { 
 		new VertexShaderLoader("LightingVertexShader.glsl"), 
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
@@ -26,10 +26,11 @@ int main()
 		new VertexShaderLoader("TextureVertexShader.glsl"),
 		new VertexShaderLoader("InversionVertexShader.glsl"),
 		new VertexShaderLoader("GreyscaleVertexShader.glsl"),
-		new VertexShaderLoader("KernelVertexShader.glsl")
+		new VertexShaderLoader("KernelVertexShader.glsl"),
+		new VertexShaderLoader("SkyboxVertexShader.glsl")
 	};
 
-	std::array <FragmentShaderLoader*, 9> fragmentShaderLoader;
+	std::array <FragmentShaderLoader*, 10> fragmentShaderLoader;
 
 	fragmentShaderLoader = {
 		new FragmentShaderLoader("LightingFragmentShader.glsl"),
@@ -40,7 +41,8 @@ int main()
 		new FragmentShaderLoader("TextureFragmentShader.glsl"),
 		new FragmentShaderLoader("InversionFragmentShader.glsl"),
 		new FragmentShaderLoader("GreyscaleFragmentShader.glsl"),
-		new FragmentShaderLoader("KernelFragmentShader.glsl")
+		new FragmentShaderLoader("KernelFragmentShader.glsl"),
+		new FragmentShaderLoader("SkyboxFragmentShader.glsl")
 	};
 
 	// I don't need to make this shader program object a pointer because the constructor doesn't pass in anything

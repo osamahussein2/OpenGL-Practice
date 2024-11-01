@@ -57,6 +57,9 @@
     <ClCompile Include="FrameBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -98,6 +101,9 @@
     <ClInclude Include="FrameBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -120,5 +126,7 @@
     <None Include="GreyscaleFragmentShader.glsl" />
     <None Include="KernelVertexShader.glsl" />
     <None Include="KernelFragmentShader.glsl" />
+    <None Include="SkyboxVertexShader.glsl" />
+    <None Include="SkyboxFragmentShader.glsl" />
   </ItemGroup>
 </Project>

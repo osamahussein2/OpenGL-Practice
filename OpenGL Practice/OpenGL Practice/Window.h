@@ -13,6 +13,7 @@
 #include "Blending.h"
 #include "FaceCulling.h"
 #include "FrameBuffer.h"
+#include "Skybox.h"
 
 class Blending;
 
@@ -31,6 +32,7 @@ public:
 	void ProcessInput(GLFWwindow* window);
 
 	void IncludeFrameBufferMethods();
+	void UseSkybox();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
@@ -44,8 +46,8 @@ private:
 
 	static void MouseScrollCallback(GLFWwindow* window, double offsetX, double offsetY);
 
-	std::array<VertexShaderLoader*, 9> vertexShaderLoader;
-	std::array<FragmentShaderLoader*, 9> fragmentShaderLoader;
+	std::array<VertexShaderLoader*, 10> vertexShaderLoader;
+	std::array<FragmentShaderLoader*, 10> fragmentShaderLoader;
 	ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
 	Camera* camera;
@@ -66,6 +68,7 @@ private:
 	Blending* blendTexture;
 	FaceCulling* faceCulling;
 	FrameBuffer* framebuffer;
+	Skybox* skybox;
 };
 
 #endif
