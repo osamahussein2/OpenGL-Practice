@@ -155,13 +155,6 @@ void Skybox::SetSkyboxTexture()
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE); // Added for 3D textures
-
-	// Bind the vertex array object using its ID
-	glBindVertexArray(skyboxVAO);
-
-	// Bind the diffuse map texture here
-	glActiveTexture(GL_TEXTURE0); // Active the first texture unit first before binding it
-	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
 }
 
 void Skybox::UseShaderProgramForSkybox(float aspect_ratio, float near_plane, float far_plane)
@@ -184,6 +177,12 @@ void Skybox::UseShaderProgramForSkybox(float aspect_ratio, float near_plane, flo
 
 	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "skyboxViewMatrix"), 1, GL_FALSE,
 		glm::value_ptr(viewMatrix));
+
+	// Bind the vertex array object using its ID
+	glBindVertexArray(skyboxVAO);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture);
 
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
@@ -294,10 +293,6 @@ void Skybox::SetCubeTexture()
 
 	// Free the image memory after generating the texture and its corresponding mipmaps
 	stbi_image_free(cubeData);
-
-	// Bind the vertex array object using its ID
-	glBindVertexArray(cubeVAO);
-	glBindTexture(GL_TEXTURE_2D, cubeTexture);
 }
 
 void Skybox::UseShaderProgramForCube(float aspect_ratio, float near_plane, float far_plane)
@@ -319,6 +314,11 @@ void Skybox::UseShaderProgramForCube(float aspect_ratio, float near_plane, float
 
 	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "modelMatrix"), 1,
 		GL_FALSE, glm::value_ptr(modelMatrix));
+
+	glBindVertexArray(cubeVAO);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, cubeTexture);
 
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);

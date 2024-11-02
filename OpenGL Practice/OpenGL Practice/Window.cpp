@@ -104,6 +104,8 @@ void Window::WindowStillRunning()
 
 	skybox->SetCubeObject();
 	skybox->SetSkyboxObject();
+	skybox->SetCubeTexture();
+	skybox->SetSkyboxTexture();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -582,7 +584,6 @@ void Window::UseSkybox()
 	// Use the texture shader files
 	shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
 
-	skybox->SetCubeTexture();
 	skybox->UseShaderProgramForCube(800.0f / 600.0f, 0.1f, 100.0f);
 
 	glDepthFunc(GL_LEQUAL);
@@ -590,7 +591,6 @@ void Window::UseSkybox()
 	// Use the skybox shader files for me
 	shaderProgram->InitializeShaderProgram(vertexShaderLoader[9], fragmentShaderLoader[9]);
 
-	skybox->SetSkyboxTexture();
 	skybox->UseShaderProgramForSkybox(800.0f / 600.0f, 0.1f, 100.0f);
 
 	glDepthFunc(GL_LESS);

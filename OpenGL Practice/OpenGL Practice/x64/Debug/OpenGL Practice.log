@@ -35,14 +35,14 @@ C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL 
 C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
   (compiling source file 'Window.cpp')
   
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(113,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(365,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(366,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(383,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(384,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(386,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(387,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(424,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(115,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(367,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(368,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(385,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(386,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(388,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(389,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(426,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
   Generating Code...
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   OpenGL Practice.vcxproj -> C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Debug\OpenGL Practice.exe
