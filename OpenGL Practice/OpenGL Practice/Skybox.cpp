@@ -304,7 +304,11 @@ void Skybox::UseShaderProgramForCube(float aspect_ratio, float near_plane, float
 
 	glUniform1i(glGetUniformLocation(ShaderProgram::shaderProgram, "textureImage"), 0);
 
-	glUniform3fv(glGetUniformLocation(ShaderProgram::shaderProgram, "cameraPosition"), 1, value_ptr(Camera::cameraPosition));
+	glUniform3fv(glGetUniformLocation(ShaderProgram::shaderProgram, "cameraPosition"), 1, 
+		value_ptr(Camera::cameraPosition));
+
+	// Set the refraction ratio uniform here (only for the refraction environment mapping)
+	glUniform1f(glGetUniformLocation(ShaderProgram::shaderProgram, "refractionRatio"), (1.00f / 1.52f));
 
 	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
 
