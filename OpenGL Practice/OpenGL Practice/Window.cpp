@@ -19,7 +19,8 @@ Window::Window()
 		new VertexShaderLoader("InversionVertexShader.glsl"),
 		new VertexShaderLoader("GreyscaleVertexShader.glsl"),
 		new VertexShaderLoader("KernelVertexShader.glsl"),
-		new VertexShaderLoader("SkyboxVertexShader.glsl")
+		new VertexShaderLoader("SkyboxVertexShader.glsl"),
+		new VertexShaderLoader("EnvironmentMappingVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
@@ -33,7 +34,8 @@ Window::Window()
 		new FragmentShaderLoader("InversionFragmentShader.glsl"),
 		new FragmentShaderLoader("GreyscaleFragmentShader.glsl"),
 		new FragmentShaderLoader("KernelFragmentShader.glsl"),
-		new FragmentShaderLoader("SkyboxFragmentShader.glsl")
+		new FragmentShaderLoader("SkyboxFragmentShader.glsl"),
+		new FragmentShaderLoader("EnvironmentMappingFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
@@ -104,7 +106,7 @@ void Window::WindowStillRunning()
 
 	skybox->SetCubeObject();
 	skybox->SetSkyboxObject();
-	skybox->SetCubeTexture();
+	//skybox->SetCubeTexture();
 	skybox->SetSkyboxTexture();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
@@ -582,7 +584,7 @@ void Window::UseSkybox()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Use the texture shader files
-	shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
+	shaderProgram->InitializeShaderProgram(vertexShaderLoader[10], fragmentShaderLoader[10]);
 
 	skybox->UseShaderProgramForCube(800.0f / 600.0f, 0.1f, 100.0f);
 

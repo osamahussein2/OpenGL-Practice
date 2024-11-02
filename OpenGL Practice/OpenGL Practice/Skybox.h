@@ -46,7 +46,7 @@ private:
 	unsigned char* cubeData;
 
 	array<float, 108> skyboxVertices;
-	array<float, 180> cubeVertices;
+	array<float, 216> cubeVertices;
 
 	int width, height, nrChannels;
 

@@ -128,5 +128,7 @@
     <None Include="KernelFragmentShader.glsl" />
     <None Include="SkyboxVertexShader.glsl" />
     <None Include="SkyboxFragmentShader.glsl" />
+    <None Include="EnvironmentMappingVertexShader.glsl" />
+    <None Include="EnvironmentMappingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

@@ -172,6 +172,8 @@
     <None Include="ColorVertexShader.glsl" />
     <None Include="DepthTestFragmentShader.glsl" />
     <None Include="DepthTestVertexShader.glsl" />
+    <None Include="EnvironmentMappingFragmentShader.glsl" />
+    <None Include="EnvironmentMappingVertexShader.glsl" />
     <None Include="GreyscaleFragmentShader.glsl" />
     <None Include="GreyscaleVertexShader.glsl" />
     <None Include="InversionFragmentShader.glsl" />
