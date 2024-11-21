@@ -292,7 +292,7 @@ void Window::WindowStillRunning()
 		*/
 		
 		//IncludeFrameBufferMethods();
-		UseSkybox();
+		//UseSkybox();
 
 		// Use the depth testing shader
 		//shaderProgram->InitializeShaderProgram(vertexShaderLoader[3], fragmentShaderLoader[3]);
@@ -543,7 +543,7 @@ void Window::ProcessInput(GLFWwindow* window)
 }
 
 // I created a function to store all the frame buffer methods in the FrameBuffer class and execute it during runtime
-void Window::IncludeFrameBufferMethods()
+/*void Window::IncludeFrameBufferMethods()
 {
 	// Use the texture shaders
 	shaderProgram->InitializeShaderProgram(vertexShaderLoader[5], fragmentShaderLoader[5]);
@@ -576,9 +576,9 @@ void Window::IncludeFrameBufferMethods()
 
 	framebuffer->BindToDefaultFrameBuffer(); // needs to be commented for inversion texturing to work
 	framebuffer->InitializeQuadTextures(); // needs to be commented to show how inversion textures work
-}
+} */
 
-void Window::UseSkybox()
+/*void Window::UseSkybox()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -596,4 +596,4 @@ void Window::UseSkybox()
 	skybox->UseShaderProgramForSkybox(800.0f / 600.0f, 0.1f, 100.0f);
 
 	glDepthFunc(GL_LESS);
-}
+}*/

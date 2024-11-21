@@ -14,6 +14,7 @@
 #include "FaceCulling.h"
 #include "FrameBuffer.h"
 #include "Skybox.h"
+#include "AdvancedData.h"
 
 class Blending;
 
@@ -31,8 +32,8 @@ public:
 	// Get the keyboard input whenever we want to close the window
 	void ProcessInput(GLFWwindow* window);
 
-	void IncludeFrameBufferMethods();
-	void UseSkybox();
+	//void IncludeFrameBufferMethods();
+	//void UseSkybox();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
@@ -69,6 +70,7 @@ private:
 	FaceCulling* faceCulling;
 	FrameBuffer* framebuffer;
 	Skybox* skybox;
+	AdvancedData* advancedData;
 };
 
 #endif

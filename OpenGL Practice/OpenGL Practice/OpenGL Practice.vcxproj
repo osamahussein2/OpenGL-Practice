@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\..\GameDev\GLAD\src\glad.c" />
+    <ClCompile Include="AdvancedData.cpp" />
     <ClCompile Include="Blending.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdvancedData.h" />
     <ClInclude Include="Blending.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
