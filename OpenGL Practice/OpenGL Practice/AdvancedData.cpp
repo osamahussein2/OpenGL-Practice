@@ -54,4 +54,63 @@ void AdvancedData::MapBuffer()
 
 	// Make sure we unmap the buffer after we're done with the pointer object
 	glUnmapBuffer(GL_ARRAY_BUFFER);
+
+	/* Using glVertexAttribPointer we were able to specify the attribute layout of the vertex array buffer’s content. 
+	Within the vertex array buffer we interleaved (mixed) the attributes; that is, we placed the position, normal 
+	and/or texture coordinates next to each other in memory for each vertex */
+
+	/* When loading vertex data from file you generally retrieve an array of positions, an array of
+	normals and/or an array of texture coordinates. It may cost some effort to combine these arrays into
+	one large array of interleaved data. Taking the batching approach is then an easier solution that we
+	can easily implement using glBufferSubData */
+
+	positions = { 0.5f, 0.5f, 0.5f };
+	normals = { 0.0f, 0.0f, -1.0f };
+	textureCoordinates = { 0.0f, 0.0f };
+
+	/* Fill the batched buffer. This way we can directly transfer the attribute arrays as a whole into the buffer 
+	without first having to process them */
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), &positions);
+	glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions), sizeof(normals), &normals);
+	glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(normals), sizeof(textureCoordinates), &textureCoordinates);
+
+	/* Note that the stride parameter is equal to the size of the vertex attribute, since the next vertex attribute 
+	vector can be found directly after its 3 (or 2) components */
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)(sizeof(positions)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vec2), (void*)(sizeof(positions) + sizeof(normals)));
+
+	/* Once your buffers are filled with data you may want to share that data with other buffers or perhaps
+	copy the buffer’s content into another buffer. The function glCopyBufferSubData allows us to
+	copy the data from one buffer to another buffer with relative ease */
+	
+	/* void glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset,
+	GLsizeiptr size); */
+
+	/* The readtarget and writetarget parameters expect to give the buffer targets that we
+	want to copy from and to. We could for example copy from a VERTEX_ARRAY_BUFFER buffer to
+	a VERTEX_ELEMENT_ARRAY_BUFFER buffer by specifying those buffer targets as the read and
+	write targets respectively. The buffers currently bound to those buffer targets will then be affected */
+
+	/* We can’t bind two buffers at the same time to the same buffer target. For this reason, and
+	this reason alone, OpenGL gives us two more buffer targets called GL_COPY_READ_BUFFER and
+	GL_COPY_WRITE_BUFFER. We then bind the buffers of our choice to these new buffer targets
+	and set those targets as the readtarget and writetarget argument */
+
+	/* glCopyBufferSubData then reads data of a given size from a given readoffset and writes it into the writetarget 
+	buffer at writeoffset */
+
+	array<unsigned int, 2> VBOs{};
+
+	unsigned int dataSize = sizeof(vec3) + sizeof(vec3) + sizeof(vec2);
+
+	glBindBuffer(GL_COPY_READ_BUFFER, VBOs[0]);
+	glBindBuffer(GL_COPY_WRITE_BUFFER, VBOs[1]);
+	glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, dataSize);
+
+	// Binding the writetarget buffer to one of the new buffer target types
+	glBindBuffer(GL_ARRAY_BUFFER, VBOs[0]);
+	glBindBuffer(GL_COPY_WRITE_BUFFER, VBOs[1]);
+	glCopyBufferSubData(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, dataSize);
+
 }

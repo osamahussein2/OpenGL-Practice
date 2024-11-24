@@ -64,6 +64,7 @@ Window::Window()
 	faceCulling = new FaceCulling();
 	framebuffer = new FrameBuffer();
 	skybox = new Skybox();
+	advancedData = new AdvancedData();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
