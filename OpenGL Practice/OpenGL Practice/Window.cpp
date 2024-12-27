@@ -10,7 +10,7 @@ Window::Window()
 {
 	vertexShaderLoader =
 	{ 
-		new VertexShaderLoader("LightingVertexShader.glsl"), 
+		new VertexShaderLoader("LightingVertexShader.glsl"),
 		new VertexShaderLoader("LightCubeVertexShader.glsl"),
 		new VertexShaderLoader("ModelVertexShader.glsl"),
 		new VertexShaderLoader("DepthTestVertexShader.glsl"),
@@ -20,7 +20,8 @@ Window::Window()
 		new VertexShaderLoader("GreyscaleVertexShader.glsl"),
 		new VertexShaderLoader("KernelVertexShader.glsl"),
 		new VertexShaderLoader("SkyboxVertexShader.glsl"),
-		new VertexShaderLoader("EnvironmentMappingVertexShader.glsl")
+		new VertexShaderLoader("EnvironmentMappingVertexShader.glsl"),
+		new VertexShaderLoader("AdvancedGLSLVertexShader.glsl")
 	};
 
 	fragmentShaderLoader =
@@ -35,12 +36,16 @@ Window::Window()
 		new FragmentShaderLoader("GreyscaleFragmentShader.glsl"),
 		new FragmentShaderLoader("KernelFragmentShader.glsl"),
 		new FragmentShaderLoader("SkyboxFragmentShader.glsl"),
-		new FragmentShaderLoader("EnvironmentMappingFragmentShader.glsl")
+		new FragmentShaderLoader("EnvironmentMappingFragmentShader.glsl"),
+		new FragmentShaderLoader("RedFragmentShader.glsl"),
+		new FragmentShaderLoader("GreenFragmentShader.glsl"),
+		new FragmentShaderLoader("BlueFragmentShader.glsl"),
+		new FragmentShaderLoader("YellowFragmentShader.glsl")
 	};
 
 	openGLwindow = NULL;
 
-	shaderProgram = new ShaderProgram();
+	//shaderProgram = new ShaderProgram();
 	camera = new Camera();
 
 	cameraMoveSpeed = 0.0f;
@@ -105,10 +110,13 @@ void Window::WindowStillRunning()
 
 	glEnable(GL_DEPTH_TEST);
 
-	skybox->SetCubeObject();
-	skybox->SetSkyboxObject();
+	//skybox->SetCubeObject();
+	//skybox->SetSkyboxObject();
 	//skybox->SetCubeTexture();
-	skybox->SetSkyboxTexture();
+	//skybox->SetSkyboxTexture();
+
+	advancedData->InitializeCubeVertices();
+	advancedData->InitializeBufferObject();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -336,6 +344,8 @@ void Window::WindowStillRunning()
 		// Then use the border color shader to render the border color on the scaled cube
 		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f); */
 		//model->DrawModel();
+		
+		AdvancedGLSL();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -349,7 +359,8 @@ void Window::WindowStillRunning()
 	//blendTexture->~Blending();
 	//faceCulling->~FaceCulling();
 	//framebuffer->~FrameBuffer();
-	skybox->~Skybox();
+	//skybox->~Skybox();
+	advancedData->~AdvancedData();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -453,7 +464,7 @@ void Window::ProcessInput(GLFWwindow* window)
 	}
 
 	// Increase the texture visibility whenever we press the UP arrow key
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	/*if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
 	{
 		shaderProgram->visibilityTextureValue += 0.001f;
 
@@ -476,7 +487,7 @@ void Window::ProcessInput(GLFWwindow* window)
 		{
 			shaderProgram->visibilityTextureValue = 0.0f;
 		}
-	}
+	}*/
 
 	// Set the camera's moving speed to 2.5 times by the deltaTime when our OpenGL program is still running
 	cameraMoveSpeed = 2.5f * deltaTime;
@@ -541,6 +552,22 @@ void Window::ProcessInput(GLFWwindow* window)
 	}
 
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
+}
+
+void Window::AdvancedGLSL()
+{
+	// For enabling the influence of point sizes in the vertex shader
+	//glEnable(GL_PROGRAM_POINT_SIZE);
+
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	advancedData->LoadCubesInfo();
+
+	advancedData->DrawRedCube();
+	advancedData->DrawGreenCube();
+	advancedData->DrawBlueCube();
+	advancedData->DrawYellowCube();
 }
 
 // I created a function to store all the frame buffer methods in the FrameBuffer class and execute it during runtime

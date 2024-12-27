@@ -20,10 +20,10 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
-	void InitializeModeling(float aspect_ratio, float near_plane, float far_plane);
-	void InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane);
-	void InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane);
-	void InitializeFloorDepthTesting();
+	//void InitializeModeling(float aspect_ratio, float near_plane, float far_plane);
+	//void InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane);
+	//void InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane);
+	//void InitializeFloorDepthTesting();
 	//void InitializeSecondTexture();
 	//void InitializeCubeColor(float aspect_ratio, float near_plane, float far_plane);
 	//void InitializeLightColor(float aspect_ratio, float near_plane, float far_plane);
@@ -32,14 +32,13 @@ public:
 	//void CreateHorrorLighting();
 	//void CreateBioChemicalLabLighting();
 
+	void DeleteShaders(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
+
 	float visibilityTextureValue;
 
-	static unsigned int shaderProgram;
+	unsigned int shaderProgram;
 
 private:
-	std::array<VertexShaderLoader*, 5> vertexShaderLoader;
-	std::array<FragmentShaderLoader*, 5> fragmentShaderLoader;
-
 	Color* color;
 	Lighting* lighting;
 

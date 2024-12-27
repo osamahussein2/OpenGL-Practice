@@ -34,6 +34,7 @@ public:
 
 	//void IncludeFrameBufferMethods();
 	//void UseSkybox();
+	void AdvancedGLSL();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
@@ -47,9 +48,9 @@ private:
 
 	static void MouseScrollCallback(GLFWwindow* window, double offsetX, double offsetY);
 
-	std::array<VertexShaderLoader*, 11> vertexShaderLoader;
-	std::array<FragmentShaderLoader*, 11> fragmentShaderLoader;
-	ShaderProgram* shaderProgram;
+	std::array<VertexShaderLoader*, 12> vertexShaderLoader;
+	std::array<FragmentShaderLoader*, 15> fragmentShaderLoader;
+	//ShaderProgram* shaderProgram;
 	GLFWwindow* openGLwindow;
 	Camera* camera;
 

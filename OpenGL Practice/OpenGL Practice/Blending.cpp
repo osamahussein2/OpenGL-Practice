@@ -137,8 +137,8 @@ void Blending::IncludeGrassBlending()
 		blendingModelMatrix = mat4(1.0f);
 		blendingModelMatrix = translate(blendingModelMatrix, vegetation[i]);
 
-		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "modelMatrix"), 1, GL_FALSE,
-			value_ptr(blendingModelMatrix));
+		//glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "modelMatrix"), 1, GL_FALSE,
+			//value_ptr(blendingModelMatrix));
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}
@@ -169,8 +169,8 @@ void Blending::IncludeTransparentWindowBlending()
 		blendingModelMatrix = mat4(1.0f);
 		blendingModelMatrix = translate(blendingModelMatrix, it->second);
 
-		glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "modelMatrix"), 1, GL_FALSE,
-			value_ptr(blendingModelMatrix));
+		//glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "modelMatrix"), 1, GL_FALSE,
+			//value_ptr(blendingModelMatrix));
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}

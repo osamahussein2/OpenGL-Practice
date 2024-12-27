@@ -170,6 +170,10 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BlueFragmentShader.glsl" />
+    <None Include="GreenFragmentShader.glsl" />
+    <None Include="RedFragmentShader.glsl" />
+    <None Include="AdvancedGLSLVertexShader.glsl" />
     <None Include="ColorFragmentShader.glsl" />
     <None Include="ColorVertexShader.glsl" />
     <None Include="DepthTestFragmentShader.glsl" />
@@ -194,6 +198,7 @@
     <None Include="TextureFragmentShader.glsl" />
     <None Include="TextureVertexShader.glsl" />
     <None Include="VertexShader.glsl" />
+    <None Include="YellowFragmentShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

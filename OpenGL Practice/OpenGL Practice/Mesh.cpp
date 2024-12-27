@@ -68,7 +68,7 @@ void Mesh::DrawMesh()
 			number = to_string(specularNumber++);
 		}
 
-		glUniform1f(glGetUniformLocation(ShaderProgram::shaderProgram, (name + number).c_str()), i);
+		//glUniform1f(glGetUniformLocation(ShaderProgram::shaderProgram, (name + number).c_str()), i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].textureID);
 	}
 

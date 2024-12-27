@@ -31,7 +31,7 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 
 	vShaderCode = vertexShaderCode.c_str();
 
-	vertices = 
+	/*vertices =
 	{
 		NULL
 	};
@@ -69,7 +69,7 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 	planeVertices =
 	{
 		NULL
-	};
+	};*/
 
 	//shaderProg = ShaderProgram();
 }
@@ -77,7 +77,7 @@ VertexShaderLoader::VertexShaderLoader(const char* vertexShaderPath_)
 VertexShaderLoader::~VertexShaderLoader()
 {
 	// Deallocate all the VAOs and VBOs
-	glDeleteVertexArrays(1, &cubeVAO);
+	/*glDeleteVertexArrays(1, &cubeVAO);
 	glDeleteVertexArrays(1, &planeVAO);
 	glDeleteBuffers(1, &cubeVBO);
 	glDeleteBuffers(1, &planeVBO);
@@ -114,7 +114,7 @@ VertexShaderLoader::~VertexShaderLoader()
 	planeVertices =
 	{
 		NULL
-	};
+	};*/
 }
 
 void VertexShaderLoader::InitializeVertexShaderLoader()
@@ -140,8 +140,8 @@ void VertexShaderLoader::InitializeVertexShaderLoader()
 	}
 }
 
-void VertexShaderLoader::InitializeVertexObjects()
-{
+//void VertexShaderLoader::InitializeVertexObjects()
+//{
 	// Texture coordinates in OpenGL go from 0,0 (bottom left) to 1,1 (top right)
 
 	/*float textureCoordinates[] = {
@@ -155,10 +155,10 @@ void VertexShaderLoader::InitializeVertexObjects()
 	the object will go offscreen */
 
 	// Initialize the first triangle's vertices and its colors to be at the middle of the OpenGL window
-	vertices = {
+	//vertices = {
 		// positions		// normals			// texture coordinates
 
-		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
+		/*-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
 		 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f,
 		 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
 		 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
@@ -199,16 +199,16 @@ void VertexShaderLoader::InitializeVertexObjects()
 		 0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
 		-0.5f,  0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
 		-0.5f,  0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f
-	};
+	};*/
 
 	// Generate a vertex attribute object ID
-	glGenVertexArrays(1, &VAO);
+	//glGenVertexArrays(1, &VAO);
 
 	// Generate the buffer ID here
-	glGenBuffers(1, &VBO); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
+	//glGenBuffers(1, &VBO); // The & is a reference to the unsigned int of VBO and converts it to a GLuint pointer type
 
 	// This binds the buffers more than once at the same time as long as they're different buffer types
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	/*glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 	// Copies the previously defined vertex data into the buffer's memory
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
@@ -256,10 +256,10 @@ void VertexShaderLoader::InitializeVertexObjects()
 	else
 	{
 		std::cout << "This texture has failed to load!" << std::endl;
-	}
+	}*/
 
 	// Free the image memory after generating the texture and its corresponding mipmaps
-	stbi_image_free(data);
+	/*stbi_image_free(data);
 
 	// Generate the specular texture in OpenGL first before binding it
 	glGenTextures(1, &specularMapTexture);
@@ -271,17 +271,17 @@ void VertexShaderLoader::InitializeVertexObjects()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
 
 	// Flip the image vertically
-	stbi_set_flip_vertically_on_load(true);
+	//stbi_set_flip_vertically_on_load(true);
 
 	// Load the specular texture image of container2
-	data = stbi_load("Textures/container2_specular.png", &width, &height, &nrChannels, 0);
+	//data = stbi_load("Textures/container2_specular.png", &width, &height, &nrChannels, 0);
 
 	// After the texture ahs been binded, we can generate textures using the previously loaded image data
 	// Textures are generated with glTexImage2D
-	if (data)
+	/*if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -290,24 +290,24 @@ void VertexShaderLoader::InitializeVertexObjects()
 	else
 	{
 		std::cout << "This texture has failed to load!" << std::endl;
-	}
+	}*/
 
 	// Free the image memory after generating the texture and its corresponding mipmaps
-	stbi_image_free(data);
+	//stbi_image_free(data);
 
 	/* Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
 	the fragment shader's sampler */
 
 	// Bind the diffuse map texture here
-	glActiveTexture(GL_TEXTURE0); // Active the first texture unit first before binding it
-	glBindTexture(GL_TEXTURE_2D, diffuseMapTexture);
+	//glActiveTexture(GL_TEXTURE0); // Active the first texture unit first before binding it
+	//glBindTexture(GL_TEXTURE_2D, diffuseMapTexture);
 
 	// Bind the specular map texture here
-	glActiveTexture(GL_TEXTURE1); // Active next texture unit to render the specular map texture
-	glBindTexture(GL_TEXTURE_2D, specularMapTexture);
+	//glActiveTexture(GL_TEXTURE1); // Active next texture unit to render the specular map texture
+	//glBindTexture(GL_TEXTURE_2D, specularMapTexture);
 
 	// Bind the vertex array object using its ID
-	glBindVertexArray(VAO);
+	//glBindVertexArray(VAO);
 
 	// Set the color attribute's location to 1 like our vertex shader GLSL file
 	// 3 * sizeof(float) in the last argument below is the offset of the color which is 3 * of our position offset
@@ -463,9 +463,9 @@ void VertexShaderLoader::InitializeVertexObjects()
 
 	glBindVertexArray(VAO);*/
 	//glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-}
+//}
 
-void VertexShaderLoader::InitializeCubeDepthTestingVertices()
+/*void VertexShaderLoader::InitializeCubeDepthTestingVertices()
 {
 	cubeVertices = 
 	{
@@ -577,9 +577,9 @@ void VertexShaderLoader::InitializeCubeDepthTestingVertices()
 
 	// Bind the vertex array object using its ID
 	glBindVertexArray(cubeVAO);
-}
+}*/
 
-void VertexShaderLoader::InitializeFloorDepthTestingVertices()
+/*void VertexShaderLoader::InitializeFloorDepthTestingVertices()
 {
 	planeVertices = 
 	{
@@ -657,8 +657,8 @@ void VertexShaderLoader::InitializeFloorDepthTestingVertices()
 	/* Bind the texture before calling the glDrawElements function and it will automatically assign the texture to
 	the fragment shader's sampler */
 	// Bind the specular map texture here
-	glBindTexture(GL_TEXTURE_2D, floorTexture);
-}
+	//glBindTexture(GL_TEXTURE_2D, floorTexture);
+//}
 
 /*void VertexShaderLoader::InitializeLightColorVertexObjects()
 {

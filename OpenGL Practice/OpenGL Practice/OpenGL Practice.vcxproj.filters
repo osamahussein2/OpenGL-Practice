@@ -136,5 +136,10 @@
     <None Include="SkyboxFragmentShader.glsl" />
     <None Include="EnvironmentMappingVertexShader.glsl" />
     <None Include="EnvironmentMappingFragmentShader.glsl" />
+    <None Include="AdvancedGLSLVertexShader.glsl" />
+    <None Include="RedFragmentShader.glsl" />
+    <None Include="GreenFragmentShader.glsl" />
+    <None Include="BlueFragmentShader.glsl" />
+    <None Include="YellowFragmentShader.glsl" />
   </ItemGroup>
 </Project>

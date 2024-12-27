@@ -19,6 +19,7 @@ void main()
 	// gl_Position is a 4D vector inside of OpenGL 
 	// gl_Position = vec4(-position + movingPosition, 1.0);
 
+	// gl_Position is the clip-space output position vector of the vertex shader
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 	vertexColor = color;
 	textureCoord = textureCoordinate;

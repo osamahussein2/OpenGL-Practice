@@ -1,26 +1,10 @@
 #include "ShaderProgram.h"
 #include "Window.h"
 
-unsigned int ShaderProgram::shaderProgram = NULL;
+//unsigned int ShaderProgram::shaderProgram = NULL;
 
 ShaderProgram::ShaderProgram()
 {
-	vertexShaderLoader = { 
-		new VertexShaderLoader("LightingVertexShader.glsl"), 
-		new VertexShaderLoader("LightCubeVertexShader.glsl"),
-		new VertexShaderLoader("ModelVertexShader.glsl"),
-		new VertexShaderLoader("DepthTestVertexShader.glsl"),
-		new VertexShaderLoader("ColorVertexShader.glsl")
-	};
-
-	fragmentShaderLoader = { 
-		new FragmentShaderLoader("LightingFragmentShader.glsl"), 
-		new FragmentShaderLoader("LightCubeFragmentShader.glsl"),
-		new FragmentShaderLoader("ModelFragmentShader.glsl"),
-		new FragmentShaderLoader("DepthTestFragmentShader.glsl"),
-		new FragmentShaderLoader("ColorFragmentShader.glsl")
-	};
-
 	color = new Color();
 	lighting = new Lighting();
 
@@ -59,25 +43,13 @@ ShaderProgram::ShaderProgram()
 
 	pointLightPositions = { glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f),
 		glm::vec3(0.0f, 0.0f, 0.0f)};
+
+	shaderProgram = NULL;
 }
 
 ShaderProgram::~ShaderProgram()
 {
-	// Delete the vertex and fragment shaders after the shader objects have been linked with the shader program
-	glDeleteShader(vertexShaderLoader[0]->vertexShader);
-	glDeleteShader(fragmentShaderLoader[0]->fragmentShader);
 
-	glDeleteShader(vertexShaderLoader[1]->vertexShader);
-	glDeleteShader(fragmentShaderLoader[1]->fragmentShader);
-
-	glDeleteShader(vertexShaderLoader[2]->vertexShader);
-	glDeleteShader(fragmentShaderLoader[2]->fragmentShader);
-
-	glDeleteShader(vertexShaderLoader[3]->vertexShader);
-	glDeleteShader(fragmentShaderLoader[3]->fragmentShader);
-
-	glDeleteShader(vertexShaderLoader[4]->vertexShader);
-	glDeleteShader(fragmentShaderLoader[4]->fragmentShader);
 }
 
 void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
@@ -105,6 +77,8 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 		glGetProgramInfoLog(shaderProgram, 512, NULL, compilationInformationLog);
 		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << compilationInformationLog << std::endl;
 	}
+
+	DeleteShaders(vertexShader_, fragmentShader_);
 
 	/*timer = glfwGetTime(); // Gets the time in seconds using the GLFW library
 	moveRight = ((timer) / 5.0f) + 0.1f;
@@ -161,7 +135,7 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, glm::value_ptr(translateMatrix));*/
 }
 
-void ShaderProgram::InitializeModeling(float aspect_ratio, float near_plane, float far_plane)
+/*void ShaderProgram::InitializeModeling(float aspect_ratio, float near_plane, float far_plane)
 {
 	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);
 
@@ -220,9 +194,9 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 
 	Camera::yaw += 180.0f;
 	Camera::constrainPitch = false;
-}
+}*/
 
-void ShaderProgram::InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane)
+/*void ShaderProgram::InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane)
 {
 	glUniform1i(glGetUniformLocation(shaderProgram, "textureImage"), 0);
 
@@ -262,13 +236,20 @@ void ShaderProgram::InitializeScaledCubeStencilTesting(float aspect_ratio, float
 
 	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-}
+}*/
 
-void ShaderProgram::InitializeFloorDepthTesting()
+/*void ShaderProgram::InitializeFloorDepthTesting()
 {
 	modelMatrix = glm::mat4(1.0f);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
+}*/
+
+void ShaderProgram::DeleteShaders(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
+{
+	// Delete the vertex and fragment shaders after the shader objects have been linked with the shader program
+	glDeleteShader(vertexShader_->vertexShader);
+	glDeleteShader(fragmentShader_->fragmentShader);
 }
 
 // Render the second container texture in the window

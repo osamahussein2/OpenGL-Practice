@@ -159,7 +159,7 @@ void Skybox::SetSkyboxTexture()
 
 void Skybox::UseShaderProgramForSkybox(float aspect_ratio, float near_plane, float far_plane)
 {
-	glUseProgram(ShaderProgram::shaderProgram);
+	/*glUseProgram(ShaderProgram::shaderProgram);
 
 	glUniform1i(glGetUniformLocation(ShaderProgram::shaderProgram, "cubeMap"), 0);
 
@@ -176,7 +176,7 @@ void Skybox::UseShaderProgramForSkybox(float aspect_ratio, float near_plane, flo
 	viewMatrix = mat4(mat3(lookAt(Camera::cameraPosition, Camera::cameraPosition + Camera::cameraFront, Camera::cameraUp)));
 
 	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "skyboxViewMatrix"), 1, GL_FALSE,
-		glm::value_ptr(viewMatrix));
+		glm::value_ptr(viewMatrix));*/
 
 	// Bind the vertex array object using its ID
 	glBindVertexArray(skyboxVAO);
@@ -300,7 +300,7 @@ void Skybox::SetCubeTexture()
 
 void Skybox::UseShaderProgramForCube(float aspect_ratio, float near_plane, float far_plane)
 {
-	glUseProgram(ShaderProgram::shaderProgram);
+	/*glUseProgram(ShaderProgram::shaderProgram);
 
 	glUniform1i(glGetUniformLocation(ShaderProgram::shaderProgram, "textureImage"), 0);
 
@@ -322,7 +322,7 @@ void Skybox::UseShaderProgramForCube(float aspect_ratio, float near_plane, float
 	modelMatrix = glm::mat4(1.0f);
 
 	glUniformMatrix4fv(glGetUniformLocation(ShaderProgram::shaderProgram, "modelMatrix"), 1,
-		GL_FALSE, glm::value_ptr(modelMatrix));
+		GL_FALSE, glm::value_ptr(modelMatrix));*/
 
 	glBindVertexArray(cubeVAO);
 

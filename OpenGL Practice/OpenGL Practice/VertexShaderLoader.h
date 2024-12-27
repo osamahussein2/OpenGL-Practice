@@ -21,27 +21,27 @@ public:
 	VertexShaderLoader(const char* vertexShaderPath_);
 	~VertexShaderLoader();
 	void InitializeVertexShaderLoader();
-	void InitializeVertexObjects();
-	void InitializeCubeDepthTestingVertices();
-	void InitializeFloorDepthTestingVertices();
+	//void InitializeVertexObjects();
+	//void InitializeCubeDepthTestingVertices();
+	//void InitializeFloorDepthTestingVertices();
 
-	void SetUpPlaneTexture();
+	//void SetUpPlaneTexture();
 	//void InitializeLightColorVertexObjects();
 
 	unsigned int vertexShader;
 
 private:
-	unsigned int VAO, VBO, lightVAO;
+	//unsigned int VAO, VBO, lightVAO;
 
-	unsigned int cubeVAO, cubeVBO;
-	unsigned int planeVAO, planeVBO;
+	//unsigned int cubeVAO, cubeVBO;
+	//unsigned int planeVAO, planeVBO;
 
 	//unsigned int EBO;
 	std::string vertexShaderCode;
 	std::ifstream vertexShaderFile;
 	std::stringstream vertexShaderStream;
 	const char* vShaderCode;
-	unsigned char* data;
+	/*unsigned char* data;
 
 	int width, height, nrChannels;
 
@@ -54,7 +54,7 @@ private:
 	std::array<float, 180> cubeVertices;
 	std::array<float, 30> planeVertices;
 
-	std::array<float, 288> vertices;
+	std::array<float, 288> vertices;*/
 	//std::array<unsigned int, 6> indices;
 
 	// I tried to create vertices' and indices' variables as std::lists and the triangles wouldn't render at all
