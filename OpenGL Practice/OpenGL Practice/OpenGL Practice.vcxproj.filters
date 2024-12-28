@@ -63,6 +63,9 @@
     <ClCompile Include="AdvancedData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -110,6 +113,9 @@
     <ClInclude Include="AdvancedData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeometryShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -141,5 +147,8 @@
     <None Include="GreenFragmentShader.glsl" />
     <None Include="BlueFragmentShader.glsl" />
     <None Include="YellowFragmentShader.glsl" />
+    <None Include="GeometryVertexShader.glsl" />
+    <None Include="GeometryFragmentShader.glsl" />
+    <None Include="GeometryShader.glsl" />
   </ItemGroup>
 </Project>

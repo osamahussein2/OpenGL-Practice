@@ -15,6 +15,7 @@
 #include "FrameBuffer.h"
 #include "Skybox.h"
 #include "AdvancedData.h"
+#include "GeometryShader.h"
 
 class Blending;
 
@@ -34,7 +35,8 @@ public:
 
 	//void IncludeFrameBufferMethods();
 	//void UseSkybox();
-	void AdvancedGLSL();
+	//void AdvancedGLSL();
+	void UseGeometryShader();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
@@ -72,6 +74,9 @@ private:
 	FrameBuffer* framebuffer;
 	Skybox* skybox;
 	AdvancedData* advancedData;
+	GeometryShader* geometryShader;
+
+	ShaderProgram* geometryShaderProgram;
 };
 
 #endif

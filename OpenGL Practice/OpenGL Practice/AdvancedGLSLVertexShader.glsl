@@ -40,7 +40,7 @@ void main()
 	/* By setting the point size to the clip-space z position, the point size will increase or decrease depending on
 	the viewer's distance from the vertices (e.g. the point size should increase the further we are from the vertices
 	as the viewer) */
-	gl_PointSize = gl_Position.z;
+	//gl_PointSize = gl_Position.z;
 
 	//vs_out.textureCoordinate = textureCoord;
 

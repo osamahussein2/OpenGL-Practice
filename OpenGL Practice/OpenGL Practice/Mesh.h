@@ -23,7 +23,7 @@ class Mesh
 public:
 	Mesh(vector<Vertex> vertices_, vector<unsigned int> indices_, vector<Texture> textures_);
 	void SetupMesh();
-	void DrawMesh();
+	void DrawMesh(ShaderProgram *shaderProgram_);
 
 private:
 	// Create a vector of mesh data information here

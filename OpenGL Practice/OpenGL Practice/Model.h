@@ -21,7 +21,7 @@ public:
 	Model(const char* filePath_);
 	~Model();
 
-	void DrawModel();
+	void DrawModel(ShaderProgram *shaderProgram_);
 private:
 
 	void LoadModel(string filePath_);

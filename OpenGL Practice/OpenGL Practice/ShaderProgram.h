@@ -5,6 +5,7 @@
 #include <iostream>
 #include "VertexShaderLoader.h"
 #include "FragmentShaderLoader.h"
+#include "GeometryShader.h"
 #include "Color.h"
 #include "Lighting.h"
 #include "FrameBuffer.h"
@@ -19,7 +20,8 @@ class ShaderProgram
 public:
 	ShaderProgram();
 	~ShaderProgram();
-	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
+	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_,
+		GeometryShader* geometryShader_ = nullptr);
 	//void InitializeModeling(float aspect_ratio, float near_plane, float far_plane);
 	//void InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane);
 	//void InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane);
@@ -32,7 +34,8 @@ public:
 	//void CreateHorrorLighting();
 	//void CreateBioChemicalLabLighting();
 
-	void DeleteShaders(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_);
+	void DeleteShaders(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_, 
+		GeometryShader* geometryShader_);
 
 	float visibilityTextureValue;
 

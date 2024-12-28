@@ -52,7 +52,8 @@ ShaderProgram::~ShaderProgram()
 
 }
 
-void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
+void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_,
+	GeometryShader* geometryShader_)
 {
 	// Create a shader program that will render both the vertex and fragment shaders to the window
 	shaderProgram = glCreateProgram();
@@ -60,9 +61,19 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 	vertexShader_->InitializeVertexShaderLoader();
 	fragmentShader_->InitializeFragmentShaderLoader();
 
+	if (geometryShader_ != nullptr)
+	{
+		geometryShader_->InitializeGeometryShaderLoader();
+	}
+
 	// Attach the vertex and fragment shaders to our created shader program ID object
 	glAttachShader(shaderProgram, vertexShader_->vertexShader);
 	glAttachShader(shaderProgram, fragmentShader_->fragmentShader);
+
+	if (geometryShader_ != nullptr)
+	{
+		glAttachShader(shaderProgram, geometryShader_->geometryShader);
+	}
 
 	// Link the attached vertex and fragment shaders together into one shader program
 	glLinkProgram(shaderProgram);
@@ -78,7 +89,7 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << compilationInformationLog << std::endl;
 	}
 
-	DeleteShaders(vertexShader_, fragmentShader_);
+	DeleteShaders(vertexShader_, fragmentShader_, geometryShader_);
 
 	/*timer = glfwGetTime(); // Gets the time in seconds using the GLFW library
 	moveRight = ((timer) / 5.0f) + 0.1f;
@@ -245,11 +256,17 @@ void ShaderProgram::InitializeCubeDepthTesting(float aspect_ratio, float near_pl
 	glBindVertexArray(0);
 }*/
 
-void ShaderProgram::DeleteShaders(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_)
+void ShaderProgram::DeleteShaders(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_,
+	GeometryShader* geometryShader_)
 {
 	// Delete the vertex and fragment shaders after the shader objects have been linked with the shader program
 	glDeleteShader(vertexShader_->vertexShader);
 	glDeleteShader(fragmentShader_->fragmentShader);
+
+	if (geometryShader_ != nullptr)
+	{
+		glDeleteShader(geometryShader_->geometryShader);
+	}
 }
 
 // Render the second container texture in the window

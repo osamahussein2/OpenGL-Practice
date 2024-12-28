@@ -43,7 +43,7 @@ void Mesh::SetupMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::DrawMesh()
+void Mesh::DrawMesh(ShaderProgram *shaderProgram_)
 {
 	diffuseNumber = 1;
 	specularNumber = 1;
@@ -68,7 +68,7 @@ void Mesh::DrawMesh()
 			number = to_string(specularNumber++);
 		}
 
-		//glUniform1f(glGetUniformLocation(ShaderProgram::shaderProgram, (name + number).c_str()), i);
+		glUniform1f(glGetUniformLocation(shaderProgram_->shaderProgram, (name + number).c_str()), i);
 		glBindTexture(GL_TEXTURE_2D, textures[i].textureID);
 	}
 

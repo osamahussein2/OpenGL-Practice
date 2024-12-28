@@ -11,11 +11,11 @@ Model::~Model()
 	scene = nullptr;
 }
 
-void Model::DrawModel()
+void Model::DrawModel(ShaderProgram *shaderProgram_)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i]->DrawMesh();
+		meshes[i]->DrawMesh(shaderProgram_);
 	}
 }
 

@@ -70,6 +70,10 @@ Window::Window()
 	framebuffer = new FrameBuffer();
 	skybox = new Skybox();
 	advancedData = new AdvancedData();
+
+	geometryShader = new GeometryShader("GeometryShader.glsl");
+
+	geometryShaderProgram = new ShaderProgram();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -114,9 +118,12 @@ void Window::WindowStillRunning()
 	//skybox->SetSkyboxObject();
 	//skybox->SetCubeTexture();
 	//skybox->SetSkyboxTexture();
+	//advancedData->InitializeCubeVertices();
+	//advancedData->InitializeBufferObject();
 
-	advancedData->InitializeCubeVertices();
-	advancedData->InitializeBufferObject();
+	//geometryShader->InitializeGeometryVertices(); // Geometry shader Part 1
+
+	geometryShader->InitializeGeometryModel(); // Geometry shader Part 2
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -345,22 +352,25 @@ void Window::WindowStillRunning()
 		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f); */
 		//model->DrawModel();
 		
-		AdvancedGLSL();
+		//AdvancedGLSL();
+		
+		UseGeometryShader();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
 	}
 
-	for (int i = 0; i < vertexShaderLoader.size(); i++)
+	/*for (int i = 0; i < vertexShaderLoader.size(); i++)
 	{
 		vertexShaderLoader[i]->~VertexShaderLoader();
-	}
+	}*/
 
 	//blendTexture->~Blending();
 	//faceCulling->~FaceCulling();
 	//framebuffer->~FrameBuffer();
 	//skybox->~Skybox();
-	advancedData->~AdvancedData();
+	//advancedData->~AdvancedData();
+	geometryShader->~GeometryShader();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -554,7 +564,17 @@ void Window::ProcessInput(GLFWwindow* window)
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }
 
-void Window::AdvancedGLSL()
+void Window::UseGeometryShader()
+{
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//geometryShader->DrawExplodingModel(); // Geometry Shader part 2
+
+	geometryShader->DrawVisualizingNormalVectors(); // Geometry Shader part 3
+}
+
+/*void Window::AdvancedGLSL()
 {
 	// For enabling the influence of point sizes in the vertex shader
 	//glEnable(GL_PROGRAM_POINT_SIZE);
@@ -568,7 +588,7 @@ void Window::AdvancedGLSL()
 	advancedData->DrawGreenCube();
 	advancedData->DrawBlueCube();
 	advancedData->DrawYellowCube();
-}
+}*/
 
 // I created a function to store all the frame buffer methods in the FrameBuffer class and execute it during runtime
 /*void Window::IncludeFrameBufferMethods()
