@@ -15,7 +15,7 @@ void Model::DrawModel(ShaderProgram *shaderProgram_)
 {
 	for (unsigned int i = 0; i < meshes.size(); i++)
 	{
-		meshes[i]->DrawMesh(shaderProgram_);
+		meshes[i].DrawMesh(shaderProgram_);
 	}
 }
 
@@ -78,7 +78,7 @@ void Model::ProcessNode(aiNode* node_, const aiScene* scene_)
 	}
 }
 
-Mesh* Model::ProcessMesh(aiMesh* mesh_, const aiScene* scene_)
+Mesh Model::ProcessMesh(aiMesh* mesh_, const aiScene* scene_)
 {
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
@@ -95,10 +95,13 @@ Mesh* Model::ProcessMesh(aiMesh* mesh_, const aiScene* scene_)
 		vector.z = mesh_->mVertices[i].z;
 		vertex.meshPosition = vector;
 
-		vector.x = mesh_->mNormals[i].x;
-		vector.y = mesh_->mNormals[i].y;
-		vector.z = mesh_->mNormals[i].z;
-		vertex.meshNormal = vector;
+		if (mesh_->HasNormals())
+		{
+			vector.x = mesh_->mNormals[i].x;
+			vector.y = mesh_->mNormals[i].y;
+			vector.z = mesh_->mNormals[i].z;
+			vertex.meshNormal = vector;
+		}
 
 		// Check if the mesh has texture coordinates
 		if (mesh_->mTextureCoords[0])
@@ -144,7 +147,7 @@ Mesh* Model::ProcessMesh(aiMesh* mesh_, const aiScene* scene_)
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
 
-	return new Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textures);
 }
 
 vector<Texture> Model::LoadMaterialTexture(aiMaterial* material_, aiTextureType textureType, string typeName_)

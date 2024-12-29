@@ -74,6 +74,8 @@ Window::Window()
 	geometryShader = new GeometryShader("GeometryShader.glsl");
 
 	geometryShaderProgram = new ShaderProgram();
+
+	instancing = new Instancing();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -120,10 +122,14 @@ void Window::WindowStillRunning()
 	//skybox->SetSkyboxTexture();
 	//advancedData->InitializeCubeVertices();
 	//advancedData->InitializeBufferObject();
-
 	//geometryShader->InitializeGeometryVertices(); // Geometry shader Part 1
+	//geometryShader->InitializeGeometryModel(); // Geometry shader Part 2
 
-	geometryShader->InitializeGeometryModel(); // Geometry shader Part 2
+	//instancing->SetInstancingOffsetPositions(); // Instancing Part 1
+	//instancing->InitializeInstancingVertices(); // Instancing Part 1
+
+	instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
+	instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -349,12 +355,13 @@ void Window::WindowStillRunning()
 		vertexShaderLoader[4]->InitializeCubeDepthTestingVertices();
 
 		// Then use the border color shader to render the border color on the scaled cube
-		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f); */
-		//model->DrawModel();
+		shaderProgram->InitializeScaledCubeStencilTesting(800.0f / 600.0f, 0.1f, 100.0f);
+		model->DrawModel();
 		
-		//AdvancedGLSL();
+		AdvancedGLSL();
+		UseGeometryShader();*/
 		
-		UseGeometryShader();
+		UseInstancingClass();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -370,7 +377,9 @@ void Window::WindowStillRunning()
 	//framebuffer->~FrameBuffer();
 	//skybox->~Skybox();
 	//advancedData->~AdvancedData();
-	geometryShader->~GeometryShader();
+	//geometryShader->~GeometryShader();
+
+	instancing->~Instancing();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -564,7 +573,15 @@ void Window::ProcessInput(GLFWwindow* window)
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }
 
-void Window::UseGeometryShader()
+void Window::UseInstancingClass()
+{
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	instancing->UseInstancingShaderProgram();
+}
+
+/*void Window::UseGeometryShader()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -572,7 +589,7 @@ void Window::UseGeometryShader()
 	//geometryShader->DrawExplodingModel(); // Geometry Shader part 2
 
 	geometryShader->DrawVisualizingNormalVectors(); // Geometry Shader part 3
-}
+}*/
 
 /*void Window::AdvancedGLSL()
 {

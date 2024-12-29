@@ -25,14 +25,16 @@ public:
 	void SetupMesh();
 	void DrawMesh(ShaderProgram *shaderProgram_);
 
-private:
+	unsigned int VAO;
+
 	// Create a vector of mesh data information here
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
 	vector<Texture> textures;
 
+private:
 	// Create render data information here
-	unsigned int VAO, VBO, EBO;
+	unsigned int VBO, EBO;
 
 	// Create diffuse and specular textures number here to use the texture diffuse and specular uniforms in the shader
 	unsigned int diffuseNumber, specularNumber;

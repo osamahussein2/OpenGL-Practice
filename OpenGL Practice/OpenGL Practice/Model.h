@@ -22,11 +22,15 @@ public:
 	~Model();
 
 	void DrawModel(ShaderProgram *shaderProgram_);
+
+	// Model data
+	vector<Mesh> meshes;
+	vector<Texture> texturesLoaded;
 private:
 
 	void LoadModel(string filePath_);
 	void ProcessNode(aiNode* node_, const aiScene* scene_);
-	Mesh* ProcessMesh(aiMesh* mesh_, const aiScene* scene_);
+	Mesh ProcessMesh(aiMesh* mesh_, const aiScene* scene_);
 
 	vector<Texture> LoadMaterialTexture(aiMaterial* material_, aiTextureType textureType, string typeName_);
 
@@ -37,15 +41,11 @@ private:
 
 	unsigned char* data;
 
-	// Model data
-	vector<Mesh*> meshes;
 	string fileDirectory;
 
 	// Let's use Assimp's library here
 	Importer assimpImporter;
 	const aiScene* scene;
-
-	vector<Texture> texturesLoaded;
 };
 
 #endif
