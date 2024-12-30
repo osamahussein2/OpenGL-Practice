@@ -69,6 +69,9 @@
     <ClCompile Include="Instancing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AntiAliasing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -122,6 +125,9 @@
     <ClInclude Include="Instancing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AntiAliasing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -158,5 +164,9 @@
     <None Include="GeometryShader.glsl" />
     <None Include="InstancingVertexShader.glsl" />
     <None Include="InstancingFragmentShader.glsl" />
+    <None Include="AntiAliasingVertexShader.glsl" />
+    <None Include="AntiAliasingFragmentShader.glsl" />
+    <None Include="AntiAliasingPostVertexShader.glsl" />
+    <None Include="AntiAliasingPostFragmentShader.glsl" />
   </ItemGroup>
 </Project>

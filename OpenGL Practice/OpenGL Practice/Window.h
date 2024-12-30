@@ -17,6 +17,7 @@
 #include "AdvancedData.h"
 #include "GeometryShader.h"
 #include "Instancing.h"
+#include "AntiAliasing.h"
 
 class Blending;
 
@@ -38,7 +39,8 @@ public:
 	//void UseSkybox();
 	//void AdvancedGLSL();
 	//void UseGeometryShader();
-	void UseInstancingClass();
+	//void UseInstancingClass();
+	void UseAntiAliasing();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function
@@ -81,6 +83,8 @@ private:
 	ShaderProgram* geometryShaderProgram;
 
 	Instancing* instancing;
+
+	AntiAliasing* antiAliasing;
 };
 
 #endif

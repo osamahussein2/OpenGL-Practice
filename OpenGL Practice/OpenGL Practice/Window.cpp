@@ -76,6 +76,8 @@ Window::Window()
 	geometryShaderProgram = new ShaderProgram();
 
 	instancing = new Instancing();
+
+	antiAliasing = new AntiAliasing();
 }
 
 void Window::InitializeOpenGLwindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
@@ -84,6 +86,12 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	/* GLFW also gives us this functionality and all we need to do is hint GLFW that we’d like to use a multisample buffer 
+	with N samples instead of a normal buffer by calling glfwWindowHint before creating the window */
+	
+	// Buffer containing 4 subsamples per screen coordinate (Anti-aliasing Part 1)
+	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	// Create a GLFW window to render it to the screen
 	openGLwindow = glfwCreateWindow(width, height, title, monitor, share);
@@ -114,7 +122,7 @@ void Window::WindowStillRunning()
 	//shaderProgram->InitializeShaderProgram(vertexShaderLoader[2], fragmentShaderLoader[2]);
 	//model = new Model("Models/Backpack/backpack.obj");
 
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 
 	//skybox->SetCubeObject();
 	//skybox->SetSkyboxObject();
@@ -124,12 +132,12 @@ void Window::WindowStillRunning()
 	//advancedData->InitializeBufferObject();
 	//geometryShader->InitializeGeometryVertices(); // Geometry shader Part 1
 	//geometryShader->InitializeGeometryModel(); // Geometry shader Part 2
-
 	//instancing->SetInstancingOffsetPositions(); // Instancing Part 1
 	//instancing->InitializeInstancingVertices(); // Instancing Part 1
+	//instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
+	//instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
 
-	instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
-	instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
+	antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -359,9 +367,10 @@ void Window::WindowStillRunning()
 		model->DrawModel();
 		
 		AdvancedGLSL();
-		UseGeometryShader();*/
+		UseGeometryShader();
+		UseInstancingClass();*/
 		
-		UseInstancingClass();
+		UseAntiAliasing();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -378,8 +387,9 @@ void Window::WindowStillRunning()
 	//skybox->~Skybox();
 	//advancedData->~AdvancedData();
 	//geometryShader->~GeometryShader();
+	//instancing->~Instancing();
 
-	instancing->~Instancing();
+	antiAliasing->~AntiAliasing();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -573,13 +583,21 @@ void Window::ProcessInput(GLFWwindow* window)
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }
 
-void Window::UseInstancingClass()
+void Window::UseAntiAliasing()
+{
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	antiAliasing->RenderAntiAliasing();
+}
+
+/*void Window::UseInstancingClass()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	instancing->UseInstancingShaderProgram();
-}
+}*/
 
 /*void Window::UseGeometryShader()
 {
