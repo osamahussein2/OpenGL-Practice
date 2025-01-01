@@ -137,6 +137,9 @@ void Window::WindowStillRunning()
 	//instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
 	//instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
 
+	TheAdvancedLighting::Instance()->InitializeVertices();
+	TheAdvancedLighting::Instance()->InitializeTextures();
+
 	antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
@@ -368,9 +371,10 @@ void Window::WindowStillRunning()
 		
 		AdvancedGLSL();
 		UseGeometryShader();
-		UseInstancingClass();*/
-		
-		UseAntiAliasing();
+		UseInstancingClass();
+		UseAntiAliasing();*/
+
+		RenderAdvancedLighting();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -388,8 +392,9 @@ void Window::WindowStillRunning()
 	//advancedData->~AdvancedData();
 	//geometryShader->~GeometryShader();
 	//instancing->~Instancing();
+	//antiAliasing->~AntiAliasing();
 
-	antiAliasing->~AntiAliasing();
+	TheAdvancedLighting::Instance()->~AdvancedLighting();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -580,16 +585,35 @@ void Window::ProcessInput(GLFWwindow* window)
 		}
 	}
 
+	// Turn on/off blinn shading by holding the B key
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && TheAdvancedLighting::Instance()->isBlinnOn == false)
+	{
+		TheAdvancedLighting::Instance()->isBlinnOn = true;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
+	{
+		TheAdvancedLighting::Instance()->isBlinnOn = false;
+	}
+
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }
 
-void Window::UseAntiAliasing()
+void Window::RenderAdvancedLighting()
+{
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	TheAdvancedLighting::Instance()->SetUpAdvancedLighting();
+}
+
+/*void Window::UseAntiAliasing()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	antiAliasing->RenderAntiAliasing();
-}
+}*/
 
 /*void Window::UseInstancingClass()
 {

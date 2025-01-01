@@ -72,6 +72,9 @@
     <ClCompile Include="AntiAliasing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AdvancedLighting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -128,6 +131,9 @@
     <ClInclude Include="AntiAliasing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AdvancedLighting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -168,5 +174,7 @@
     <None Include="AntiAliasingFragmentShader.glsl" />
     <None Include="AntiAliasingPostVertexShader.glsl" />
     <None Include="AntiAliasingPostFragmentShader.glsl" />
+    <None Include="AdvancedLightingVertexShader.glsl" />
+    <None Include="AdvancedLightingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

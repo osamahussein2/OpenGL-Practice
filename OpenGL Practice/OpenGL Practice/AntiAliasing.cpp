@@ -278,6 +278,7 @@ void AntiAliasing::RenderAntiAliasing()
     glBlitFramebuffer(0, 0, 1280, 960, 0, 0, 1280, 960, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
     // Render quad with scene's visuals as its texture image
+    // Since the scene is stored in 2D texture, we can use that for post-processing if necessary
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);

@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\..\GameDev\GLAD\src\glad.c" />
     <ClCompile Include="AdvancedData.cpp" />
+    <ClCompile Include="AdvancedLighting.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="Blending.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -157,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedData.h" />
+    <ClInclude Include="AdvancedLighting.h" />
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="Blending.h" />
     <ClInclude Include="Camera.h" />
@@ -176,6 +178,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AdvancedLightingFragmentShader.glsl" />
+    <None Include="AdvancedLightingVertexShader.glsl" />
     <None Include="AntiAliasingFragmentShader.glsl" />
     <None Include="AntiAliasingPostFragmentShader.glsl" />
     <None Include="AntiAliasingPostVertexShader.glsl" />
