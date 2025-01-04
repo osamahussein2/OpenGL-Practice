@@ -145,6 +145,7 @@
     <ClCompile Include="FaceCulling.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="GammaCorrection.cpp" />
     <ClCompile Include="GeometryShader.cpp" />
     <ClCompile Include="Instancing.cpp" />
     <ClCompile Include="Lighting.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="FaceCulling.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="GammaCorrection.h" />
     <ClInclude Include="GeometryShader.h" />
     <ClInclude Include="Instancing.h" />
     <ClInclude Include="Lighting.h" />
@@ -185,6 +187,8 @@
     <None Include="AntiAliasingPostVertexShader.glsl" />
     <None Include="AntiAliasingVertexShader.glsl" />
     <None Include="BlueFragmentShader.glsl" />
+    <None Include="GammaCorrectionFragmentShader.glsl" />
+    <None Include="GammaCorrectionVertexShader.glsl" />
     <None Include="GeometryShader.glsl" />
     <None Include="GeometryFragmentShader.glsl" />
     <None Include="GeometryVertexShader.glsl" />

@@ -75,6 +75,9 @@
     <ClCompile Include="AdvancedLighting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GammaCorrection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -134,6 +137,9 @@
     <ClInclude Include="AdvancedLighting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GammaCorrection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -176,5 +182,7 @@
     <None Include="AntiAliasingPostFragmentShader.glsl" />
     <None Include="AdvancedLightingVertexShader.glsl" />
     <None Include="AdvancedLightingFragmentShader.glsl" />
+    <None Include="GammaCorrectionVertexShader.glsl" />
+    <None Include="GammaCorrectionFragmentShader.glsl" />
   </ItemGroup>
 </Project>

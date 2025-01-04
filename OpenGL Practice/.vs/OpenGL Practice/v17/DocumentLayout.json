@@ -3,16 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrection.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\GammaCorrection.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Window.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrectionFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\GammaCorrectionFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\ShaderProgram.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\ShaderProgram.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrection.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\GammaCorrection.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLighting.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\AdvancedLighting.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLighting.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\AdvancedLighting.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrectionVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\GammaCorrectionVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -21,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\AdvancedLightingVertexShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Window.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AntiAliasingPostFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -147,10 +167,6 @@
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\SkyboxFragmentShader.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\Camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\FrameBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1FB82A0D-43C2-43B6-B93C-BD24C85060E4}|OpenGL Practice\\OpenGL Practice.vcxproj|solutionrelative:OpenGL Practice\\FrameBuffer.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -218,43 +234,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdvancedLightingVertexShader.glsl",
-              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingVertexShader.glsl",
-              "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedLightingVertexShader.glsl",
-              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingVertexShader.glsl",
-              "RelativeToolTip": "OpenGL Practice\\AdvancedLightingVertexShader.glsl",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-01-01T18:56:14.442Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdvancedLighting.cpp",
-              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLighting.cpp",
-              "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedLighting.cpp",
-              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLighting.cpp",
-              "RelativeToolTip": "OpenGL Practice\\AdvancedLighting.cpp",
-              "ViewState": "AQIAAIMAAAAAAAAAAAAAAJYAAABnAAAA",
+              "DocumentIndex": 0,
+              "Title": "GammaCorrection.cpp",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrection.cpp",
+              "RelativeDocumentMoniker": "OpenGL Practice\\GammaCorrection.cpp",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrection.cpp",
+              "RelativeToolTip": "OpenGL Practice\\GammaCorrection.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAANsAAAB1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-01T18:45:24.056Z",
+              "WhenOpened": "2025-01-04T21:02:36.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
+              "Title": "GammaCorrection.h",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrection.h",
+              "RelativeDocumentMoniker": "OpenGL Practice\\GammaCorrection.h",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrection.h",
+              "RelativeToolTip": "OpenGL Practice\\GammaCorrection.h",
+              "ViewState": "AQIAABAAAAAAAAAAAAAAAB8AAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-04T21:02:20.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "AdvancedLighting.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLighting.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedLighting.h",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLighting.h",
               "RelativeToolTip": "OpenGL Practice\\AdvancedLighting.h",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAAAC8AAABKAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-01-01T18:45:15.077Z",
               "EditorCaption": ""
@@ -267,20 +283,20 @@
               "RelativeDocumentMoniker": "OpenGL Practice\\Window.h",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.h",
               "RelativeToolTip": "OpenGL Practice\\Window.h",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAACwAAAAZAAAA",
+              "ViewState": "AQIAACMAAAAAAAAAAAAAAC4AAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-12-30T19:15:27.08Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Window.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Window.cpp",
               "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Window.cpp",
               "RelativeToolTip": "OpenGL Practice\\Window.cpp",
-              "ViewState": "AQIAAEMCAAAAAAAAAAAAAFMCAAA1AAAA",
+              "ViewState": "AQIAAG4BAAAAAAAAAAAAAF8CAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-07T21:51:22.216Z",
               "EditorCaption": ""
@@ -288,6 +304,70 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "GammaCorrectionFragmentShader.glsl",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrectionFragmentShader.glsl",
+              "RelativeDocumentMoniker": "OpenGL Practice\\GammaCorrectionFragmentShader.glsl",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrectionFragmentShader.glsl",
+              "RelativeToolTip": "OpenGL Practice\\GammaCorrectionFragmentShader.glsl",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABoAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-04T21:03:12.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Camera.cpp",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.cpp",
+              "RelativeDocumentMoniker": "OpenGL Practice\\Camera.cpp",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.cpp",
+              "RelativeToolTip": "OpenGL Practice\\Camera.cpp",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAAAEMAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-30T21:25:31.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ShaderProgram.cpp",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\ShaderProgram.cpp",
+              "RelativeDocumentMoniker": "OpenGL Practice\\ShaderProgram.cpp",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\ShaderProgram.cpp",
+              "RelativeToolTip": "OpenGL Practice\\ShaderProgram.cpp",
+              "ViewState": "AQIAAPABAAAAAAAAAAAlwP0BAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-01-04T22:24:01.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GammaCorrectionVertexShader.glsl",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrectionVertexShader.glsl",
+              "RelativeDocumentMoniker": "OpenGL Practice\\GammaCorrectionVertexShader.glsl",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GammaCorrectionVertexShader.glsl",
+              "RelativeToolTip": "OpenGL Practice\\GammaCorrectionVertexShader.glsl",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-04T21:02:58.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AdvancedLightingVertexShader.glsl",
+              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingVertexShader.glsl",
+              "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedLightingVertexShader.glsl",
+              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingVertexShader.glsl",
+              "RelativeToolTip": "OpenGL Practice\\AdvancedLightingVertexShader.glsl",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-01-01T18:56:14.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "AdvancedLightingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedLightingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedLightingFragmentShader.glsl",
@@ -295,12 +375,11 @@
               "RelativeToolTip": "OpenGL Practice\\AdvancedLightingFragmentShader.glsl",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-01-01T18:56:31.416Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-01T18:56:31.416Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "AntiAliasingPostFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AntiAliasingPostFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\AntiAliasingPostFragmentShader.glsl",
@@ -308,12 +387,11 @@
               "RelativeToolTip": "OpenGL Practice\\AntiAliasingPostFragmentShader.glsl",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-12-30T20:05:26.601Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-30T20:05:26.601Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "AntiAliasingPostVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AntiAliasingPostVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\AntiAliasingPostVertexShader.glsl",
@@ -321,12 +399,11 @@
               "RelativeToolTip": "OpenGL Practice\\AntiAliasingPostVertexShader.glsl",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-12-30T20:05:13.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-30T20:05:13.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "AntiAliasingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AntiAliasingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\AntiAliasingFragmentShader.glsl",
@@ -334,12 +411,11 @@
               "RelativeToolTip": "OpenGL Practice\\AntiAliasingFragmentShader.glsl",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-12-30T19:33:51.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-30T19:33:51.717Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "AntiAliasing.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AntiAliasing.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\AntiAliasing.h",
@@ -347,12 +423,11 @@
               "RelativeToolTip": "OpenGL Practice\\AntiAliasing.h",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAwCgAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-30T18:47:57.893Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-30T18:47:57.893Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "Instancing.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Instancing.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Instancing.cpp",
@@ -364,7 +439,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "AntiAliasingVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AntiAliasingVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\AntiAliasingVertexShader.glsl",
@@ -376,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "Model.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Model.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Model.h",
@@ -388,7 +463,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "Instancing.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Instancing.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Instancing.h",
@@ -400,7 +475,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "Model.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Model.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Model.cpp",
@@ -412,7 +487,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "InstancingVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\InstancingVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\InstancingVertexShader.glsl",
@@ -424,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "AdvancedData.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedData.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedData.cpp",
@@ -436,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "Mesh.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Mesh.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Mesh.cpp",
@@ -448,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "InstancingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\InstancingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\InstancingFragmentShader.glsl",
@@ -460,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "Mesh.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Mesh.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Mesh.h",
@@ -472,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 25,
               "Title": "AdvancedData.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedData.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedData.h",
@@ -484,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 26,
               "Title": "GeometryShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GeometryShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\GeometryShader.glsl",
@@ -496,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 28,
               "Title": "GeometryFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GeometryFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\GeometryFragmentShader.glsl",
@@ -508,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 27,
               "Title": "GeometryVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GeometryVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\GeometryVertexShader.glsl",
@@ -520,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 29,
               "Title": "GeometryShader.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GeometryShader.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\GeometryShader.h",
@@ -532,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 30,
               "Title": "VertexShaderLoader.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShaderLoader.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\VertexShaderLoader.h",
@@ -544,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 31,
               "Title": "AdvancedGLSLVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\AdvancedGLSLVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\AdvancedGLSLVertexShader.glsl",
@@ -556,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "FragmentShaderLoader.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\FragmentShaderLoader.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\FragmentShaderLoader.cpp",
@@ -568,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Main.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Main.cpp",
@@ -580,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 34,
               "Title": "RedFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\RedFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\RedFragmentShader.glsl",
@@ -592,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 35,
               "Title": "VertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\VertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\VertexShader.glsl",
@@ -604,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 36,
               "Title": "EnvironmentMappingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\EnvironmentMappingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\EnvironmentMappingFragmentShader.glsl",
@@ -616,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 37,
               "Title": "EnvironmentMappingVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\EnvironmentMappingVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\EnvironmentMappingVertexShader.glsl",
@@ -628,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 39,
               "Title": "SkyboxVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\SkyboxVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\SkyboxVertexShader.glsl",
@@ -640,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 38,
               "Title": "Skybox.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Skybox.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Skybox.h",
@@ -652,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 40,
               "Title": "SkyboxFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\SkyboxFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\SkyboxFragmentShader.glsl",
@@ -664,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 41,
               "Title": "FrameBuffer.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\FrameBuffer.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\FrameBuffer.h",
@@ -676,19 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "Camera.cpp",
-              "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.cpp",
-              "RelativeDocumentMoniker": "OpenGL Practice\\Camera.cpp",
-              "ToolTip": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.cpp",
-              "RelativeToolTip": "OpenGL Practice\\Camera.cpp",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAAABcAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-30T21:25:31.423Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 42,
               "Title": "Camera.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Camera.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Camera.h",
@@ -700,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 43,
               "Title": "KernelFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\KernelFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\KernelFragmentShader.glsl",
@@ -712,7 +775,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 44,
               "Title": "KernelVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\KernelVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\KernelVertexShader.glsl",
@@ -724,7 +787,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 45,
               "Title": "GreyscaleVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GreyscaleVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\GreyscaleVertexShader.glsl",
@@ -736,7 +799,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 46,
               "Title": "GreyscaleFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\GreyscaleFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\GreyscaleFragmentShader.glsl",
@@ -748,7 +811,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 47,
               "Title": "InversionVertexShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\InversionVertexShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\InversionVertexShader.glsl",
@@ -760,7 +823,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 48,
               "Title": "InversionFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\InversionFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\InversionFragmentShader.glsl",
@@ -772,7 +835,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 49,
               "Title": "FaceCulling.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\FaceCulling.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\FaceCulling.h",
@@ -784,7 +847,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 50,
               "Title": "Blending.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Blending.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Blending.h",
@@ -796,7 +859,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 52,
               "Title": "Lighting.cpp",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Lighting.cpp",
               "RelativeDocumentMoniker": "OpenGL Practice\\Lighting.cpp",
@@ -808,7 +871,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 51,
               "Title": "LightingFragmentShader.glsl",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\LightingFragmentShader.glsl",
               "RelativeDocumentMoniker": "OpenGL Practice\\LightingFragmentShader.glsl",
@@ -820,7 +883,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 53,
               "Title": "Lighting.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Lighting.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Lighting.h",
@@ -832,7 +895,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 54,
               "Title": "FragmentShaderLoader.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\FragmentShaderLoader.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\FragmentShaderLoader.h",
@@ -844,7 +907,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 55,
               "Title": "Color.h",
               "DocumentMoniker": "C:\\Users\\osama\\Downloads\\OpenGL Practice\\OpenGL-Practice\\OpenGL Practice\\OpenGL Practice\\Color.h",
               "RelativeDocumentMoniker": "OpenGL Practice\\Color.h",

@@ -136,11 +136,11 @@ void Window::WindowStillRunning()
 	//instancing->InitializeInstancingVertices(); // Instancing Part 1
 	//instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
 	//instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
+	//antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
+	//TheAdvancedLighting::Instance()->InitializeVertices();
+	//TheAdvancedLighting::Instance()->InitializeTextures();
 
-	TheAdvancedLighting::Instance()->InitializeVertices();
-	TheAdvancedLighting::Instance()->InitializeTextures();
-
-	antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
+	InitializeGammaCorrection();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -372,9 +372,10 @@ void Window::WindowStillRunning()
 		AdvancedGLSL();
 		UseGeometryShader();
 		UseInstancingClass();
-		UseAntiAliasing();*/
+		UseAntiAliasing();
+		RenderAdvancedLighting();*/
 
-		RenderAdvancedLighting();
+		GammaCorrection::Instance()->UseGammaShaderProgram();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -393,8 +394,9 @@ void Window::WindowStillRunning()
 	//geometryShader->~GeometryShader();
 	//instancing->~Instancing();
 	//antiAliasing->~AntiAliasing();
+	//TheAdvancedLighting::Instance()->~AdvancedLighting();
 
-	TheAdvancedLighting::Instance()->~AdvancedLighting();
+	GammaCorrection::Instance()->~GammaCorrection();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -586,7 +588,7 @@ void Window::ProcessInput(GLFWwindow* window)
 	}
 
 	// Turn on/off blinn shading by holding the B key
-	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && TheAdvancedLighting::Instance()->isBlinnOn == false)
+	/*if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS && TheAdvancedLighting::Instance()->isBlinnOn == false)
 	{
 		TheAdvancedLighting::Instance()->isBlinnOn = true;
 	}
@@ -594,17 +596,35 @@ void Window::ProcessInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_RELEASE)
 	{
 		TheAdvancedLighting::Instance()->isBlinnOn = false;
+	}*/
+
+	// Turn on/off gamma correction by holding the SPACE key
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !GammaCorrection::Instance()->gammaEnabled)
+	{
+		GammaCorrection::Instance()->gammaEnabled = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+	{
+		GammaCorrection::Instance()->gammaEnabled = false;
 	}
 
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
 }
 
-void Window::RenderAdvancedLighting()
+/*void Window::RenderAdvancedLighting()
 {
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	TheAdvancedLighting::Instance()->SetUpAdvancedLighting();
+}*/
+
+void Window::InitializeGammaCorrection()
+{
+	GammaCorrection::Instance()->InitializeGamma();
+	GammaCorrection::Instance()->InitializeTextures("Textures/Wood.png", false);
+	GammaCorrection::Instance()->InitializeGammaCorrectedTextures("Textures/Wood.png", true);
+	GammaCorrection::Instance()->InitializeLighting();
 }
 
 /*void Window::UseAntiAliasing()
