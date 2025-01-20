@@ -20,6 +20,7 @@
 #include "AntiAliasing.h"
 #include "AdvancedLighting.h"
 #include "GammaCorrection.h"
+#include "ShadowMapping.h"
 
 class Blending;
 
@@ -44,7 +45,8 @@ public:
 	//void UseInstancingClass();
 	//void UseAntiAliasing();
 	//void RenderAdvancedLighting();
-	void InitializeGammaCorrection();
+	//void InitializeGammaCorrection();
+	void InitializeShadowMapping();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function

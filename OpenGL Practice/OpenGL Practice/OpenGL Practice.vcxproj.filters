@@ -78,6 +78,9 @@
     <ClCompile Include="GammaCorrection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowMapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -140,6 +143,9 @@
     <ClInclude Include="GammaCorrection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowMapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -184,5 +190,11 @@
     <None Include="AdvancedLightingFragmentShader.glsl" />
     <None Include="GammaCorrectionVertexShader.glsl" />
     <None Include="GammaCorrectionFragmentShader.glsl" />
+    <None Include="SimpleDepthVertexShader.glsl" />
+    <None Include="SimpleDepthFragmentShader.glsl" />
+    <None Include="QuadDepthVertexShader.glsl" />
+    <None Include="QuadDepthFragmentShader.glsl" />
+    <None Include="ShadowMappingVertexShader.glsl" />
+    <None Include="ShadowMappingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

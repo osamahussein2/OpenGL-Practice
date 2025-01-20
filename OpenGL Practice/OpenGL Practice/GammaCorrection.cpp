@@ -56,6 +56,10 @@ void GammaCorrection::InitializeGamma()
 	We can specify a texture as an sRGB texture like so: (LEARNING PURPOSES ONLY)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image); */
 
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	gammaCorrectionShaderProgram->InitializeShaderProgram(new VertexShaderLoader("GammaCorrectionVertexShader.glsl"),
 		new FragmentShaderLoader("GammaCorrectionFragmentShader.glsl"));
 

@@ -139,8 +139,9 @@ void Window::WindowStillRunning()
 	//antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
 	//TheAdvancedLighting::Instance()->InitializeVertices();
 	//TheAdvancedLighting::Instance()->InitializeTextures();
+	//InitializeGammaCorrection();
 
-	InitializeGammaCorrection();
+	InitializeShadowMapping();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -373,9 +374,10 @@ void Window::WindowStillRunning()
 		UseGeometryShader();
 		UseInstancingClass();
 		UseAntiAliasing();
-		RenderAdvancedLighting();*/
+		RenderAdvancedLighting();
+		GammaCorrection::Instance()->UseGammaShaderProgram();*/
 
-		GammaCorrection::Instance()->UseGammaShaderProgram();
+		TheShadowMapping::Instance()->UseShaderProgram();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -395,11 +397,19 @@ void Window::WindowStillRunning()
 	//instancing->~Instancing();
 	//antiAliasing->~AntiAliasing();
 	//TheAdvancedLighting::Instance()->~AdvancedLighting();
+	//GammaCorrection::Instance()->~GammaCorrection();
 
-	GammaCorrection::Instance()->~GammaCorrection();
+	TheShadowMapping::Instance()->~ShadowMapping();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
+}
+
+void Window::InitializeShadowMapping()
+{
+	TheShadowMapping::Instance()->InitializePlaneVertices();
+	TheShadowMapping::Instance()->InitializeTexture("Textures/Wood.png");
+	TheShadowMapping::Instance()->InitializeFramebuffers();
 }
 
 // Even though I don't know what a size callback is, I'm assuming this is supposed to get the viewport of the OpenGL window
@@ -619,13 +629,13 @@ void Window::ProcessInput(GLFWwindow* window)
 	TheAdvancedLighting::Instance()->SetUpAdvancedLighting();
 }*/
 
-void Window::InitializeGammaCorrection()
+/*void Window::InitializeGammaCorrection()
 {
 	GammaCorrection::Instance()->InitializeGamma();
 	GammaCorrection::Instance()->InitializeTextures("Textures/Wood.png", false);
 	GammaCorrection::Instance()->InitializeGammaCorrectedTextures("Textures/Wood.png", true);
 	GammaCorrection::Instance()->InitializeLighting();
-}
+}*/
 
 /*void Window::UseAntiAliasing()
 {

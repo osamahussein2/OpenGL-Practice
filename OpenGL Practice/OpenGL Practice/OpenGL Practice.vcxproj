@@ -153,6 +153,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="ShadowMapping.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="ShadowMapping.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="VertexShaderLoader.h" />
@@ -195,6 +197,8 @@
     <None Include="GreenFragmentShader.glsl" />
     <None Include="InstancingFragmentShader.glsl" />
     <None Include="InstancingVertexShader.glsl" />
+    <None Include="QuadDepthFragmentShader.glsl" />
+    <None Include="QuadDepthVertexShader.glsl" />
     <None Include="RedFragmentShader.glsl" />
     <None Include="AdvancedGLSLVertexShader.glsl" />
     <None Include="ColorFragmentShader.glsl" />
@@ -216,6 +220,10 @@
     <None Include="LightCubeVertexShader.glsl" />
     <None Include="ModelFragmentShader.glsl" />
     <None Include="ModelVertexShader.glsl" />
+    <None Include="ShadowMappingFragmentShader.glsl" />
+    <None Include="ShadowMappingVertexShader.glsl" />
+    <None Include="SimpleDepthFragmentShader.glsl" />
+    <None Include="SimpleDepthVertexShader.glsl" />
     <None Include="SkyboxFragmentShader.glsl" />
     <None Include="SkyboxVertexShader.glsl" />
     <None Include="TextureFragmentShader.glsl" />
