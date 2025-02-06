@@ -140,8 +140,9 @@ void Window::WindowStillRunning()
 	//TheAdvancedLighting::Instance()->InitializeVertices();
 	//TheAdvancedLighting::Instance()->InitializeTextures();
 	//InitializeGammaCorrection();
+	//InitializeShadowMapping();
 
-	InitializeShadowMapping();
+	CallPointShadows();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -375,9 +376,10 @@ void Window::WindowStillRunning()
 		UseInstancingClass();
 		UseAntiAliasing();
 		RenderAdvancedLighting();
-		GammaCorrection::Instance()->UseGammaShaderProgram();*/
+		GammaCorrection::Instance()->UseGammaShaderProgram();
+		TheShadowMapping::Instance()->UseShaderProgram();*/
 
-		TheShadowMapping::Instance()->UseShaderProgram();
+		ThePointShadows::Instance()->ShowPointShadows();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -398,18 +400,28 @@ void Window::WindowStillRunning()
 	//antiAliasing->~AntiAliasing();
 	//TheAdvancedLighting::Instance()->~AdvancedLighting();
 	//GammaCorrection::Instance()->~GammaCorrection();
+	//TheShadowMapping::Instance()->~ShadowMapping();
 
-	TheShadowMapping::Instance()->~ShadowMapping();
+	ThePointShadows::Instance()->~PointShadows();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
 }
 
-void Window::InitializeShadowMapping()
+/*void Window::InitializeShadowMapping()
 {
 	TheShadowMapping::Instance()->InitializePlaneVertices();
 	TheShadowMapping::Instance()->InitializeTexture("Textures/Wood.png");
 	TheShadowMapping::Instance()->InitializeFramebuffers();
+}*/
+
+void Window::CallPointShadows()
+{
+	ThePointShadows::Instance()->InitializePointShadows();
+	ThePointShadows::Instance()->InitializeTexture("Textures/Wood.png");
+	ThePointShadows::Instance()->InitializeDepthCubemapTexture();
+	ThePointShadows::Instance()->InitializeFramebuffers();
+	ThePointShadows::Instance()->InitializeTextureUniformShaders();
 }
 
 // Even though I don't know what a size callback is, I'm assuming this is supposed to get the viewport of the OpenGL window
@@ -593,7 +605,7 @@ void Window::ProcessInput(GLFWwindow* window)
 		if (cameraMovement == CameraMovement::MoveCameraRight)
 		{
 			// Move the camera right when D key is pressed
-			Camera::cameraPosition += glm::normalize(glm::cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
+			Camera::cameraPosition += glm::normalize(cross(Camera::cameraFront, Camera::cameraUp)) * cameraMoveSpeed;
 		}
 	}
 
@@ -609,13 +621,25 @@ void Window::ProcessInput(GLFWwindow* window)
 	}*/
 
 	// Turn on/off gamma correction by holding the SPACE key
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !GammaCorrection::Instance()->gammaEnabled)
+	/*if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && !GammaCorrection::Instance()->gammaEnabled)
 	{
 		GammaCorrection::Instance()->gammaEnabled = true;
 	}
+
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
 	{
 		GammaCorrection::Instance()->gammaEnabled = false;
+	}*/
+
+	// Turn on/off point shadows
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && ThePointShadows::Instance()->shadows == false)
+	{
+		ThePointShadows::Instance()->shadows = true;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+	{
+		ThePointShadows::Instance()->shadows = false;
 	}
 
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)
