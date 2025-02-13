@@ -141,8 +141,9 @@ void Window::WindowStillRunning()
 	//TheAdvancedLighting::Instance()->InitializeTextures();
 	//InitializeGammaCorrection();
 	//InitializeShadowMapping();
+	//CallPointShadows();
 
-	CallPointShadows();
+	NormalMapping::Instance()->InitializeNormalMapping();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -377,9 +378,10 @@ void Window::WindowStillRunning()
 		UseAntiAliasing();
 		RenderAdvancedLighting();
 		GammaCorrection::Instance()->UseGammaShaderProgram();
-		TheShadowMapping::Instance()->UseShaderProgram();*/
+		TheShadowMapping::Instance()->UseShaderProgram();
+		ThePointShadows::Instance()->ShowPointShadows();*/
 
-		ThePointShadows::Instance()->ShowPointShadows();
+		NormalMapping::Instance()->RenderNormalMapping();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -401,8 +403,9 @@ void Window::WindowStillRunning()
 	//TheAdvancedLighting::Instance()->~AdvancedLighting();
 	//GammaCorrection::Instance()->~GammaCorrection();
 	//TheShadowMapping::Instance()->~ShadowMapping();
+	//ThePointShadows::Instance()->~PointShadows();
 
-	ThePointShadows::Instance()->~PointShadows();
+	NormalMapping::Instance()->~NormalMapping();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -415,14 +418,14 @@ void Window::WindowStillRunning()
 	TheShadowMapping::Instance()->InitializeFramebuffers();
 }*/
 
-void Window::CallPointShadows()
+/*void Window::CallPointShadows()
 {
 	ThePointShadows::Instance()->InitializePointShadows();
 	ThePointShadows::Instance()->InitializeTexture("Textures/Wood.png");
 	ThePointShadows::Instance()->InitializeDepthCubemapTexture();
 	ThePointShadows::Instance()->InitializeFramebuffers();
 	ThePointShadows::Instance()->InitializeTextureUniformShaders();
-}
+}*/
 
 // Even though I don't know what a size callback is, I'm assuming this is supposed to get the viewport of the OpenGL window
 void Window::FrameBufferSizeCallback(GLFWwindow* window, int width, int height)

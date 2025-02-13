@@ -152,6 +152,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="NormalMapping.cpp" />
     <ClCompile Include="PointShadows.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ShadowMapping.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Lighting.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="NormalMapping.h" />
     <ClInclude Include="PointShadows.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="ShadowMapping.h" />
@@ -199,6 +201,8 @@
     <None Include="GreenFragmentShader.glsl" />
     <None Include="InstancingFragmentShader.glsl" />
     <None Include="InstancingVertexShader.glsl" />
+    <None Include="NormalMappingFragmentShader.glsl" />
+    <None Include="NormalMappingVertexShader.glsl" />
     <None Include="PointShadowsDepthFragmentShader.glsl" />
     <None Include="PointShadowsDepthGeometryShader.glsl" />
     <None Include="PointShadowsDepthVertexShader.glsl" />

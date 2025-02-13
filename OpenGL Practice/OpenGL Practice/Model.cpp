@@ -36,7 +36,10 @@ void Model::LoadModel(string filePath_)
 
 	// Abstract the details of loading models in all different formats
 	// The second argument of ReadFile() expects several post-processing options
-	scene = assimpImporter.ReadFile(filePath_, aiProcess_Triangulate | aiProcess_FlipUVs);
+
+	/* When the aiProcess_CalcTangentSpace bit is supplied to Assimp’s ReadFile function, Assimp calculates smooth tangent 
+	and bitangent vectors for each of the loaded vertices, similarly to how we did it in this chapter */
+	scene = assimpImporter.ReadFile(filePath_, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 	
 	// Check if the scene and the root node of the scene is null, and if the flags returned is incomplete
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -111,6 +114,18 @@ Mesh Model::ProcessMesh(aiMesh* mesh_, const aiScene* scene_)
 			textureVector.x = mesh_->mTextureCoords[0][i].x;
 			textureVector.y = mesh_->mTextureCoords[0][i].y;
 			vertex.meshTextureCoordinates = textureVector;
+
+			// tangent
+			vector.x = mesh_->mTangents[i].x;
+			vector.y = mesh_->mTangents[i].y;
+			vector.z = mesh_->mTangents[i].z;
+			vertex.tangent = vector;
+
+			// bitangent
+			vector.x = mesh_->mBitangents[i].x;
+			vector.y = mesh_->mBitangents[i].y;
+			vector.z = mesh_->mBitangents[i].z;
+			vertex.biTangent = vector;
 		}
 
 		// But if the mesh doesn't have texture coordinates, set the texture coordinates to 0 on both axes
@@ -140,11 +155,20 @@ Mesh Model::ProcessMesh(aiMesh* mesh_, const aiScene* scene_)
 	{
 		aiMaterial* material = scene_->mMaterials[mesh_->mMaterialIndex];
 
+		// Diffuse maps
 		vector<Texture> diffuseMaps = LoadMaterialTexture(material, aiTextureType_DIFFUSE, "TextureDiffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
+		// Specular maps
 		vector<Texture> specularMaps = LoadMaterialTexture(material, aiTextureType_SPECULAR, "TextureSpecular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+
+		// Normal maps
+
+		/* The wavefront object format (.obj) exports normal maps slightly different from Assimp’s conventions as 
+		aiTextureType_NORMAL doesn’t load normal maps, while aiTextureType_HEIGHT does */
+		std::vector<Texture> normalMaps = LoadMaterialTexture(material, aiTextureType_HEIGHT, "TextureNormal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 	}
 
 	return Mesh(vertices, indices, textures);

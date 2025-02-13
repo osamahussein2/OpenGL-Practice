@@ -22,6 +22,7 @@
 #include "GammaCorrection.h"
 #include "ShadowMapping.h"
 #include "PointShadows.h"
+#include "NormalMapping.h"
 
 class Blending;
 
@@ -48,7 +49,7 @@ public:
 	//void RenderAdvancedLighting();
 	//void InitializeGammaCorrection();
 	//void InitializeShadowMapping();
-	void CallPointShadows();
+	//void CallPointShadows();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function

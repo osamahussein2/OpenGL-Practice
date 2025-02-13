@@ -84,6 +84,9 @@
     <ClCompile Include="PointShadows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="NormalMapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -152,6 +155,9 @@
     <ClInclude Include="PointShadows.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NormalMapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -207,5 +213,7 @@
     <None Include="PointShadowsDepthVertexShader.glsl" />
     <None Include="PointShadowsDepthFragmentShader.glsl" />
     <None Include="PointShadowsDepthGeometryShader.glsl" />
+    <None Include="NormalMappingVertexShader.glsl" />
+    <None Include="NormalMappingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

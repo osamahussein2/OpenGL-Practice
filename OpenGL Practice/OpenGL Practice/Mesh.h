@@ -9,6 +9,7 @@ struct Vertex
 {
 	vec3 meshPosition, meshNormal;
 	vec2 meshTextureCoordinates;
+	vec3 tangent, biTangent;
 };
 
 struct Texture
