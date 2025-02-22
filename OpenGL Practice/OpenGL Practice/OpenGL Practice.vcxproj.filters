@@ -87,6 +87,9 @@
     <ClCompile Include="NormalMapping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ParallaxMapping.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -158,6 +161,9 @@
     <ClInclude Include="NormalMapping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParallaxMapping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -215,5 +221,7 @@
     <None Include="PointShadowsDepthGeometryShader.glsl" />
     <None Include="NormalMappingVertexShader.glsl" />
     <None Include="NormalMappingFragmentShader.glsl" />
+    <None Include="ParallaxMappingVertexShader.glsl" />
+    <None Include="ParallaxMappingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

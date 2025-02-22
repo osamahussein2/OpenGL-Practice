@@ -142,8 +142,9 @@ void Window::WindowStillRunning()
 	//InitializeGammaCorrection();
 	//InitializeShadowMapping();
 	//CallPointShadows();
+	//NormalMapping::Instance()->InitializeNormalMapping();
 
-	NormalMapping::Instance()->InitializeNormalMapping();
+	ParallaxMapping::Instance()->InitializeParallaxMapping();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -379,9 +380,10 @@ void Window::WindowStillRunning()
 		RenderAdvancedLighting();
 		GammaCorrection::Instance()->UseGammaShaderProgram();
 		TheShadowMapping::Instance()->UseShaderProgram();
-		ThePointShadows::Instance()->ShowPointShadows();*/
+		ThePointShadows::Instance()->ShowPointShadows();
+		NormalMapping::Instance()->RenderNormalMapping();*/
 
-		NormalMapping::Instance()->RenderNormalMapping();
+		ParallaxMapping::Instance()->RenderParallaxMapping();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -404,8 +406,9 @@ void Window::WindowStillRunning()
 	//GammaCorrection::Instance()->~GammaCorrection();
 	//TheShadowMapping::Instance()->~ShadowMapping();
 	//ThePointShadows::Instance()->~PointShadows();
+	//NormalMapping::Instance()->~NormalMapping();
 
-	NormalMapping::Instance()->~NormalMapping();
+	ParallaxMapping::Instance()->~ParallaxMapping();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -635,7 +638,7 @@ void Window::ProcessInput(GLFWwindow* window)
 	}*/
 
 	// Turn on/off point shadows
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && ThePointShadows::Instance()->shadows == false)
+	/*if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS && ThePointShadows::Instance()->shadows == false)
 	{
 		ThePointShadows::Instance()->shadows = true;
 	}
@@ -643,6 +646,17 @@ void Window::ProcessInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
 	{
 		ThePointShadows::Instance()->shadows = false;
+	}*/
+
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		if (ParallaxMapping::Instance()->heightScale > 0.0f) ParallaxMapping::Instance()->heightScale -= 0.0005f;
+		else ParallaxMapping::Instance()->heightScale = 0.0f;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		if (ParallaxMapping::Instance()->heightScale < 1.0f) ParallaxMapping::Instance()->heightScale += 0.0005f;
+		else ParallaxMapping::Instance()->heightScale = 1.0f;
 	}
 
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)

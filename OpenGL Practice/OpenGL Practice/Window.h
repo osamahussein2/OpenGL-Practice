@@ -23,6 +23,7 @@
 #include "ShadowMapping.h"
 #include "PointShadows.h"
 #include "NormalMapping.h"
+#include "ParallaxMapping.h"
 
 class Blending;
 
