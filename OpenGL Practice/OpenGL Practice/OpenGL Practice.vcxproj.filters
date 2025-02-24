@@ -90,6 +90,9 @@
     <ClCompile Include="ParallaxMapping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HDR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -164,6 +167,9 @@
     <ClInclude Include="ParallaxMapping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HDR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -223,5 +229,9 @@
     <None Include="NormalMappingFragmentShader.glsl" />
     <None Include="ParallaxMappingVertexShader.glsl" />
     <None Include="ParallaxMappingFragmentShader.glsl" />
+    <None Include="HDRVertexShader.glsl" />
+    <None Include="HDRFragmentShader.glsl" />
+    <None Include="HDRLightingVertexShader.glsl" />
+    <None Include="HDRLightingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

@@ -24,6 +24,7 @@
 #include "PointShadows.h"
 #include "NormalMapping.h"
 #include "ParallaxMapping.h"
+#include "HDR.h"
 
 class Blending;
 

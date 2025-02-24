@@ -147,6 +147,7 @@
     <ClCompile Include="FrameBuffer.cpp" />
     <ClCompile Include="GammaCorrection.cpp" />
     <ClCompile Include="GeometryShader.cpp" />
+    <ClCompile Include="HDR.cpp" />
     <ClCompile Include="Instancing.cpp" />
     <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="FrameBuffer.h" />
     <ClInclude Include="GammaCorrection.h" />
     <ClInclude Include="GeometryShader.h" />
+    <ClInclude Include="HDR.h" />
     <ClInclude Include="Instancing.h" />
     <ClInclude Include="Lighting.h" />
     <ClInclude Include="Mesh.h" />
@@ -201,6 +203,10 @@
     <None Include="GeometryFragmentShader.glsl" />
     <None Include="GeometryVertexShader.glsl" />
     <None Include="GreenFragmentShader.glsl" />
+    <None Include="HDRFragmentShader.glsl" />
+    <None Include="HDRLightingFragmentShader.glsl" />
+    <None Include="HDRLightingVertexShader.glsl" />
+    <None Include="HDRVertexShader.glsl" />
     <None Include="InstancingFragmentShader.glsl" />
     <None Include="InstancingVertexShader.glsl" />
     <None Include="NormalMappingFragmentShader.glsl" />
