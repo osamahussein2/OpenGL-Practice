@@ -93,6 +93,9 @@
     <ClCompile Include="HDR.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Bloom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -170,6 +173,9 @@
     <ClInclude Include="HDR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Bloom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -233,5 +239,12 @@
     <None Include="HDRFragmentShader.glsl" />
     <None Include="HDRLightingVertexShader.glsl" />
     <None Include="HDRLightingFragmentShader.glsl" />
+    <None Include="BloomVertexShader.glsl" />
+    <None Include="BloomFragmentShader.glsl" />
+    <None Include="BloomFinalVertexShader.glsl" />
+    <None Include="BloomFinalFragmentShader.glsl" />
+    <None Include="BloomBlurVertexShader.glsl" />
+    <None Include="BloomBlurFragmentShader.glsl" />
+    <None Include="BloomLightboxFragmentShader.glsl" />
   </ItemGroup>
 </Project>

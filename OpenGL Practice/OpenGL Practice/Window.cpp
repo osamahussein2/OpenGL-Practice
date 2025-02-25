@@ -144,8 +144,9 @@ void Window::WindowStillRunning()
 	//CallPointShadows();
 	//NormalMapping::Instance()->InitializeNormalMapping();
 	//ParallaxMapping::Instance()->InitializeParallaxMapping();
+	//HDR::Instance()->InitializeHDR();
 
-	HDR::Instance()->InitializeHDR();
+	Bloom::Instance()->InitializeBloom();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -383,9 +384,10 @@ void Window::WindowStillRunning()
 		TheShadowMapping::Instance()->UseShaderProgram();
 		ThePointShadows::Instance()->ShowPointShadows();
 		NormalMapping::Instance()->RenderNormalMapping();
-		ParallaxMapping::Instance()->RenderParallaxMapping();*/
-
-		HDR::Instance()->RenderHDR();
+		ParallaxMapping::Instance()->RenderParallaxMapping();
+		HDR::Instance()->RenderHDR();*/
+		
+		Bloom::Instance()->RenderBloom();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -410,8 +412,9 @@ void Window::WindowStillRunning()
 	//ThePointShadows::Instance()->~PointShadows();
 	//NormalMapping::Instance()->~NormalMapping();
 	//ParallaxMapping::Instance()->~ParallaxMapping();
+	//HDR::Instance()->~HDR();
 
-	HDR::Instance()->~HDR();
+	Bloom::Instance()->~Bloom();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -662,7 +665,7 @@ void Window::ProcessInput(GLFWwindow* window)
 		else ParallaxMapping::Instance()->heightScale = 1.0f;
 	}*/
 
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	/*if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
 		HDR::Instance()->hdr = false;
 	}
@@ -680,6 +683,29 @@ void Window::ProcessInput(GLFWwindow* window)
 	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
 	{
 		HDR::Instance()->exposure += 0.001f;
+	}*/
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		Bloom::Instance()->bloom = false;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_RELEASE)
+	{
+		Bloom::Instance()->bloom = true;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		if (Bloom::Instance()->exposure > 0.0f)
+			Bloom::Instance()->exposure -= 0.001f;
+		else
+			Bloom::Instance()->exposure = 0.0f;
+	}
+
+	else if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		Bloom::Instance()->exposure += 0.001f;
 	}
 
 	//Camera::cameraPosition.y = 0.0f; // Prevents flying or landing, staying at ground level (xz plane)

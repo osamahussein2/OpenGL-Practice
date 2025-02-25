@@ -140,6 +140,7 @@
     <ClCompile Include="AdvancedLighting.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
     <ClCompile Include="Blending.cpp" />
+    <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="FaceCulling.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="AdvancedLighting.h" />
     <ClInclude Include="AntiAliasing.h" />
     <ClInclude Include="Blending.h" />
+    <ClInclude Include="Bloom.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="FaceCulling.h" />
@@ -196,6 +198,13 @@
     <None Include="AntiAliasingPostFragmentShader.glsl" />
     <None Include="AntiAliasingPostVertexShader.glsl" />
     <None Include="AntiAliasingVertexShader.glsl" />
+    <None Include="BloomBlurFragmentShader.glsl" />
+    <None Include="BloomBlurVertexShader.glsl" />
+    <None Include="BloomFinalFragmentShader.glsl" />
+    <None Include="BloomFinalVertexShader.glsl" />
+    <None Include="BloomFragmentShader.glsl" />
+    <None Include="BloomLightboxFragmentShader.glsl" />
+    <None Include="BloomVertexShader.glsl" />
     <None Include="BlueFragmentShader.glsl" />
     <None Include="GammaCorrectionFragmentShader.glsl" />
     <None Include="GammaCorrectionVertexShader.glsl" />
