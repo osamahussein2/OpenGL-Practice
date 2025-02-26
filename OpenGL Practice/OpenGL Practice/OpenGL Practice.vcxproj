@@ -143,6 +143,7 @@
     <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DeferredShading.cpp" />
     <ClCompile Include="FaceCulling.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Bloom.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="DeferredShading.h" />
     <ClInclude Include="FaceCulling.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="FrameBuffer.h" />
@@ -206,8 +208,14 @@
     <None Include="BloomLightboxFragmentShader.glsl" />
     <None Include="BloomVertexShader.glsl" />
     <None Include="BlueFragmentShader.glsl" />
+    <None Include="DeferredLightboxFragmentShader.glsl" />
+    <None Include="DeferredLightboxVertexShader.glsl" />
+    <None Include="DeferredShadingFragmentShader.glsl" />
+    <None Include="DeferredShadingVertexShader.glsl" />
     <None Include="GammaCorrectionFragmentShader.glsl" />
     <None Include="GammaCorrectionVertexShader.glsl" />
+    <None Include="gBufferFragmentShader.glsl" />
+    <None Include="gBufferVertexShader.glsl" />
     <None Include="GeometryShader.glsl" />
     <None Include="GeometryFragmentShader.glsl" />
     <None Include="GeometryVertexShader.glsl" />

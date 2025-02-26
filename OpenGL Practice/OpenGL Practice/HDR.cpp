@@ -15,10 +15,6 @@ mapping algorithms exist that aim to preserve most HDR details during the conver
 These tone mapping algorithms often involve an exposure parameter that selectively favors dark or
 bright regions */
 
-/* When the internal format of a framebuffer’s color buffer is specified as GL_RGB16F, GL_RGBA16F, GL_RGB32F, or GL_RGBA32F 
-the framebuffer is known as a floating point framebuffer that can store floating point values outside the default range of 
-0.0 and 1.0 */
-
 HDR* HDR::hdrInstance = NULL;
 
 HDR::HDR() : hdr(true), exposure(1.0f), shaders{ new ShaderProgram(), new ShaderProgram() }, cubeVAO(0), cubeVBO(0)
@@ -55,19 +51,26 @@ void HDR::InitializeHDR()
 
     glGenFramebuffers(1, &hdrFBO);
 
-    // create floating point color buffer
+    // Create floating point color buffer
     glGenTextures(1, &colorBuffer);
     glBindTexture(GL_TEXTURE_2D, colorBuffer);
+
+    /* With a floating point framebuffer with 32 bits per color component (when using GL_RGB32F or GL_RGBA32F) we’re using 4 
+    times more memory for storing color values */
+
+    /* When the internal format of a framebuffer’s color buffer is specified as GL_RGB16F, GL_RGBA16F, GL_RGB32F, or 
+    GL_RGBA32F the framebuffer is known as a floating point framebuffer that can store floating point values outside the 
+    default range of 0.0 and 1.0 */
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, 1280, 960, 0, GL_RGBA, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // create depth buffer (renderbuffer)
+    // Create depth buffer (renderbuffer)
     glGenRenderbuffers(1, &rboDepth);
     glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, 1280, 960);
 
-    // attach buffers
+    // Attach buffers
     glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorBuffer, 0);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);

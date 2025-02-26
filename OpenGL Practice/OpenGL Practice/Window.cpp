@@ -145,8 +145,9 @@ void Window::WindowStillRunning()
 	//NormalMapping::Instance()->InitializeNormalMapping();
 	//ParallaxMapping::Instance()->InitializeParallaxMapping();
 	//HDR::Instance()->InitializeHDR();
+	//Bloom::Instance()->InitializeBloom();
 
-	Bloom::Instance()->InitializeBloom();
+	DeferredShading::Instance()->InitializeDeferredShading();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -385,9 +386,10 @@ void Window::WindowStillRunning()
 		ThePointShadows::Instance()->ShowPointShadows();
 		NormalMapping::Instance()->RenderNormalMapping();
 		ParallaxMapping::Instance()->RenderParallaxMapping();
-		HDR::Instance()->RenderHDR();*/
-		
-		Bloom::Instance()->RenderBloom();
+		HDR::Instance()->RenderHDR();
+		Bloom::Instance()->RenderBloom();*/
+
+		DeferredShading::Instance()->RenderDeferredShading();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -413,8 +415,9 @@ void Window::WindowStillRunning()
 	//NormalMapping::Instance()->~NormalMapping();
 	//ParallaxMapping::Instance()->~ParallaxMapping();
 	//HDR::Instance()->~HDR();
+	//Bloom::Instance()->~Bloom();
 
-	Bloom::Instance()->~Bloom();
+	DeferredShading::Instance()->~DeferredShading();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();

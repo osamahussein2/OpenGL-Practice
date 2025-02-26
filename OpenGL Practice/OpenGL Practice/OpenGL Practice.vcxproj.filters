@@ -96,6 +96,9 @@
     <ClCompile Include="Bloom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DeferredShading.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -176,6 +179,9 @@
     <ClInclude Include="Bloom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DeferredShading.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -246,5 +252,11 @@
     <None Include="BloomBlurVertexShader.glsl" />
     <None Include="BloomBlurFragmentShader.glsl" />
     <None Include="BloomLightboxFragmentShader.glsl" />
+    <None Include="DeferredShadingVertexShader.glsl" />
+    <None Include="DeferredShadingFragmentShader.glsl" />
+    <None Include="DeferredLightboxVertexShader.glsl" />
+    <None Include="DeferredLightboxFragmentShader.glsl" />
+    <None Include="gBufferVertexShader.glsl" />
+    <None Include="gBufferFragmentShader.glsl" />
   </ItemGroup>
 </Project>

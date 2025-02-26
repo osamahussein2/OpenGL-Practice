@@ -26,6 +26,7 @@
 #include "ParallaxMapping.h"
 #include "HDR.h"
 #include "Bloom.h"
+#include "DeferredShading.h"
 
 class Blending;
 
