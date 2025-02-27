@@ -27,6 +27,7 @@
 #include "HDR.h"
 #include "Bloom.h"
 #include "DeferredShading.h"
+#include "SSAO.h"
 
 class Blending;
 

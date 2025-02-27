@@ -99,6 +99,9 @@
     <ClCompile Include="DeferredShading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SSAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -182,6 +185,9 @@
     <ClInclude Include="DeferredShading.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SSAO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -258,5 +264,11 @@
     <None Include="DeferredLightboxFragmentShader.glsl" />
     <None Include="gBufferVertexShader.glsl" />
     <None Include="gBufferFragmentShader.glsl" />
+    <None Include="ssaoVertexShader.glsl" />
+    <None Include="ssaoFragmentShader.glsl" />
+    <None Include="ssaoBlurFragmentShader.glsl" />
+    <None Include="ssaoLightingFragmentShader.glsl" />
+    <None Include="ssaoGeometryVertexShader.glsl" />
+    <None Include="ssaoGeometryFragmentShader.glsl" />
   </ItemGroup>
 </Project>

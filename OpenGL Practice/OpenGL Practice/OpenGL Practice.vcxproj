@@ -161,6 +161,7 @@
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ShadowMapping.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="SSAO.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="ShadowMapping.h" />
     <ClInclude Include="Skybox.h" />
+    <ClInclude Include="SSAO.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="VertexShaderLoader.h" />
     <ClInclude Include="Window.h" />
@@ -264,6 +266,12 @@
     <None Include="SimpleDepthVertexShader.glsl" />
     <None Include="SkyboxFragmentShader.glsl" />
     <None Include="SkyboxVertexShader.glsl" />
+    <None Include="ssaoBlurFragmentShader.glsl" />
+    <None Include="ssaoFragmentShader.glsl" />
+    <None Include="ssaoGeometryFragmentShader.glsl" />
+    <None Include="ssaoGeometryVertexShader.glsl" />
+    <None Include="ssaoLightingFragmentShader.glsl" />
+    <None Include="ssaoVertexShader.glsl" />
     <None Include="TextureFragmentShader.glsl" />
     <None Include="TextureVertexShader.glsl" />
     <None Include="VertexShader.glsl" />
