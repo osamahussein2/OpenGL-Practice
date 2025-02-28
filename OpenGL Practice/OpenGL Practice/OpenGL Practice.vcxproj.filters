@@ -102,6 +102,9 @@
     <ClCompile Include="SSAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PBRLighting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -188,6 +191,9 @@
     <ClInclude Include="SSAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PBRLighting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -270,5 +276,7 @@
     <None Include="ssaoLightingFragmentShader.glsl" />
     <None Include="ssaoGeometryVertexShader.glsl" />
     <None Include="ssaoGeometryFragmentShader.glsl" />
+    <None Include="PBRLightingVertexShader.glsl" />
+    <None Include="PBRLightingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

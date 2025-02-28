@@ -124,31 +124,32 @@ void Window::WindowStillRunning()
 
 	//glEnable(GL_DEPTH_TEST);
 
-	//skybox->SetCubeObject();
-	//skybox->SetSkyboxObject();
-	//skybox->SetCubeTexture();
-	//skybox->SetSkyboxTexture();
-	//advancedData->InitializeCubeVertices();
-	//advancedData->InitializeBufferObject();
-	//geometryShader->InitializeGeometryVertices(); // Geometry shader Part 1
-	//geometryShader->InitializeGeometryModel(); // Geometry shader Part 2
-	//instancing->SetInstancingOffsetPositions(); // Instancing Part 1
-	//instancing->InitializeInstancingVertices(); // Instancing Part 1
-	//instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
-	//instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
-	//antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
-	//TheAdvancedLighting::Instance()->InitializeVertices();
-	//TheAdvancedLighting::Instance()->InitializeTextures();
-	//InitializeGammaCorrection();
-	//InitializeShadowMapping();
-	//CallPointShadows();
-	//NormalMapping::Instance()->InitializeNormalMapping();
-	//ParallaxMapping::Instance()->InitializeParallaxMapping();
-	//HDR::Instance()->InitializeHDR();
-	//Bloom::Instance()->InitializeBloom();
-	//DeferredShading::Instance()->InitializeDeferredShading();
+	/*skybox->SetCubeObject();
+	skybox->SetSkyboxObject();
+	skybox->SetCubeTexture();
+	skybox->SetSkyboxTexture();
+	advancedData->InitializeCubeVertices();
+	advancedData->InitializeBufferObject();
+	geometryShader->InitializeGeometryVertices(); // Geometry shader Part 1
+	geometryShader->InitializeGeometryModel(); // Geometry shader Part 2
+	instancing->SetInstancingOffsetPositions(); // Instancing Part 1
+	instancing->InitializeInstancingVertices(); // Instancing Part 1
+	instancing->SetTransformationMatrix(); // Instancing Part 2 & 3
+	instancing->SetInstancedArrays(); // Instancing Part 3 (for instanced rendering)
+	antiAliasing->InitializeAntiAliasing(); // Anti-Aliasing Part 1
+	TheAdvancedLighting::Instance()->InitializeVertices();
+	TheAdvancedLighting::Instance()->InitializeTextures();
+	InitializeGammaCorrection();
+	InitializeShadowMapping();
+	CallPointShadows();
+	NormalMapping::Instance()->InitializeNormalMapping();
+	ParallaxMapping::Instance()->InitializeParallaxMapping();
+	HDR::Instance()->InitializeHDR();
+	Bloom::Instance()->InitializeBloom();
+	DeferredShading::Instance()->InitializeDeferredShading();
+	SSAO::Instance()->InitializeSSAO(); */
 
-	SSAO::Instance()->InitializeSSAO();
+	PBRLighting::Instance()->InitializePBRLighting();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -389,9 +390,10 @@ void Window::WindowStillRunning()
 		ParallaxMapping::Instance()->RenderParallaxMapping();
 		HDR::Instance()->RenderHDR();
 		Bloom::Instance()->RenderBloom();
-		DeferredShading::Instance()->RenderDeferredShading();*/
+		DeferredShading::Instance()->RenderDeferredShading();
+		SSAO::Instance()->RenderSSAO(); */
 
-		SSAO::Instance()->RenderSSAO();
+		PBRLighting::Instance()->RenderPBRLighting();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -419,8 +421,9 @@ void Window::WindowStillRunning()
 	//HDR::Instance()->~HDR();
 	//Bloom::Instance()->~Bloom();
 	//DeferredShading::Instance()->~DeferredShading();
-
-	SSAO::Instance()->~SSAO();
+	//SSAO::Instance()->~SSAO();
+	
+	PBRLighting::Instance()->~PBRLighting();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
