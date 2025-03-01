@@ -29,6 +29,7 @@
 #include "DeferredShading.h"
 #include "SSAO.h"
 #include "PBRLighting.h"
+#include "DiffuseIrradiance.h"
 
 class Blending;
 
@@ -56,6 +57,7 @@ public:
 	//void InitializeGammaCorrection();
 	//void InitializeShadowMapping();
 	//void CallPointShadows();
+	void CallDiffuseIrradianceViewport();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function

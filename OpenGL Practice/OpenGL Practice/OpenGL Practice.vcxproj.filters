@@ -105,6 +105,12 @@
     <ClCompile Include="PBRLighting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DiffuseIrradiance.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffuseIrradiance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -278,5 +284,10 @@
     <None Include="ssaoGeometryFragmentShader.glsl" />
     <None Include="PBRLightingVertexShader.glsl" />
     <None Include="PBRLightingFragmentShader.glsl" />
+    <None Include="DiffuseIrradianceCubemapVertexShader.glsl" />
+    <None Include="DiffuseIrradianceEquirectangularToCubemapFragmentShader.glsl" />
+    <None Include="DiffuseIrradianceBackgroundVertexShader.glsl" />
+    <None Include="DiffuseIrradianceBackgroundFragmentShader.glsl" />
+    <None Include="DiffuseIrradianceConvolutionFragmentShader.glsl" />
   </ItemGroup>
 </Project>

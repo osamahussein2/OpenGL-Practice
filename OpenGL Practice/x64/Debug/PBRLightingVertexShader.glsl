@@ -5,7 +5,7 @@ layout (location = 1) in vec3 normals;
 layout (location = 2) in vec2 textureCoords;
 
 out vec2 TexCoords;
-out vec3 WorldPos;
+out vec3 worldPosition;
 out vec3 Normal;
 
 uniform mat4 projection;
@@ -16,8 +16,8 @@ uniform mat3 normalMatrix;
 void main()
 {
     TexCoords = textureCoords;
-    WorldPos = vec3(model * vec4(position, 1.0));
+    worldPosition = vec3(model * vec4(position, 1.0));
     Normal = normalMatrix * normals;   
 
-    gl_Position =  projection * view * vec4(WorldPos, 1.0);
+    gl_Position =  projection * view * vec4(worldPosition, 1.0);
 }

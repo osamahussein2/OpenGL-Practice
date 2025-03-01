@@ -144,6 +144,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DeferredShading.cpp" />
+    <ClCompile Include="DiffuseIrradiance.cpp" />
+    <ClCompile Include="DiffuseIrradiance.h" />
     <ClCompile Include="FaceCulling.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
@@ -216,6 +218,11 @@
     <None Include="DeferredLightboxVertexShader.glsl" />
     <None Include="DeferredShadingFragmentShader.glsl" />
     <None Include="DeferredShadingVertexShader.glsl" />
+    <None Include="DiffuseIrradianceBackgroundFragmentShader.glsl" />
+    <None Include="DiffuseIrradianceBackgroundVertexShader.glsl" />
+    <None Include="DiffuseIrradianceConvolutionFragmentShader.glsl" />
+    <None Include="DiffuseIrradianceCubemapVertexShader.glsl" />
+    <None Include="DiffuseIrradianceEquirectangularToCubemapFragmentShader.glsl" />
     <None Include="GammaCorrectionFragmentShader.glsl" />
     <None Include="GammaCorrectionVertexShader.glsl" />
     <None Include="gBufferFragmentShader.glsl" />
