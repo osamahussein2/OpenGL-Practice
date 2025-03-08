@@ -30,6 +30,7 @@
 #include "SSAO.h"
 #include "PBRLighting.h"
 #include "DiffuseIrradiance.h"
+#include "SpecularIBL.h"
 
 class Blending;
 
@@ -58,6 +59,7 @@ public:
 	//void InitializeShadowMapping();
 	//void CallPointShadows();
 	void CallDiffuseIrradianceViewport();
+	void CallSpecularIBLViewport();
 
 private:
 	// Make this function static to use it inside the glfwSetFramebufferSizeCallback function

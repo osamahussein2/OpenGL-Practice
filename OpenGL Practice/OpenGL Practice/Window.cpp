@@ -148,10 +148,12 @@ void Window::WindowStillRunning()
 	Bloom::Instance()->InitializeBloom();
 	DeferredShading::Instance()->InitializeDeferredShading();
 	SSAO::Instance()->InitializeSSAO();
-	PBRLighting::Instance()->InitializePBRLighting();*/
-
+	PBRLighting::Instance()->InitializePBRLighting();
 	DiffuseIrradiance::Instance()->InitializeDiffuseIrradiance();
-	CallDiffuseIrradianceViewport();
+	CallDiffuseIrradianceViewport();*/
+
+	SpecularIBL::Instance()->InitializeSpecularIBL();
+	CallSpecularIBLViewport();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -394,9 +396,10 @@ void Window::WindowStillRunning()
 		Bloom::Instance()->RenderBloom();
 		DeferredShading::Instance()->RenderDeferredShading();
 		SSAO::Instance()->RenderSSAO(); 
-		PBRLighting::Instance()->RenderPBRLighting();*/
+		PBRLighting::Instance()->RenderPBRLighting();
+		DiffuseIrradiance::Instance()->RenderDiffuseIrradiance();*/
 
-		DiffuseIrradiance::Instance()->RenderDiffuseIrradiance();
+		SpecularIBL::Instance()->RenderSpecularIBL();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -426,8 +429,9 @@ void Window::WindowStillRunning()
 	//DeferredShading::Instance()->~DeferredShading();
 	//SSAO::Instance()->~SSAO();
 	//PBRLighting::Instance()->~PBRLighting();
+	//DiffuseIrradiance::Instance()->~DiffuseIrradiance();
 
-	DiffuseIrradiance::Instance()->~DiffuseIrradiance();
+	SpecularIBL::Instance()->~SpecularIBL();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -453,6 +457,14 @@ void Window::CallDiffuseIrradianceViewport()
 {
 	// Then before rendering, configure the viewport to the original framebuffer's screen dimensions
 	// Diffuse Irradiance Part 1
+	int scrWidth, scrHeight;
+	glfwGetFramebufferSize(openGLwindow, &scrWidth, &scrHeight);
+	glViewport(0, 0, scrWidth, scrHeight);
+}
+
+void Window::CallSpecularIBLViewport()
+{
+	// Then before rendering, configure the viewport to the original framebuffer's screen dimensions
 	int scrWidth, scrHeight;
 	glfwGetFramebufferSize(openGLwindow, &scrWidth, &scrHeight);
 	glViewport(0, 0, scrWidth, scrHeight);

@@ -7,6 +7,8 @@ uniform mat4 view;
 
 out vec3 worldPosition;
 
+// Also applies to Specular IBL as well
+
 void main()
 {
     worldPosition = position;

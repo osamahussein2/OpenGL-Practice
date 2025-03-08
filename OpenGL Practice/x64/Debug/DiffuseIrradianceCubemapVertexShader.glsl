@@ -7,6 +7,8 @@ out vec3 worldPosition;
 uniform mat4 projection;
 uniform mat4 view;
 
+// Also applies to Specular IBL as well
+
 void main()
 {
     // Renders the cube as is and passes its local position to the fragment shader as a 3D sample vector

@@ -7,6 +7,8 @@ uniform samplerCube environmentMap;
 
 const float PI = 3.14159265359;
 
+// Also applies to Specular IBL as well
+
 void main()
 {		
 	/* The world vector acts as the normal of a tangent surface from the origin, aligned to worldPosition. Given this normal, 

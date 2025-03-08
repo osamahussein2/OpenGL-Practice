@@ -111,6 +111,9 @@
     <ClCompile Include="DiffuseIrradiance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpecularIBL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -200,6 +203,9 @@
     <ClInclude Include="PBRLighting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpecularIBL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -283,11 +289,14 @@
     <None Include="ssaoGeometryVertexShader.glsl" />
     <None Include="ssaoGeometryFragmentShader.glsl" />
     <None Include="PBRLightingVertexShader.glsl" />
-    <None Include="PBRLightingFragmentShader.glsl" />
     <None Include="DiffuseIrradianceCubemapVertexShader.glsl" />
     <None Include="DiffuseIrradianceEquirectangularToCubemapFragmentShader.glsl" />
     <None Include="DiffuseIrradianceBackgroundVertexShader.glsl" />
     <None Include="DiffuseIrradianceBackgroundFragmentShader.glsl" />
     <None Include="DiffuseIrradianceConvolutionFragmentShader.glsl" />
+    <None Include="SpecularIBL_BRDF_VertexShader.glsl" />
+    <None Include="SpecularIBL_BRDF_FragmentShader.glsl" />
+    <None Include="SpecularIBL_Prefilter_FragmentShader.glsl" />
+    <None Include="PBRLightingFragmentShader.glsl" />
   </ItemGroup>
 </Project>
