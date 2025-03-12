@@ -114,6 +114,9 @@
     <ClCompile Include="SpecularIBL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Debugging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpecularIBL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Debugging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -298,5 +304,7 @@
     <None Include="SpecularIBL_BRDF_FragmentShader.glsl" />
     <None Include="SpecularIBL_Prefilter_FragmentShader.glsl" />
     <None Include="PBRLightingFragmentShader.glsl" />
+    <None Include="DebuggingVertexShader.glsl" />
+    <None Include="DebuggingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

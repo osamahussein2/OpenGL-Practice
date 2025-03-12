@@ -93,6 +93,15 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 	// Buffer containing 4 subsamples per screen coordinate (Anti-aliasing Part 1)
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
+	/* A less common, but more useful tool than glCheckError is an OpenGL extension called debug output that became part of 
+	core OpenGL since version 4.3. With the debug output extension, OpenGL itself will directly send an error or warning 
+	message to the user with a lot more details compared to glCheckError. Not only does it provide more information, it can 
+	also help you catch errors exactly where they occur by intelligently using a debugger */
+
+	/* To request a debug context, pass a hint to GLFW that we’d like to have a debug output context. We have to do this 
+	before we call glfwCreateWindow */
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true); // this line isn't needed in a release build
+
 	// Create a GLFW window to render it to the screen
 	openGLwindow = glfwCreateWindow(width, height, title, monitor, share);
 
@@ -150,10 +159,11 @@ void Window::WindowStillRunning()
 	SSAO::Instance()->InitializeSSAO();
 	PBRLighting::Instance()->InitializePBRLighting();
 	DiffuseIrradiance::Instance()->InitializeDiffuseIrradiance();
-	CallDiffuseIrradianceViewport();*/
-
+	CallDiffuseIrradianceViewport();
 	SpecularIBL::Instance()->InitializeSpecularIBL();
-	CallSpecularIBLViewport();
+	CallSpecularIBLViewport();*/
+
+	DebuggingTime::Instance()->InitializeDebugging();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -397,9 +407,10 @@ void Window::WindowStillRunning()
 		DeferredShading::Instance()->RenderDeferredShading();
 		SSAO::Instance()->RenderSSAO(); 
 		PBRLighting::Instance()->RenderPBRLighting();
-		DiffuseIrradiance::Instance()->RenderDiffuseIrradiance();*/
+		DiffuseIrradiance::Instance()->RenderDiffuseIrradiance();
+		SpecularIBL::Instance()->RenderSpecularIBL();*/
 
-		SpecularIBL::Instance()->RenderSpecularIBL();
+		DebuggingTime::Instance()->RenderDebugging();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -430,8 +441,9 @@ void Window::WindowStillRunning()
 	//SSAO::Instance()->~SSAO();
 	//PBRLighting::Instance()->~PBRLighting();
 	//DiffuseIrradiance::Instance()->~DiffuseIrradiance();
+	//SpecularIBL::Instance()->~SpecularIBL();
 
-	SpecularIBL::Instance()->~SpecularIBL();
+	DebuggingTime::Instance()->~Debugging();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -453,7 +465,7 @@ void Window::WindowStillRunning()
 	ThePointShadows::Instance()->InitializeTextureUniformShaders();
 }*/
 
-void Window::CallDiffuseIrradianceViewport()
+/*void Window::CallDiffuseIrradianceViewport()
 {
 	// Then before rendering, configure the viewport to the original framebuffer's screen dimensions
 	// Diffuse Irradiance Part 1
@@ -468,7 +480,7 @@ void Window::CallSpecularIBLViewport()
 	int scrWidth, scrHeight;
 	glfwGetFramebufferSize(openGLwindow, &scrWidth, &scrHeight);
 	glViewport(0, 0, scrWidth, scrHeight);
-}
+}*/
 
 // Even though I don't know what a size callback is, I'm assuming this is supposed to get the viewport of the OpenGL window
 void Window::FrameBufferSizeCallback(GLFWwindow* window, int width, int height)

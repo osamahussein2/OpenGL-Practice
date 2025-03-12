@@ -143,6 +143,7 @@
     <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Debugging.cpp" />
     <ClCompile Include="DeferredShading.cpp" />
     <ClCompile Include="DiffuseIrradiance.cpp" />
     <ClCompile Include="DiffuseIrradiance.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Bloom.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Debugging.h" />
     <ClInclude Include="DeferredShading.h" />
     <ClInclude Include="FaceCulling.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
@@ -216,6 +218,8 @@
     <None Include="BloomLightboxFragmentShader.glsl" />
     <None Include="BloomVertexShader.glsl" />
     <None Include="BlueFragmentShader.glsl" />
+    <None Include="DebuggingFragmentShader.glsl" />
+    <None Include="DebuggingVertexShader.glsl" />
     <None Include="DeferredLightboxFragmentShader.glsl" />
     <None Include="DeferredLightboxVertexShader.glsl" />
     <None Include="DeferredShadingFragmentShader.glsl" />
