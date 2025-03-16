@@ -32,6 +32,7 @@
 #include "DiffuseIrradiance.h"
 #include "SpecularIBL.h"
 #include "Debugging.h"
+#include "TextRendering.h"
 
 class Blending;
 

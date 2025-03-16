@@ -117,6 +117,9 @@
     <ClCompile Include="Debugging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextRendering.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -210,6 +213,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Debugging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRendering.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -306,5 +312,7 @@
     <None Include="PBRLightingFragmentShader.glsl" />
     <None Include="DebuggingVertexShader.glsl" />
     <None Include="DebuggingFragmentShader.glsl" />
+    <None Include="TextRenderingVertexShader.glsl" />
+    <None Include="TextRenderingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

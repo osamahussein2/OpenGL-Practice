@@ -161,9 +161,10 @@ void Window::WindowStillRunning()
 	DiffuseIrradiance::Instance()->InitializeDiffuseIrradiance();
 	CallDiffuseIrradianceViewport();
 	SpecularIBL::Instance()->InitializeSpecularIBL();
-	CallSpecularIBLViewport();*/
+	CallSpecularIBLViewport();
+	DebuggingTime::Instance()->InitializeDebugging();*/
 
-	DebuggingTime::Instance()->InitializeDebugging();
+	RenderText::Instance()->InitializeTextRendering();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -408,9 +409,10 @@ void Window::WindowStillRunning()
 		SSAO::Instance()->RenderSSAO(); 
 		PBRLighting::Instance()->RenderPBRLighting();
 		DiffuseIrradiance::Instance()->RenderDiffuseIrradiance();
-		SpecularIBL::Instance()->RenderSpecularIBL();*/
+		SpecularIBL::Instance()->RenderSpecularIBL();
+		DebuggingTime::Instance()->RenderDebugging();*/
 
-		DebuggingTime::Instance()->RenderDebugging();
+		RenderText::Instance()->ShowTextRendering();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -442,8 +444,9 @@ void Window::WindowStillRunning()
 	//PBRLighting::Instance()->~PBRLighting();
 	//DiffuseIrradiance::Instance()->~DiffuseIrradiance();
 	//SpecularIBL::Instance()->~SpecularIBL();
+	//DebuggingTime::Instance()->~Debugging();
 
-	DebuggingTime::Instance()->~Debugging();
+	RenderText::Instance()->~TextRendering();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();

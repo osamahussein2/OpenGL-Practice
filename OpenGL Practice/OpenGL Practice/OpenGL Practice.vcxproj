@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>C:\GameDev\Assimp\lib\x64;C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\GameDev\Assimp\include;C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\GameDev\Freetype\lib;C:\GameDev\Assimp\lib\x64;C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\GameDev\Freetype\include;C:\GameDev\Assimp\include;C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,7 +114,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -167,6 +167,7 @@
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpecularIBL.cpp" />
     <ClCompile Include="SSAO.cpp" />
+    <ClCompile Include="TextRendering.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -200,6 +201,7 @@
     <ClInclude Include="SpecularIBL.h" />
     <ClInclude Include="SSAO.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TextRendering.h" />
     <ClInclude Include="VertexShaderLoader.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
@@ -292,6 +294,8 @@
     <None Include="ssaoGeometryVertexShader.glsl" />
     <None Include="ssaoLightingFragmentShader.glsl" />
     <None Include="ssaoVertexShader.glsl" />
+    <None Include="TextRenderingFragmentShader.glsl" />
+    <None Include="TextRenderingVertexShader.glsl" />
     <None Include="TextureFragmentShader.glsl" />
     <None Include="TextureVertexShader.glsl" />
     <None Include="VertexShader.glsl" />
