@@ -89,6 +89,7 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << compilationInformationLog << std::endl;
 	}
 
+	// Delete the shaders as they're linked into our program now and no longer necessary
 	DeleteShaders(vertexShader_, fragmentShader_, geometryShader_);
 
 	/*timer = glfwGetTime(); // Gets the time in seconds using the GLFW library

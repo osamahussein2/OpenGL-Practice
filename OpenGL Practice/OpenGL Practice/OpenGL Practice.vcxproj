@@ -150,6 +150,7 @@
     <ClCompile Include="FaceCulling.cpp" />
     <ClCompile Include="FragmentShaderLoader.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GammaCorrection.cpp" />
     <ClCompile Include="GeometryShader.cpp" />
     <ClCompile Include="HDR.cpp" />
@@ -162,12 +163,14 @@
     <ClCompile Include="ParallaxMapping.cpp" />
     <ClCompile Include="PBRLighting.cpp" />
     <ClCompile Include="PointShadows.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ShadowMapping.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpecularIBL.cpp" />
     <ClCompile Include="SSAO.cpp" />
     <ClCompile Include="TextRendering.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
@@ -184,6 +187,7 @@
     <ClInclude Include="FaceCulling.h" />
     <ClInclude Include="FragmentShaderLoader.h" />
     <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GammaCorrection.h" />
     <ClInclude Include="GeometryShader.h" />
     <ClInclude Include="HDR.h" />
@@ -195,6 +199,7 @@
     <ClInclude Include="ParallaxMapping.h" />
     <ClInclude Include="PBRLighting.h" />
     <ClInclude Include="PointShadows.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="ShadowMapping.h" />
     <ClInclude Include="Skybox.h" />
@@ -202,6 +207,7 @@
     <ClInclude Include="SSAO.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextRendering.h" />
+    <ClInclude Include="Texture2D.h" />
     <ClInclude Include="VertexShaderLoader.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

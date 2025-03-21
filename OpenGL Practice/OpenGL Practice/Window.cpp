@@ -6,7 +6,7 @@ float Window::lastPositionY = 300;
 // Initialize the first time mouse input to true since the mouse cursor will be immediately focused in OpenGL window
 extern bool firstTimeMouseReceivesInput = true;
 
-Window::Window()
+Window::Window() : breakout(Game(1280, 960))
 {
 	vertexShaderLoader =
 	{ 
@@ -100,7 +100,7 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 
 	/* To request a debug context, pass a hint to GLFW that we’d like to have a debug output context. We have to do this 
 	before we call glfwCreateWindow */
-	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true); // this line isn't needed in a release build
+	//glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true); // this line isn't needed in a release build
 
 	// Create a GLFW window to render it to the screen
 	openGLwindow = glfwCreateWindow(width, height, title, monitor, share);
@@ -123,6 +123,7 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 
 	glViewport(0, 0, 1280, 960);
 
+	glfwSetKeyCallback(openGLwindow, KeyCallback);
 	glfwSetFramebufferSizeCallback(openGLwindow, FrameBufferSizeCallback);
 }
 
@@ -162,9 +163,10 @@ void Window::WindowStillRunning()
 	CallDiffuseIrradianceViewport();
 	SpecularIBL::Instance()->InitializeSpecularIBL();
 	CallSpecularIBLViewport();
-	DebuggingTime::Instance()->InitializeDebugging();*/
+	DebuggingTime::Instance()->InitializeDebugging();
+	RenderText::Instance()->InitializeTextRendering();*/
 
-	RenderText::Instance()->InitializeTextRendering();
+	breakout.InitializeGame();
 
 	/* While we don't want to close the GLFW window, process the input of our window, add our own background color
 	for the window, clear the color buffer bit to render our color to the window, swap the window's buffers,
@@ -410,9 +412,13 @@ void Window::WindowStillRunning()
 		PBRLighting::Instance()->RenderPBRLighting();
 		DiffuseIrradiance::Instance()->RenderDiffuseIrradiance();
 		SpecularIBL::Instance()->RenderSpecularIBL();
-		DebuggingTime::Instance()->RenderDebugging();*/
+		DebuggingTime::Instance()->RenderDebugging();
+		RenderText::Instance()->ShowTextRendering();*/
+		
+		breakout.ProcessInput(deltaTime);
 
-		RenderText::Instance()->ShowTextRendering();
+		breakout.UpdateGame(deltaTime);
+		breakout.RenderGame();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
 		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
@@ -445,8 +451,9 @@ void Window::WindowStillRunning()
 	//DiffuseIrradiance::Instance()->~DiffuseIrradiance();
 	//SpecularIBL::Instance()->~SpecularIBL();
 	//DebuggingTime::Instance()->~Debugging();
+	//RenderText::Instance()->~TextRendering();
 
-	RenderText::Instance()->~TextRendering();
+	ResourceManager::Clear();
 
 	// Close all GLFW-related stuff and perhaps terminate the whole program, maybe?
 	glfwTerminate();
@@ -489,6 +496,26 @@ void Window::CallSpecularIBLViewport()
 void Window::FrameBufferSizeCallback(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
+}
+
+void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+	// when a user presses the escape key, we set the WindowShouldClose property to true, closing the application
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+
+	if (key >= 0 && key < 1024)
+	{
+		if (action == GLFW_PRESS)
+		{
+			Game::keys[key] = true;
+		}
+
+		else if (action == GLFW_RELEASE)
+		{
+			Game::keys[key] = false;
+		}
+	}
 }
 
 // To calculate the pitch and yaw values, we must tell GLFW to listen to mouse-movement events
