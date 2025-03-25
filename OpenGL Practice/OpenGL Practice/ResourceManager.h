@@ -47,4 +47,4 @@ private:
     static Texture2D loadTextureFromFile(const char* file, bool alpha);
 };
 
-#endif RESOURCE_MANAGER_H
+#endif //RESOURCE_MANAGER_H

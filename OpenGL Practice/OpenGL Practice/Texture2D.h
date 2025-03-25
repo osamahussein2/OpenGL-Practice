@@ -35,4 +35,4 @@ public:
     unsigned int filterMax; // filtering mode if texture pixels > screen pixels
 };
 
-#endif TEXTURE_H
+#endif //TEXTURE_H

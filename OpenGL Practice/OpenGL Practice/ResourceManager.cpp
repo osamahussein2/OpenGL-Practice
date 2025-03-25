@@ -92,10 +92,10 @@ ShaderProgram ResourceManager::loadShaderFromFile(const char* vShaderFile, const
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
     const char* gShaderCode = geometryCode.c_str();
-    
+
     // Create shader object from source code
     ShaderProgram shader;
-    shader.InitializeShaderProgram(new VertexShaderLoader(vShaderCode), new FragmentShaderLoader(fShaderCode), new GeometryShader(gShaderFile));
+    shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
 
     return shader;
 }

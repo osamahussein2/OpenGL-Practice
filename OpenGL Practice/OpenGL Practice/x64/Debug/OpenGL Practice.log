@@ -100,6 +100,7 @@ C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Came
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
   SpecularIBL.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  SpriteRenderer.cpp
   SSAO.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
   TextRendering.cpp
@@ -110,13 +111,13 @@ C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Text
   Window.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(176,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(527,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(528,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(545,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(529,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(546,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(548,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(547,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(549,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(586,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(550,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(587,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
   Generating Code...
 x64\Debug\DiffuseIrradiance.obj : warning LNK4042: object specified more than once; extras ignored
 freetype.lib(ftinit.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftinit.obj)' or at ''; linking object as if no debug info

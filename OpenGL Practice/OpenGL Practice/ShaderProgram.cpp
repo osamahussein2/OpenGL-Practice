@@ -147,6 +147,76 @@ void ShaderProgram::InitializeShaderProgram(VertexShaderLoader* vertexShader_, F
 	glUniformMatrix4fv(transformMatrixLocation, 1, GL_FALSE, glm::value_ptr(translateMatrix));*/
 }
 
+void ShaderProgram::Compile(const char* vertexSource, const char* fragmentSource, const char* geometrySource)
+{
+	unsigned int sVertex, sFragment, gShader;
+
+	// vertex Shader
+	sVertex = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(sVertex, 1, &vertexSource, NULL);
+	glCompileShader(sVertex);
+	CheckCompileErrors(sVertex, "VERTEX");
+
+	// fragment Shader
+	sFragment = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(sFragment, 1, &fragmentSource, NULL);
+	glCompileShader(sFragment);
+	CheckCompileErrors(sFragment, "FRAGMENT");
+
+	// if geometry shader source code is given, also compile geometry shader
+	if (geometrySource != nullptr)
+	{
+		gShader = glCreateShader(GL_GEOMETRY_SHADER);
+		glShaderSource(gShader, 1, &geometrySource, NULL);
+		glCompileShader(gShader);
+		CheckCompileErrors(gShader, "GEOMETRY");
+	}
+
+	// shader program
+	shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, sVertex);
+	glAttachShader(shaderProgram, sFragment);
+
+	if (geometrySource != nullptr)
+		glAttachShader(shaderProgram, gShader);
+	glLinkProgram(shaderProgram);
+	CheckCompileErrors(shaderProgram, "PROGRAM");
+
+	// delete the shaders as they're linked into our program now and no longer necessary
+	glDeleteShader(sVertex);
+	glDeleteShader(sFragment);
+	if (geometrySource != nullptr)
+		glDeleteShader(gShader);
+}
+
+void ShaderProgram::CheckCompileErrors(unsigned int object, string type)
+{
+	int success;
+	char infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(object, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(object, 1024, NULL, infoLog);
+			std::cout << "| ERROR::SHADER: Compile-time error: Type: " << type << "\n"
+				<< infoLog << "\n -- --------------------------------------------------- -- "
+				<< std::endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(object, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(object, 1024, NULL, infoLog);
+			std::cout << "| ERROR::Shader: Link-time error: Type: " << type << "\n"
+				<< infoLog << "\n -- --------------------------------------------------- -- "
+				<< std::endl;
+		}
+	}
+}
+
 /*void ShaderProgram::InitializeModeling(float aspect_ratio, float near_plane, float far_plane)
 {
 	projectionMatrix = glm::perspective(glm::radians(Camera::fieldOfView), aspect_ratio, near_plane, far_plane);

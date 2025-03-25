@@ -168,6 +168,7 @@
     <ClCompile Include="ShadowMapping.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="SpecularIBL.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SSAO.cpp" />
     <ClCompile Include="TextRendering.cpp" />
     <ClCompile Include="Texture2D.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="ShadowMapping.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="SpecularIBL.h" />
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SSAO.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextRendering.h" />
@@ -212,6 +214,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\OneDrive_12_3-25-2025\SpriteRendererFragmentShader.glsl" />
+    <None Include="..\..\..\OneDrive_12_3-25-2025\SpriteRendererVertexShader.glsl" />
     <None Include="AdvancedLightingFragmentShader.glsl" />
     <None Include="AdvancedLightingVertexShader.glsl" />
     <None Include="AntiAliasingFragmentShader.glsl" />

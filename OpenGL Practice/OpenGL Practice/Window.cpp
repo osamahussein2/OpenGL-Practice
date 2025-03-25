@@ -91,7 +91,7 @@ void Window::InitializeOpenGLwindow(int width, int height, const char* title, GL
 	with N samples instead of a normal buffer by calling glfwWindowHint before creating the window */
 	
 	// Buffer containing 4 subsamples per screen coordinate (Anti-aliasing Part 1)
-	glfwWindowHint(GLFW_SAMPLES, 4);
+	//glfwWindowHint(GLFW_SAMPLES, 4);
 
 	/* A less common, but more useful tool than glCheckError is an OpenGL extension called debug output that became part of 
 	core OpenGL since version 4.3. With the debug output extension, OpenGL itself will directly send an error or warning 
@@ -179,20 +179,22 @@ void Window::WindowStillRunning()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame; // Get the time of the last frame
 
+		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
+
 		// Tell GLFW to hide the mouse cursor and capture it
 
 		/* Capturing a cursor means that, once the application has focus, the mouse cursor stays within the center of the 
 		window (unless if the application loses focus or quits )*/
-		glfwSetInputMode(openGLwindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		//glfwSetInputMode(openGLwindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		/* As soon as we register the callback function with GLFW each time the mouse moves while the window has focus on
 		the cursor, this MouseCallback function below will get called. */
-		glfwSetCursorPosCallback(openGLwindow, MouseCallback);
+		//glfwSetCursorPosCallback(openGLwindow, MouseCallback);
 
 		// Register the mouse scroll callback every time we move the mouse scroll wheel
-		glfwSetScrollCallback(openGLwindow, MouseScrollCallback);
+		//glfwSetScrollCallback(openGLwindow, MouseScrollCallback);
 
-		ProcessInput(openGLwindow);
+		//ProcessInput(openGLwindow);
 
 		// OpenGL stores all its depth information in a z-buffer, also known as depth buffering
 
@@ -421,7 +423,6 @@ void Window::WindowStillRunning()
 		breakout.RenderGame();
 
 		glfwSwapBuffers(openGLwindow); // Removing this will throw an exception error
-		glfwPollEvents(); // Waits for any input by the user and processes it in real-time
 	}
 
 	/*for (int i = 0; i < vertexShaderLoader.size(); i++)

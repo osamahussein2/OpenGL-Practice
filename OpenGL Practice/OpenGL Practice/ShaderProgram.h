@@ -22,6 +22,11 @@ public:
 	~ShaderProgram();
 	void InitializeShaderProgram(VertexShaderLoader* vertexShader_, FragmentShaderLoader* fragmentShader_,
 		GeometryShader* geometryShader_ = nullptr);
+
+	void Compile(const char* vertexSource, const char* fragmentSource, const char* geometrySource);
+
+	void CheckCompileErrors(unsigned int object, string type);
+
 	//void InitializeModeling(float aspect_ratio, float near_plane, float far_plane);
 	//void InitializeCubeDepthTesting(float aspect_ratio, float near_plane, float far_plane);
 	//void InitializeScaledCubeStencilTesting(float aspect_ratio, float near_plane, float far_plane);

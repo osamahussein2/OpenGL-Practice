@@ -129,6 +129,9 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -236,6 +239,9 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -332,5 +338,7 @@
     <None Include="DebuggingFragmentShader.glsl" />
     <None Include="TextRenderingVertexShader.glsl" />
     <None Include="TextRenderingFragmentShader.glsl" />
+    <None Include="..\..\..\OneDrive_12_3-25-2025\SpriteRendererFragmentShader.glsl" />
+    <None Include="..\..\..\OneDrive_12_3-25-2025\SpriteRendererVertexShader.glsl" />
   </ItemGroup>
 </Project>

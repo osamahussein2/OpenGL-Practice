@@ -8,6 +8,9 @@
 #include <glad/glad.h>
 #include <glfw3.h>
 
+#include "ResourceManager.h"
+#include "SpriteRenderer.h"
+
 using namespace std;
 
 // Represents the current state of the game
@@ -39,6 +42,8 @@ public:
 
 	static array<bool, 1024> keys;
 	unsigned int gameWidth, gameHeight;
+
+	SpriteRenderer* spriteRenderer;
 };
 
 #endif GAME_H
