@@ -10,6 +10,13 @@
 
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
+#include "GameLevel.h"
+
+// Initial size of the player paddle
+const vec2 PLAYER_SIZE(100.0f, 20.0f);
+
+// Initial velocity of the player paddle
+const float PLAYER_VELOCITY(500.0f);
 
 using namespace std;
 
@@ -44,6 +51,11 @@ public:
 	unsigned int gameWidth, gameHeight;
 
 	SpriteRenderer* spriteRenderer;
+
+	std::vector<GameLevel> levels;
+	unsigned int level;
+
+	GameObject* player;
 };
 
 #endif GAME_H
