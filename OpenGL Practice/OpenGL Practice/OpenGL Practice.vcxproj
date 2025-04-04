@@ -139,6 +139,7 @@
     <ClCompile Include="AdvancedData.cpp" />
     <ClCompile Include="AdvancedLighting.cpp" />
     <ClCompile Include="AntiAliasing.cpp" />
+    <ClCompile Include="BallObject.cpp" />
     <ClCompile Include="Blending.cpp" />
     <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="AdvancedData.h" />
     <ClInclude Include="AdvancedLighting.h" />
     <ClInclude Include="AntiAliasing.h" />
+    <ClInclude Include="BallObject.h" />
     <ClInclude Include="Blending.h" />
     <ClInclude Include="Bloom.h" />
     <ClInclude Include="Camera.h" />
