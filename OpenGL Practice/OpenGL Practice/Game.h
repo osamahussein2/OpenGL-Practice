@@ -7,6 +7,7 @@
 
 #include <glad/glad.h>
 #include <glfw3.h>
+#include <tuple>
 
 #include "ResourceManager.h"
 #include "SpriteRenderer.h"
@@ -35,6 +36,13 @@ enum GameState
 	GAME_WIN
 };
 
+enum Direction {
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT
+};
+
 class Game
 {
 public:
@@ -52,8 +60,9 @@ public:
 	void RenderGame();
 
 	void CheckCollisions();
-	bool DetectCollision(GameObject& one, GameObject& two);
-	bool DetectCollision(BallObject& one, GameObject& two);
+
+	void ResetLevel();
+	void ResetPlayer();
 
 	// Create a game state enumeration object
 	GameState gameState;
@@ -63,11 +72,16 @@ public:
 
 	SpriteRenderer* spriteRenderer;
 
-	std::vector<GameLevel> levels;
+	vector<GameLevel> levels;
 	unsigned int level;
 
 	GameObject* player;
 	BallObject* ball;
 };
+
+/* To calculate the required values for collision resolution we need a bit more information from the collision function(s) than just a true or false.
+We’re now going to return a tuple of information that tells us if a collision occurred, what direction it occurred, and the difference vector R. You can
+find the tuple container in the <tuple> header */
+typedef tuple<bool, Direction, vec2> Collision;
 
 #endif GAME_H

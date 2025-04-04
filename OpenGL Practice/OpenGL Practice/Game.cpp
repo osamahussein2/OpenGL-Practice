@@ -2,6 +2,10 @@
 
 array<bool, 1024> Game::keys = {};
 
+bool DetectCollision(GameObject& one, GameObject& two);
+Collision DetectCollision(BallObject& one, GameObject& two);
+Direction VectorDirection(vec2 target_);
+
 Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_ACTIVE), gameWidth(gameWidth_), gameHeight(gameHeight_)
 {
 }
@@ -96,6 +100,12 @@ void Game::UpdateGame(float dt)
 
 	// Check for collisions between the ball and the bricks
 	CheckCollisions();
+
+	if (ball->position.y >= gameHeight) // did ball reach bottom edge?
+	{
+		ResetLevel();
+		ResetPlayer();
+	}
 }
 
 void Game::RenderGame()
@@ -130,17 +140,91 @@ void Game::CheckCollisions()
 	{
 		if (!box.destroyed)
 		{
-			if (DetectCollision(*ball, box))
+			Collision collision = DetectCollision(*ball, box);
+
+			if (get<0>(collision)) // if collision is true
 			{
+				// destroy block if not solid
 				if (!box.isSolid) box.destroyed = true;
+
+				// collision resolution
+				Direction dir = get<1>(collision);
+				vec2 diff_vector = get<2>(collision);
+				if (dir == LEFT || dir == RIGHT) // horizontal collision
+				{
+					ball->velocity.x = -ball->velocity.x; // reverse
+
+					// relocate
+					float penetration = ball->radius - abs(diff_vector.x);
+					if (dir == LEFT)
+						ball->position.x += penetration; // move right
+					else
+						ball->position.x -= penetration; // move left;
+				}
+				else // vertical collision
+				{
+					ball->velocity.y = -ball->velocity.y; // reverse
+					// relocate
+					float penetration = ball->radius -
+						abs(diff_vector.y);
+					if (dir == UP)
+						ball->position.y -= penetration; // move up
+					else
+						ball->position.y += penetration; // move down
+				}
 			}
 		}
+
+		/* After checking collisions between the ball and each brick, check if the ball collided with the player paddle. If true (and the ball is not stuck to the paddle),
+		we calculate the percentage of how far the ball’s center is moved from the paddle’s center compared to the half-extent of the paddle. The horizontal velocity of 
+		the ball is then updated based on the distance it hit the paddle from its center. In addition to updating the horizontal velocity, we also have to reverse the 
+		y velocity */
+		Collision result = DetectCollision(*ball, *player);
+		if (!ball->stuck && get<0>(result))
+		{
+			// check where it hit the board, and change velocity
+			float centerBoard = player->position.x + player->size.x / 2.0f;
+			float distance = (ball->position.x + ball->radius) - centerBoard;
+			float percentage = distance / (player->size.x / 2.0f);
+
+			// Move the ball accordingly
+			float strength = 2.0f;
+			vec2 oldVelocity = ball->velocity;
+			ball->velocity.x = INITIAL_BALL_VELOCITY.x * percentage * strength;
+
+			/* This issue is called the sticky paddle issue. This happens, because the player paddle moves with a high velocity towards the ball with the ball’s center
+			ending up inside the player paddle. Since we did not account for the case where the ball’s center is inside an AABB, the game tries to continuously react to
+			all the collisions. Once it finally breaks free, it will have reversed its y velocity so much that it’s unsure whether to go up or down after breaking free */
+			//ball->velocity.y = -ball->velocity.y;
+
+			/* Fix this behavior by introducing a small hack made possible by the fact that the we can always assume we have a collision at the top of the paddle. Instead
+			of reversing the y velocity, we simply always return a positive y direction so whenever it does get stuck, it will immediately break free */
+			ball->velocity.y = -1.0f * abs(ball->velocity.y);
+			ball->velocity = normalize(ball->velocity) * length(oldVelocity);
+		}
+
 	}
 }
 
-bool Game::DetectCollision(GameObject& one, GameObject& two)
+void Game::ResetLevel()
 {
-	/* Check if the right side of the first object is greater than the left side of the second object and if the second object’s right side is greater than the first 
+	if (level == 0) levels[0].Load("levels/one.lvl", gameWidth, gameHeight / 2);
+	else if (level == 1) levels[1].Load("levels/two.lvl", gameWidth, gameHeight / 2);
+	else if (level == 2) levels[2].Load("levels/three.lvl", gameWidth, gameHeight / 2);
+	else if (level == 3) levels[3].Load("levels/four.lvl", gameWidth, gameHeight / 2);
+}
+
+void Game::ResetPlayer()
+{
+	// reset player/ball stats
+	player->size = PLAYER_SIZE;
+	player->position = vec2(gameWidth / 2.0f - PLAYER_SIZE.x / 2.0f, gameHeight - PLAYER_SIZE.y);
+	ball->Reset(player->position + vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -(BALL_RADIUS * 2.0f)), INITIAL_BALL_VELOCITY);
+}
+
+bool DetectCollision(GameObject& one, GameObject& two)
+{
+	/* Check if the right side of the first object is greater than the left side of the second object and if the second object’s right side is greater than the first
 	object’s left side; similarly for the vertical axis (AABB - AABB) */
 
 	// collision x-axis?
@@ -154,7 +238,7 @@ bool Game::DetectCollision(GameObject& one, GameObject& two)
 }
 
 // Create an overloaded function for CheckCollision that specifically deals with the case between a BallObject and a GameObject
-bool Game::DetectCollision(BallObject& one, GameObject& two)
+Collision DetectCollision(BallObject& one, GameObject& two)
 {
 	/* First, get the difference vector between the ball’s center C and the AABB’s center B to obtain D. Then, clamp vector D to the AABB’s half-extents w and h
 	and add it to B. The half-extents of a rectangle are the distances between the rectangle’s center and its edges: its size divided by two. This returns a
@@ -178,5 +262,36 @@ bool Game::DetectCollision(BallObject& one, GameObject& two)
 	// vector between center circle and closest point AABB
 	difference = closest - center;
 
-	return length(difference) < one.radius;
+	// Return the direction and difference vector
+	if (length(difference) <= one.radius) return make_tuple(true, VectorDirection(difference), difference);
+	else return make_tuple(false, UP, vec2(0.0f, 0.0f));
 }
+
+Direction VectorDirection(vec2 target_)
+{
+	array<vec2, 4> compass = 
+	{
+		vec2(0.0f, 1.0f), // up
+		vec2(1.0f, 0.0f), // right
+		vec2(0.0f, -1.0f), // down
+		vec2(-1.0f, 0.0f) // left
+	};
+
+	float max = 0.0f;
+	unsigned int best_match = -1; // set it to an undefined number like -1 in this case
+
+	for (unsigned int i = 0; i < 4; i++)
+	{
+		/* Compare target to each of the direction vectors in the compass array. The compass vector target is closest to in angle, is the direction returned
+		to the function caller */
+		float dot_product = dot(normalize(target_), compass[i]);
+
+		if (dot_product > max)
+		{
+			max = dot_product;
+			best_match = i;
+		}
+	}
+	return (Direction)best_match;
+}
+
