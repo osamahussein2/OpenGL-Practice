@@ -12,7 +12,7 @@ Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_A
 
 Game::~Game()
 {
-	delete spriteRenderer, player;
+	delete spriteRenderer, player, ball, Particles;
 }
 
 void Game::InitializeGame()
@@ -23,6 +23,7 @@ void Game::InitializeGame()
 
 	// Load shaders
 	ResourceManager::LoadShader("SpriteRendererVertexShader.glsl", "SpriteRendererFragmentShader.glsl", nullptr, "sprite");
+	ResourceManager::LoadShader("ParticleVertexShader.glsl", "ParticleFragmentShader.glsl", nullptr, "particle");
 
 	// Configure shaders
 	mat4 proj = ortho(0.0f, static_cast<float>(gameWidth), static_cast<float>(gameHeight), 0.0f, -1.0f, 1.0f);
@@ -32,6 +33,11 @@ void Game::InitializeGame()
 	glUniform1i(glGetUniformLocation(ResourceManager::GetShader("sprite").shaderProgram, "image"), 0);
 	glUniformMatrix4fv(glGetUniformLocation(ResourceManager::GetShader("sprite").shaderProgram, "projectionMatrix"), 1, GL_FALSE, value_ptr(proj));
 
+	glUseProgram(ResourceManager::GetShader("particle").shaderProgram);
+
+	glUniform1i(glGetUniformLocation(ResourceManager::GetShader("particle").shaderProgram, "sprite"), 0);
+	glUniformMatrix4fv(glGetUniformLocation(ResourceManager::GetShader("particle").shaderProgram, "projection"), 1, GL_FALSE, value_ptr(proj));
+
 	// Set render-specific controls
 	spriteRenderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 
@@ -40,7 +46,8 @@ void Game::InitializeGame()
 	ResourceManager::LoadTexture("Textures/awesomeface.png", true, "face");
 	ResourceManager::LoadTexture("Textures/block.png", false, "block");
 	ResourceManager::LoadTexture("Textures/block_solid.png", false, "block_solid");
-	ResourceManager::LoadTexture("textures/paddle.png", true, "paddle");
+	ResourceManager::LoadTexture("Textures/paddle.png", true, "paddle");
+	ResourceManager::LoadTexture("Textures/particle.png", true, "particle");
 
 	// Load levels
 	GameLevel one; one.Load("Levels/one.lvl", gameWidth, gameHeight / 2);
@@ -60,6 +67,8 @@ void Game::InitializeGame()
 
 	vec2 ballPos = playerPos + vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -BALL_RADIUS * 2.0f);
 	ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("face"));
+
+	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
 }
 
 void Game::ProcessInput(float dt)
@@ -106,6 +115,13 @@ void Game::UpdateGame(float dt)
 		ResetLevel();
 		ResetPlayer();
 	}
+
+	// Only update the particles once the ball isn't stuck on the paddle
+	if (!ball->stuck)
+	{
+		// update particles
+		Particles->UpdateParticles(dt, *ball, 2, vec2(ball->radius / 2.0f));
+	}
 }
 
 void Game::RenderGame()
@@ -126,6 +142,13 @@ void Game::RenderGame()
 
 		// Draw the player
 		player->DrawSprite(*spriteRenderer);
+
+		// Only draw the particles once the ball isn't stuck on the paddle
+		if (!ball->stuck)
+		{
+			// draw particles
+			Particles->DrawParticles();
+		}
 
 		ball->DrawSprite(*spriteRenderer);
 	}

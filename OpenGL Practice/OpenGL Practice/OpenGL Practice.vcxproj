@@ -164,6 +164,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="NormalMapping.cpp" />
     <ClCompile Include="ParallaxMapping.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="PBRLighting.cpp" />
     <ClCompile Include="PointShadows.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="NormalMapping.h" />
     <ClInclude Include="ParallaxMapping.h" />
+    <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="PBRLighting.h" />
     <ClInclude Include="PointShadows.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -265,6 +267,8 @@
     <None Include="NormalMappingVertexShader.glsl" />
     <None Include="ParallaxMappingFragmentShader.glsl" />
     <None Include="ParallaxMappingVertexShader.glsl" />
+    <None Include="ParticleFragmentShader.glsl" />
+    <None Include="ParticleVertexShader.glsl" />
     <None Include="PBRLightingFragmentShader.glsl" />
     <None Include="PBRLightingVertexShader.glsl" />
     <None Include="PointShadowsDepthFragmentShader.glsl" />
