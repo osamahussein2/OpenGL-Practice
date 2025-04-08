@@ -14,6 +14,7 @@
 #include "GameLevel.h"
 #include "BallObject.h"
 #include "ParticleGenerator.h"
+#include "Postprocessing.h"
 
 // Initial size of the player paddle
 const vec2 PLAYER_SIZE(100.0f, 20.0f);
@@ -80,6 +81,8 @@ public:
 	BallObject* ball;
 
 	ParticleGenerator* Particles;
+
+	Postprocessing* Effects;
 };
 
 /* To calculate the required values for collision resolution we need a bit more information from the collision function(s) than just a true or false.

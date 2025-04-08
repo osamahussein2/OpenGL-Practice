@@ -144,6 +144,9 @@
     <ClCompile Include="ParticleGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Postprocessing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -266,6 +269,9 @@
     <ClInclude Include="ParticleGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Postprocessing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -366,5 +372,7 @@
     <None Include="..\..\..\OneDrive_12_3-25-2025\SpriteRendererVertexShader.glsl" />
     <None Include="ParticleVertexShader.glsl" />
     <None Include="ParticleFragmentShader.glsl" />
+    <None Include="PostprocessingVertexShader.glsl" />
+    <None Include="PostprocessingFragmentShader.glsl" />
   </ItemGroup>
 </Project>

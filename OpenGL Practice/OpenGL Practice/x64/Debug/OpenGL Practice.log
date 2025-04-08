@@ -26,6 +26,7 @@ C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Diff
   FragmentShaderLoader.cpp
   FrameBuffer.cpp
   Game.cpp
+C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Game.cpp(170,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   GameLevel.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\GameLevel.cpp(7,22): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\GameLevel.cpp(8,21): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
@@ -98,6 +99,7 @@ C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRL
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(319,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
   PointShadows.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  Postprocessing.cpp
   ResourceManager.cpp
   ShaderProgram.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
@@ -113,9 +115,9 @@ C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Came
   TextRendering.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\TextRendering.cpp(119,82): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
-  Texture2D.cpp
   Generating Code...
   Compiling...
+  Texture2D.cpp
   VertexShaderLoader.cpp
   Window.cpp
 C:\Users\husseios\Downloads\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(10,13): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared

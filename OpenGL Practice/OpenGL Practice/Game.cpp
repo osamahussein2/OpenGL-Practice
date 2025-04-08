@@ -12,7 +12,7 @@ Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_A
 
 Game::~Game()
 {
-	delete spriteRenderer, player, ball, Particles;
+	delete spriteRenderer, player, ball, Particles, Effects;
 }
 
 void Game::InitializeGame()
@@ -24,6 +24,7 @@ void Game::InitializeGame()
 	// Load shaders
 	ResourceManager::LoadShader("SpriteRendererVertexShader.glsl", "SpriteRendererFragmentShader.glsl", nullptr, "sprite");
 	ResourceManager::LoadShader("ParticleVertexShader.glsl", "ParticleFragmentShader.glsl", nullptr, "particle");
+	ResourceManager::LoadShader("PostprocessingVertexShader.glsl", "PostprocessingFragmentShader.glsl", nullptr, "postprocessing");
 
 	// Configure shaders
 	mat4 proj = ortho(0.0f, static_cast<float>(gameWidth), static_cast<float>(gameHeight), 0.0f, -1.0f, 1.0f);
@@ -69,6 +70,8 @@ void Game::InitializeGame()
 	ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("face"));
 
 	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
+
+	Effects = new Postprocessing(ResourceManager::GetShader("postprocessing"), this->gameWidth, this->gameHeight);
 }
 
 void Game::ProcessInput(float dt)
@@ -102,6 +105,8 @@ void Game::ProcessInput(float dt)
 
 }
 
+float ShakeTime = 0.0f;
+
 void Game::UpdateGame(float dt)
 {
 	// Update objects during runtime
@@ -122,6 +127,13 @@ void Game::UpdateGame(float dt)
 		// update particles
 		Particles->UpdateParticles(dt, *ball, 2, vec2(ball->radius / 2.0f));
 	}
+
+	if (ShakeTime > 0.0f)
+	{
+		ShakeTime -= dt;
+
+		if (ShakeTime <= 0.0f) Effects->Shake = false;
+	}
 }
 
 void Game::RenderGame()
@@ -133,6 +145,8 @@ void Game::RenderGame()
 
 	if (gameState == GAME_ACTIVE)
 	{
+		Effects->BeginRender();
+
 		// Draw background
 		spriteRenderer->DrawSprite(ResourceManager::GetTexture("background"), vec2(0.0f, 0.0f), 
 			vec2(gameWidth, gameHeight), 0.0f);
@@ -151,6 +165,9 @@ void Game::RenderGame()
 		}
 
 		ball->DrawSprite(*spriteRenderer);
+
+		Effects->EndRender();
+		Effects->RenderPostprocessing(glfwGetTime());
 	}
 
 }
@@ -169,6 +186,13 @@ void Game::CheckCollisions()
 			{
 				// destroy block if not solid
 				if (!box.isSolid) box.destroyed = true;
+
+				// if block is solid, enable shake effect
+				else
+				{
+					ShakeTime = 0.05f; // Reset the shake time duration to a specific value over 0
+					Effects->Shake = true;
+				}
 
 				// collision resolution
 				Direction dir = get<1>(collision);

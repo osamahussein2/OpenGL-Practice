@@ -167,6 +167,7 @@
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="PBRLighting.cpp" />
     <ClCompile Include="PointShadows.cpp" />
+    <ClCompile Include="Postprocessing.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="ShadowMapping.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="PBRLighting.h" />
     <ClInclude Include="PointShadows.h" />
+    <ClInclude Include="Postprocessing.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="ShadowMapping.h" />
@@ -276,6 +278,8 @@
     <None Include="PointShadowsDepthVertexShader.glsl" />
     <None Include="PointShadowsFragmentShader.glsl" />
     <None Include="PointShadowsVertexShader.glsl" />
+    <None Include="PostprocessingFragmentShader.glsl" />
+    <None Include="PostprocessingVertexShader.glsl" />
     <None Include="QuadDepthFragmentShader.glsl" />
     <None Include="QuadDepthVertexShader.glsl" />
     <None Include="RedFragmentShader.glsl" />
