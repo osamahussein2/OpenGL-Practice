@@ -15,6 +15,7 @@
 #include "BallObject.h"
 #include "ParticleGenerator.h"
 #include "Postprocessing.h"
+#include "PowerUp.h"
 
 // Initial size of the player paddle
 const vec2 PLAYER_SIZE(100.0f, 20.0f);
@@ -83,6 +84,15 @@ public:
 	ParticleGenerator* Particles;
 
 	Postprocessing* Effects;
+
+	// Track all power ups in the game
+	vector<PowerUp> PowerUps;
+	
+	void SpawnPowerUps(GameObject& block);
+	void UpdatePowerUps(float dt);
+
+private:
+	void ActivatePowerUp(PowerUp& powerUp);
 };
 
 /* To calculate the required values for collision resolution we need a bit more information from the collision function(s) than just a true or false.

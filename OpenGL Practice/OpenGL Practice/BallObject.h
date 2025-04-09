@@ -8,6 +8,7 @@ public:
 	// Ball state
 	float radius;
 	bool stuck;
+	bool sticky, passThrough;
 
 	BallObject();
 	BallObject(vec2 position_, float radius_, vec2 velocity_, Texture2D sprite_);
