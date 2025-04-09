@@ -1,12 +1,23 @@
 #include "Game.h"
 
+#include <irrKlang.h>
+using namespace irrklang;
+
 array<bool, 1024> Game::keys = {};
 
 bool DetectCollision(GameObject& one, GameObject& two);
 Collision DetectCollision(BallObject& one, GameObject& two);
 Direction VectorDirection(vec2 target_);
 
-Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_ACTIVE), gameWidth(gameWidth_), gameHeight(gameHeight_)
+/* Create an irrKlang::ISoundEngine, initialize it with createIrrKlangDevice, and then use the engine to load and play
+audio files */
+
+/* 3D audio means that an audio source can have a 3D position that will attenuate its volume based on the camera’s
+distance to the audio source, making it feel natural in a 3D world */
+ISoundEngine* SoundEngine = createIrrKlangDevice();
+
+Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_ACTIVE), gameWidth(gameWidth_), 
+gameHeight(gameHeight_)
 {
 }
 
@@ -78,6 +89,9 @@ void Game::InitializeGame()
 	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
 
 	Effects = new Postprocessing(ResourceManager::GetShader("postprocessing"), this->gameWidth, this->gameHeight);
+
+	// Play audio here and make it loop by passing in true after the file string name
+	SoundEngine->play2D("Audio/breakout.mp3", true);
 }
 
 void Game::ProcessInput(float dt)
@@ -237,6 +251,8 @@ void Game::CheckCollisions()
 				{
 					box.destroyed = true;
 					SpawnPowerUps(box);
+
+					SoundEngine->play2D("Audio/bleep.mp3", false);
 				}
 
 				// if block is solid, enable shake effect
@@ -244,6 +260,8 @@ void Game::CheckCollisions()
 				{
 					ShakeTime = 0.05f; // Reset the shake time duration to a specific value over 0
 					Effects->Shake = true;
+
+					SoundEngine->play2D("Audio/solid.wav", false);
 				}
 
 				// collision resolution
@@ -306,6 +324,8 @@ void Game::CheckCollisions()
 			ball->velocity = normalize(ball->velocity) * length(oldVelocity);
 
 			ball->stuck = ball->sticky;
+
+			SoundEngine->play2D("Audio/bleep.wav", false);
 		}
 
 	}
@@ -324,6 +344,8 @@ void Game::CheckCollisions()
 
 				powerUp.destroyed = true;
 				powerUp.activated = true;
+
+				SoundEngine->play2D("Audio/powerup.wav", false);
 			}
 		}
 	}

@@ -1,2 +1,3 @@
-﻿  ResourceManager.cpp
+﻿  Game.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Game.cpp(193,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   OpenGL Practice.vcxproj -> C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Debug\OpenGL Practice.exe
