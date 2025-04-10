@@ -4,6 +4,7 @@
 using namespace irrklang;
 
 array<bool, 1024> Game::keys = {};
+array<bool, 1024> Game::keysProcessed = {};
 
 bool DetectCollision(GameObject& one, GameObject& two);
 Collision DetectCollision(BallObject& one, GameObject& two);
@@ -16,14 +17,16 @@ audio files */
 distance to the audio source, making it feel natural in a 3D world */
 ISoundEngine* SoundEngine = createIrrKlangDevice();
 
-Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_ACTIVE), gameWidth(gameWidth_), 
-gameHeight(gameHeight_)
+Game::Game(unsigned int gameWidth_, unsigned int gameHeight_) : gameState(GAME_MENU), gameWidth(gameWidth_), 
+gameHeight(gameHeight_), level(0), lives(3)
 {
 }
 
 Game::~Game()
 {
-	delete spriteRenderer, player, ball, Particles, Effects;
+	delete spriteRenderer, player, ball, Particles, Effects, text;
+
+	SoundEngine->drop();
 }
 
 void Game::InitializeGame()
@@ -50,9 +53,6 @@ void Game::InitializeGame()
 	glUniform1i(glGetUniformLocation(ResourceManager::GetShader("particle").shaderProgram, "sprite"), 0);
 	glUniformMatrix4fv(glGetUniformLocation(ResourceManager::GetShader("particle").shaderProgram, "projection"), 1, GL_FALSE, value_ptr(proj));
 
-	// Set render-specific controls
-	spriteRenderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
-
 	// Load textures
 	ResourceManager::LoadTexture("Textures/background.jpg", false, "background");
 	ResourceManager::LoadTexture("Textures/awesomeface.png", true, "face");
@@ -66,6 +66,16 @@ void Game::InitializeGame()
 	ResourceManager::LoadTexture("Textures/powerup_confuse.png", true, "powerup_confuse");
 	ResourceManager::LoadTexture("Textures/powerup_chaos.png", true, "powerup_chaos");
 	ResourceManager::LoadTexture("Textures/powerup_passthrough.png", true, "powerup_passthrough");
+
+	// Set render-specific controls
+	spriteRenderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
+
+	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
+
+	Effects = new Postprocessing(ResourceManager::GetShader("postprocessing"), this->gameWidth, this->gameHeight);
+
+	text = new TextRenderer(gameWidth, gameHeight);
+	text->Load("fonts/ocraext.TTF", 24);
 
 	// Load levels
 	GameLevel one; one.Load("Levels/one.lvl", gameWidth, gameHeight / 2);
@@ -86,16 +96,44 @@ void Game::InitializeGame()
 	vec2 ballPos = playerPos + vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -BALL_RADIUS * 2.0f);
 	ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("face"));
 
-	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
-
-	Effects = new Postprocessing(ResourceManager::GetShader("postprocessing"), this->gameWidth, this->gameHeight);
-
 	// Play audio here and make it loop by passing in true after the file string name
 	SoundEngine->play2D("Audio/breakout.mp3", true);
 }
 
 void Game::ProcessInput(float dt)
 {
+	if (gameState == GAME_MENU)
+	{
+		/* The trick is to, not only record the keys currently pressed, but also store the keys that have been processed
+		once, until released again. We then check (before processing) whether the key has not yet been processed, and if
+		so, process this key after which we store this key as being processed. Once we want to process the same key again
+		without the key having been released, we do not process the key */
+		if (keys[GLFW_KEY_ENTER] && !keysProcessed[GLFW_KEY_ENTER])
+		{
+			gameState = GAME_ACTIVE;
+			keysProcessed[GLFW_KEY_ENTER] = true;
+		}
+
+		if (keys[GLFW_KEY_W] && !keysProcessed[GLFW_KEY_W])
+		{
+			/* The modulus operator (%) to make sure the Level variable remains within the acceptable level range
+			(between 0 and 3) */
+			level = (level + 1) % 4;
+			keysProcessed[GLFW_KEY_W] = true;
+		}
+
+		if (keys[GLFW_KEY_S] && !keysProcessed[GLFW_KEY_S])
+		{
+			if (level > 0)
+				--level;
+			else
+				level = 3;
+			keysProcessed[GLFW_KEY_S] = true;
+		}
+
+	}
+
+
 	if (gameState == GAME_ACTIVE)
 	{
 		float velocity = PLAYER_VELOCITY * dt;
@@ -123,6 +161,15 @@ void Game::ProcessInput(float dt)
 		}
 	}
 
+	if (gameState == GAME_WIN)
+	{
+		if (keys[GLFW_KEY_ENTER])
+		{
+			keysProcessed[GLFW_KEY_ENTER] = true;
+			Effects->Chaos = false;
+			gameState = GAME_MENU;
+		}
+	}
 }
 
 float ShakeTime = 0.0f;
@@ -137,15 +184,32 @@ void Game::UpdateGame(float dt)
 
 	if (ball->position.y >= gameHeight) // did ball reach bottom edge?
 	{
-		ResetLevel();
+		--lives;
+
+		// did the player lose all his lives? : Game over
+		if (lives == 0)
+		{
+			ResetLevel();
+			gameState = GAME_MENU;
+		}
+
 		ResetPlayer();
 	}
 
 	// Only update the particles once the ball isn't stuck on the paddle
 	if (!ball->stuck)
 	{
-		// update particles
-		Particles->UpdateParticles(dt, *ball, 2, vec2(ball->radius / 2.0f));
+		if (Particles == nullptr)
+		{
+			Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), 
+				ResourceManager::GetTexture("particle"), 500);
+		}
+
+		else
+		{
+			// update particles
+			Particles->UpdateParticles(dt, *ball, 2, vec2(ball->radius / 2.0f));
+		}
 	}
 
 	// update PowerUps
@@ -157,6 +221,15 @@ void Game::UpdateGame(float dt)
 
 		if (ShakeTime <= 0.0f) Effects->Shake = false;
 	}
+
+	if (gameState == GAME_ACTIVE && levels[level].IsLevelCompleted())
+	{
+		ResetLevel();
+		ResetPlayer();
+		Effects->Chaos = true;
+		gameState = GAME_WIN;
+	}
+
 }
 
 void Game::RenderGame()
@@ -166,7 +239,7 @@ void Game::RenderGame()
 
 	//spriteRenderer->DrawSprite(ResourceManager::GetTexture("face"), vec2(200.0f, 200.0f), vec2(300.0f, 400.0f), 45.0f, vec3(0.0f, 1.0f, 0.0f));
 
-	if (gameState == GAME_ACTIVE)
+	if (gameState == GAME_ACTIVE || gameState == GAME_MENU || gameState == GAME_WIN)
 	{
 		Effects->BeginRender();
 
@@ -181,7 +254,7 @@ void Game::RenderGame()
 		player->DrawSprite(*spriteRenderer);
 
 		// Only draw the particles once the ball isn't stuck on the paddle
-		if (!ball->stuck)
+		if (!ball->stuck && Particles != nullptr)
 		{
 			// draw particles
 			Particles->DrawParticles();
@@ -195,6 +268,23 @@ void Game::RenderGame()
 		// Render all the power ups in the game only if they're not destroyed yet
 		for (PowerUp& powerUp : PowerUps)
 			if (!powerUp.destroyed) powerUp.DrawSprite(*spriteRenderer);
+
+		stringstream ss;
+		ss << lives;
+
+		text->RenderText("Lives:" + ss.str(), 5.0f, 5.0f, 1.0f);
+	}
+
+	if (gameState == GAME_MENU)
+	{
+		text->RenderText("Press ENTER to start", 250.0f, gameHeight / 2.0f, 1.0f);
+		text->RenderText("Press W or S to select level", 245.0f, gameHeight / 2.0f + 20.0f, 0.75f);
+	}
+
+	if (gameState == GAME_WIN)
+	{
+		text->RenderText("You WON!!!", 320.0, gameHeight / 2 - 20.0, 1.0, vec3(0.0, 1.0, 0.0));
+		text->RenderText("Press ENTER to retry or ESC to quit", 130.0, gameHeight / 2, 1.0, vec3(1.0, 1.0, 0.0));
 	}
 
 }
@@ -357,6 +447,8 @@ void Game::ResetLevel()
 	else if (level == 1) levels[1].Load("levels/two.lvl", gameWidth, gameHeight / 2);
 	else if (level == 2) levels[2].Load("levels/three.lvl", gameWidth, gameHeight / 2);
 	else if (level == 3) levels[3].Load("levels/four.lvl", gameWidth, gameHeight / 2);
+
+	lives = 3;
 }
 
 void Game::ResetPlayer()
@@ -365,6 +457,14 @@ void Game::ResetPlayer()
 	player->size = PLAYER_SIZE;
 	player->position = vec2(gameWidth / 2.0f - PLAYER_SIZE.x / 2.0f, gameHeight - PLAYER_SIZE.y);
 	ball->Reset(player->position + vec2(PLAYER_SIZE.x / 2.0f - BALL_RADIUS, -(BALL_RADIUS * 2.0f)), INITIAL_BALL_VELOCITY);
+
+	// also disable all active powerups
+	Effects->Chaos = Effects->Confuse = false;
+	ball->passThrough = ball->sticky = false;
+	player->color = vec3(1.0f);
+	ball->color = vec3(1.0f);
+
+	Particles = nullptr;
 }
 
 bool ShouldSpawn(unsigned int chance)

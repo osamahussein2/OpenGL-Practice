@@ -147,6 +147,9 @@
     <ClCompile Include="Postprocessing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -275,6 +278,9 @@
     <ClInclude Include="PowerUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl" />
@@ -377,5 +383,7 @@
     <None Include="ParticleFragmentShader.glsl" />
     <None Include="PostprocessingVertexShader.glsl" />
     <None Include="PostprocessingFragmentShader.glsl" />
+    <None Include="Text2DVertexShader.glsl" />
+    <None Include="Text2DFragmentShader.glsl" />
   </ItemGroup>
 </Project>

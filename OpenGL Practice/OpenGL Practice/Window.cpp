@@ -507,14 +507,12 @@ void Window::KeyCallback(GLFWwindow* window, int key, int scancode, int action, 
 
 	if (key >= 0 && key < 1024)
 	{
-		if (action == GLFW_PRESS)
-		{
-			Game::keys[key] = true;
-		}
+		if (action == GLFW_PRESS) Game::keys[key] = true;
 
 		else if (action == GLFW_RELEASE)
 		{
 			Game::keys[key] = false;
+			Game::keysProcessed[key] = false;
 		}
 	}
 }

@@ -74,6 +74,10 @@
     <LibraryPath>C:\GameDev\irrKlang\lib;C:\GameDev\Freetype\lib;C:\GameDev\Assimp\lib\x64;C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\GameDev\irrKlang\include;C:\GameDev\Freetype\include;C:\GameDev\Assimp\include;C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\GameDev\Assimp\include;C:\GameDev\glm;C:\GameDev\GLAD\include;C:\GameDev\Freetype\include;C:\GameDev\irrKlang\include;C:\GameDev\GLFW 3.4 bin WIN64\include\GLFW;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\GameDev\irrKlang\lib;C:\GameDev\GLFW 3.4 bin WIN64\lib-vc2022;C:\GameDev\Freetype\lib;C:\GameDev\Assimp\lib\x64;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -132,6 +136,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;assimp.lib;freetype.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -175,6 +180,7 @@
     <ClCompile Include="SpecularIBL.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SSAO.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="TextRendering.cpp" />
     <ClCompile Include="Texture2D.cpp" />
     <ClCompile Include="VertexShaderLoader.cpp" />
@@ -219,6 +225,7 @@
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SSAO.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="TextRendering.h" />
     <ClInclude Include="Texture2D.h" />
     <ClInclude Include="VertexShaderLoader.h" />
@@ -319,6 +326,8 @@
     <None Include="ssaoGeometryVertexShader.glsl" />
     <None Include="ssaoLightingFragmentShader.glsl" />
     <None Include="ssaoVertexShader.glsl" />
+    <None Include="Text2DFragmentShader.glsl" />
+    <None Include="Text2DVertexShader.glsl" />
     <None Include="TextRenderingFragmentShader.glsl" />
     <None Include="TextRenderingVertexShader.glsl" />
     <None Include="TextureFragmentShader.glsl" />

@@ -1,0 +1,145 @@
+﻿  AdvancedData.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'AdvancedData.cpp')
+  
+  DeferredShading.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'DeferredShading.cpp')
+  
+  DiffuseIrradiance.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'DiffuseIrradiance.cpp')
+  
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\DiffuseIrradiance.cpp(384,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  DiffuseIrradiance.h
+  FaceCulling.cpp
+  GeometryShader.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'GeometryShader.cpp')
+  
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\GeometryShader.cpp(151,96): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+  HDR.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'HDR.cpp')
+  
+  Instancing.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'Instancing.cpp')
+  
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Instancing.cpp(119,19): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Instancing.cpp(148,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Instancing.cpp(152,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Instancing.cpp(271,69): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  Lighting.cpp
+  Main.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'Main.cpp')
+  
+  Mesh.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Mesh.cpp(71,93): warning C4244: 'argument': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Mesh.cpp(77,43): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  Model.cpp
+  NormalMapping.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'NormalMapping.cpp')
+  
+  PBRLighting.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'PBRLighting.cpp')
+  
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,80): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,80): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,80): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,80): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,80): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,91): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,91): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,91): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,91): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,91): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,103): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,103): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,103): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,103): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,103): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,111): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,111): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,111): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,111): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(42,111): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,3): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,3): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,3): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,3): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,3): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,14): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,14): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,14): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,14): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,14): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,22): warning C4838: conversion from 'unsigned int' to '_Ty' requires a narrowing conversion
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,22): warning C4838:         with
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,22): warning C4838:         [
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,22): warning C4838:             _Ty=int
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(43,22): warning C4838:         ]
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\PBRLighting.cpp(319,28): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  PointShadows.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'PointShadows.cpp')
+  
+  ShaderProgram.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'ShaderProgram.cpp')
+  
+  ShadowMapping.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'ShadowMapping.cpp')
+  
+  SSAO.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'SSAO.cpp')
+  
+  TextRenderer.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\TextRenderer.cpp(90,91): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
+  Window.cpp
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Camera.h(16,2): warning C4091: 'static ': ignored on left of 'CameraMovement' when no variable is declared
+  (compiling source file 'Window.cpp')
+  
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(176,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(526,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(527,19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(544,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(545,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(547,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(548,18): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\OpenGL Practice\Window.cpp(585,25): warning C4244: '-=': conversion from 'double' to 'float', possible loss of data
+x64\Release\DiffuseIrradiance.obj : warning LNK4042: object specified more than once; extras ignored
+     Creating library C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Release\OpenGL Practice.lib and object C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Release\OpenGL Practice.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1640 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+freetype.lib(ftbase.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftbase.obj)' or at ''; linking object as if no debug info
+freetype.lib(ftinit.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftinit.obj)' or at ''; linking object as if no debug info
+freetype.lib(ftsystem.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftsystem.obj)' or at ''; linking object as if no debug info
+freetype.lib(autofit.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(autofit.obj)' or at ''; linking object as if no debug info
+freetype.lib(truetype.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(truetype.obj)' or at ''; linking object as if no debug info
+freetype.lib(type1.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(type1.obj)' or at ''; linking object as if no debug info
+freetype.lib(cff.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(cff.obj)' or at ''; linking object as if no debug info
+freetype.lib(type1cid.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(type1cid.obj)' or at ''; linking object as if no debug info
+freetype.lib(pfr.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(pfr.obj)' or at ''; linking object as if no debug info
+freetype.lib(type42.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(type42.obj)' or at ''; linking object as if no debug info
+freetype.lib(winfnt.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(winfnt.obj)' or at ''; linking object as if no debug info
+freetype.lib(pcf.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(pcf.obj)' or at ''; linking object as if no debug info
+freetype.lib(psaux.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(psaux.obj)' or at ''; linking object as if no debug info
+freetype.lib(psmodule.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(psmodule.obj)' or at ''; linking object as if no debug info
+freetype.lib(pshinter.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(pshinter.obj)' or at ''; linking object as if no debug info
+freetype.lib(raster.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(raster.obj)' or at ''; linking object as if no debug info
+freetype.lib(sfnt.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(sfnt.obj)' or at ''; linking object as if no debug info
+freetype.lib(smooth.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(smooth.obj)' or at ''; linking object as if no debug info
+freetype.lib(bdf.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(bdf.obj)' or at ''; linking object as if no debug info
+freetype.lib(ftgzip.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftgzip.obj)' or at ''; linking object as if no debug info
+freetype.lib(ftlzw.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftlzw.obj)' or at ''; linking object as if no debug info
+freetype.lib(ftbitmap.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftbitmap.obj)' or at ''; linking object as if no debug info
+freetype.lib(ftdebug.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftdebug.obj)' or at ''; linking object as if no debug info
+  OpenGL Practice.vcxproj -> C:\Users\osama\Downloads\OpenGL Practice\OpenGL-Practice\OpenGL Practice\x64\Release\OpenGL Practice.exe

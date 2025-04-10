@@ -16,6 +16,7 @@
 #include "ParticleGenerator.h"
 #include "Postprocessing.h"
 #include "PowerUp.h"
+#include "TextRenderer.h"
 
 // Initial size of the player paddle
 const vec2 PLAYER_SIZE(100.0f, 20.0f);
@@ -71,6 +72,8 @@ public:
 	GameState gameState;
 
 	static array<bool, 1024> keys;
+	static array<bool, 1024> keysProcessed;
+
 	unsigned int gameWidth, gameHeight;
 
 	SpriteRenderer* spriteRenderer;
@@ -87,9 +90,13 @@ public:
 
 	// Track all power ups in the game
 	vector<PowerUp> PowerUps;
+
+	TextRenderer* text;
 	
 	void SpawnPowerUps(GameObject& block);
 	void UpdatePowerUps(float dt);
+
+	unsigned int lives;
 
 private:
 	void ActivatePowerUp(PowerUp& powerUp);
